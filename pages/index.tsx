@@ -84,6 +84,7 @@ class Home extends React.Component<AppProps, AppState>  {
     setShowMessage = (show: boolean, message: string) => this.setState((_) => ({showMessage: show, messageToShow: message}))
 
     componentDidMount() {
+        console.debug(`Base url is ${process.env.NEXT_PUBLIC_REST_URL}`);
         this.loadDom();
     }
 
