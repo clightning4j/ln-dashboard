@@ -11,7 +11,7 @@ export default function Offline({ size = 90 }: { size?: number }) {
         >
             <Grid item xs={3}>
                 <Typography variant="h6" style={{ flex: 1 }}>
-                    The node is offline for the moment. I'm sorry
+                    The node is offline for the moment. I`&#39;`m sorry
                 </Typography>
             </Grid>
         </Grid>

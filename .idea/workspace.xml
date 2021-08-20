@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bb93769-fa71-4d3a-8140-085a372d1a6c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/NodeTable.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/genericView/Offline.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/ListFunds.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/channelsInfo.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/pingNode.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/appbar/BasicAppBar.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/appbar/BasicAppBar.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/NodeTable.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/tableNodes/NodeTable.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/genericView/Offline.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/genericView/Offline.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/home/Home.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/Home.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/loading/Loading.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/genericView/Loading.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/ListFunds.ts" beforeDir="false" afterPath="$PROJECT_DIR$/model/ListFunds.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/channelsInfo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/channelsInfo.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/DarkTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/theme/DarkTheme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +49,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/components/tableNodes" />
       <recent name="$PROJECT_DIR$/components/genericView" />
     </key>
   </component>
@@ -65,7 +61,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1629378169033</updated>
-      <workItem from="1629378171147" duration="19712000" />
+      <workItem from="1629378171147" duration="20630000" />
     </task>
     <servers />
   </component>

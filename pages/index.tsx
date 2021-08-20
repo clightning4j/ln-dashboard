@@ -25,7 +25,7 @@ type AppState = {
 
 class Home extends React.Component<any, AppState>  {
     state: AppState = {
-        page: <HomeView show={this.setShowMessage} nodeInfo={null}/>,
+        page: <HomeView show={(visible, message) => console.debug(visible)} nodeInfo={null}/>,
         pageName: "home",
         infoNode: null,
         offline: false,

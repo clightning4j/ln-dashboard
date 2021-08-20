@@ -9,18 +9,19 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import useSWR from "swr";
-import Loading from "./genericView/Loading.component";
+import Loading from "../genericView/Loading.component";
 import axios from "axios";
+import {JSX} from "@babel/types";
 
 type NodeTableProps = {
-    show: (boolean, string) => void
+    show: (visible: boolean, message: string) => void
 }
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
+const fetcher = (url: string) => fetch(url).then((res: Response) => res.json())
 
-const pingNode = async (nodeId: string, show: (boolean, string) => void) => {
+const pingNode = async (nodeId: string, show: (visible: boolean, message: string) => void) => {
     try {
-        const _ = await axios(`/api/pingNode`, nodeId)
+        const _ = await axios(`/api/pingNode/${nodeId}`)
         show(true, "The node is up");
     }catch (e) {
         console.error(e);
@@ -28,10 +29,12 @@ const pingNode = async (nodeId: string, show: (boolean, string) => void) => {
     }
 }
 
-export function NodeTable({show}: NodeTableProps) {
+export function NodeTable({show}: NodeTableProps): JSX.Element {
     const { data, error } = useSWR('/api/channelsInfo', fetcher)
-    if (error)
-        return show(true, "Error: " + error)
+    if (error) {
+        show(true, "Error: " + error)
+        return <></>
+    }
     if (!data)
         return <Loading />
     if (data.channels.length == 0) {
@@ -53,8 +56,8 @@ export function NodeTable({show}: NodeTableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.channels.map((channel) => (
-                        <TableRow>
+                    {data.channels.map((channel: any, index: number) => (
+                        <TableRow key={index}>
                             <TableCell component="th" scope="row">
                                 <Chip
                                     label={channel.nodeInfo["alias"]}

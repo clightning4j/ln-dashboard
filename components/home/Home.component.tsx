@@ -13,7 +13,7 @@ import QRCode from 'qrcode.react';
 import theme from '../../theme/DarkTheme'
 import {GetInfoNode, NodeAddress} from "../../model/GetInfoNode";
 import {useState} from "react";
-import {NodeTable} from "../NodeTable.component";
+import {NodeTable} from "../tableNodes/NodeTable.component";
 
 const BootstrapInput = withStyles((_) => ({
     root: {
@@ -39,7 +39,7 @@ const BootstrapInput = withStyles((_) => ({
 
 type ParentProps = {
     nodeInfo: GetInfoNode | null
-    show: (boolean, string) => void
+    show: (visible: boolean, message: string) => void
 }
 
 export default function HomeView({nodeInfo, show}: ParentProps) {

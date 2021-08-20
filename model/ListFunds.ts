@@ -1,4 +1,4 @@
-interface ListFounds {
-    outputs: Array<Object>;
-    channels: Array<Object>;
+export type ListFounds = {
+    outputs: Array<Object>
+    channels: Array<Object>
 }
