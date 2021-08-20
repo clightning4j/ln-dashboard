@@ -4,7 +4,7 @@ const oceanic = createTheme({
     palette: {
         type: "dark",
         primary: {
-            main: "#263238",
+            main: "#009688",
         },
         secondary: {
             main: "#32424A",

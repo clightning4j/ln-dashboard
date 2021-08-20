@@ -16,8 +16,11 @@ a {
 }
 
 .navigation-style {
-  padding-top: 1em;
-  padding-bottom: 0.5em;
   top: auto !important;
   bottom: 0 !important;
+  width: 30% !important;
+  margin-left: 35% !important;
+  margin-right: 35% !important;
+  border-top-right-radius: 20px !important;
+  border-top-left-radius: 20px !important;
 }

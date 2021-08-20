@@ -8,9 +8,9 @@ import {
     Toolbar,
     Typography
 } from "@material-ui/core"
-import {Menu, Home} from "@material-ui/icons"
+import {Menu, Home, PieChart} from "@material-ui/icons"
 import theme from '../../theme/DarkTheme'
-import Loading from "../loading/Loading.component"
+import Loading from "../genericView/Loading.component"
 
 class BasicAppBar extends React.Component {
     constructor(props, context) {
@@ -52,9 +52,9 @@ class BasicAppBar extends React.Component {
                 </AppBar>
 
                 {this.state.ready ? child : <Loading />}
-                <Box m={theme.spacing(2)}/>
+                <Box mt={theme.spacing(2)} style={{alignItems: "center"}}>
                 <AppBar position="fixed" className="navigation-style"
-                        style={{ backgroundColor: theme.palette.background.paper }}>
+                        style={{ backgroundColor: theme.palette.background.paper}}>
                     <BottomNavigation
                         value={value}
                         onChange={(event, newValue) => {
@@ -64,8 +64,10 @@ class BasicAppBar extends React.Component {
                         }}
                     >
                         <BottomNavigationAction label="Home" value="home" icon={<Home/>} />
+                        <BottomNavigationAction label="Metrics" value="metrics" icon={<PieChart/>} />
                     </BottomNavigation>
                 </AppBar>
+                </Box>
             </Container>
         )
     }

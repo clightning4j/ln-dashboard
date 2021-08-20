@@ -13,6 +13,7 @@ import QRCode from 'qrcode.react';
 import theme from '../../theme/DarkTheme'
 import {GetInfoNode, NodeAddress} from "../../model/GetInfoNode";
 import {useState} from "react";
+import {NodeTable} from "../NodeTable.component";
 
 const BootstrapInput = withStyles((_) => ({
     root: {
@@ -38,13 +39,14 @@ const BootstrapInput = withStyles((_) => ({
 
 type ParentProps = {
     nodeInfo: GetInfoNode | null
+    show: (boolean, string) => void
 }
 
-export default function HomeView({nodeInfo}: ParentProps) {
+export default function HomeView({nodeInfo, show}: ParentProps) {
     if (nodeInfo === null)
         return <>NodeInfo null</>
     let addr: NodeAddress = nodeInfo!.address.length > 0 ? nodeInfo!.address[0] : nodeInfo!.binding[0]
-    const [selectAddr, setSelectAddr] = useState(addr);
+    const [selectAddr, setSelectAddr] = useState(addr)
 
     let mapAddress = new Map();
     for (let i = 0; i < nodeInfo!.address.length; i++) {
@@ -108,5 +110,6 @@ export default function HomeView({nodeInfo}: ParentProps) {
                 </Grid>
             </CardContent>
         </Card>
+        <NodeTable show={show}/>
     </Grid>
 }
