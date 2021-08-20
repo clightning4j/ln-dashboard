@@ -1,4 +1,5 @@
 import React from 'react'
+import {GetServerSideProps} from 'next'
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import HomeView from '../components/home/Home.component';
@@ -17,17 +18,33 @@ import Offline from "../components/genericView/Offline.component";
 type AppState = {
     page: JSX.Element
     pageName: string
-    infoNode: GetInfoNode | null
     offline: boolean
     showMessage: boolean
     messageToShow: string
 }
 
-class Home extends React.Component<any, AppState>  {
+type AppProps = {
+    infoNode: GetInfoNode | null
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    let infoNode = null;
+    try {
+        infoNode = (await axios.get(`${process.env.NEXT_PUBLIC_REST_URL}/utility/getinfo`)).data;
+    } catch (e) {
+        console.error(e);
+    }
+    return {
+        props: {
+            infoNode: infoNode
+        }
+    }
+}
+
+class Home extends React.Component<AppProps, AppState>  {
     state: AppState = {
-        page: <HomeView show={(visible, message) => console.debug(visible)} nodeInfo={null}/>,
+        page: <HomeView show={(visible, message) => console.debug(visible)} nodeInfo={this.props.infoNode}/>,
         pageName: "home",
-        infoNode: null,
         offline: false,
         showMessage: false,
         messageToShow: ""
@@ -39,11 +56,11 @@ class Home extends React.Component<any, AppState>  {
         console.debug("Value is: ", value)
         switch (value) {
             case "home":
-                page = <HomeView show={this.setShowMessage} nodeInfo={this.state.infoNode}/>
+                page = <HomeView show={this.setShowMessage} nodeInfo={this.props.infoNode}/>
                 pageName = "home"
                 break
             case "metrics":
-                page = <HomeView show={this.setShowMessage}  nodeInfo={this.state.infoNode}/>
+                page = <HomeView show={this.setShowMessage}  nodeInfo={this.props.infoNode}/>
                 pageName = "metrics"
                 break
             default:
@@ -55,23 +72,25 @@ class Home extends React.Component<any, AppState>  {
         }));
     }
 
+    loadDom = (): void => {
+        new Promise<void>((resolve) => setTimeout(() => resolve(), 9000))
+            .then(() => {
+                // In case of error we can remove the loading view
+                if (this.props.infoNode === null)
+                    this.setState({offline: true}); // showing the app
+            });
+    }
+
     setShowMessage = (show: boolean, message: string) => this.setState((_) => ({showMessage: show, messageToShow: message}))
 
     componentDidMount() {
-        console.debug("Base url is: ", process.env.NEXT_PUBLIC_REST_URL)
-        axios.get(`${process.env.NEXT_PUBLIC_REST_URL}/utility/getinfo`).then(response => {
-            this.setState((_) => ({infoNode: response.data}));
-            this.changePage(this.state.pageName)
-        }).catch(error => {
-            console.error(error);
-            this.setState((_) => ({offline: true}))
-        });
+        this.loadDom();
     }
 
     render() {
         let view =  this.state.offline ? <Offline /> : <Loading />
-        if (this.state.infoNode !== null) {
-            view = <BasicAppBar nameNode={this.state.infoNode.alias} child={this.state.page} value={this.state.pageName} changeValue={this.changePage}/>
+        if (this.props.infoNode !== null) {
+            view = <BasicAppBar nameNode={this.props.infoNode.alias} child={this.state.page} value={this.state.pageName} changeValue={this.changePage}/>
         }
         return  (
             <ThemeProvider theme={theme}>

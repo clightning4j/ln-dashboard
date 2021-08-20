@@ -64,7 +64,7 @@ class BasicAppBar extends React.Component {
                         }}
                     >
                         <BottomNavigationAction label="Home" value="home" icon={<Home/>} />
-                        <BottomNavigationAction label="Metrics" value="metrics" icon={<PieChart/>} />
+                        <BottomNavigationAction disabled={true} label="Metrics" value="metrics" icon={<PieChart/>} />
                     </BottomNavigation>
                 </AppBar>
                 </Box>
