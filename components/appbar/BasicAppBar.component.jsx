@@ -63,7 +63,7 @@ class BasicAppBar extends React.Component {
                             this.loadDom()
                         }}
                     >
-                        <BottomNavigationAction label="Home" value="home" icon={<Menu/>} />
+                        <BottomNavigationAction label="Home" value="home" icon={<Home/>} />
                     </BottomNavigation>
                 </AppBar>
             </Container>

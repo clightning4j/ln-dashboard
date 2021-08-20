@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  ngnix:
+    depends_on:
+      - lnchecker
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:8080"
+    networks:
+      default:
+        aliases:
+          - user_api
+          - restaurants_api
+          - sendemail_api
+    restart: on-failure
+  lnchecker:
+    build: .
+    restart: on-failure
+    environment:
+      - REST_URL=localhost:7000
