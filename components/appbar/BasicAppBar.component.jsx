@@ -50,9 +50,8 @@ class BasicAppBar extends React.Component {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <Box mb={theme.spacing(4)} style={{alignItems: "center"}}>
-                    {this.state.ready ? child : <Loading />}
-                </Box>
+                {this.state.ready ? child : <Loading />}
+                <Box mb={theme.spacing(2)} />
                 <AppBar position="fixed" className="navigation-style"
                         style={{ backgroundColor: theme.palette.background.paper}}>
                     <BottomNavigation

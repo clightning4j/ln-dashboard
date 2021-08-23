@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7bb93769-fa71-4d3a-8140-085a372d1a6c" name="Changes" comment="# Title: &#10;&#10;Signed-off-by: Vincenzo Palazzo &lt;vincenzopalazzodev@gmail.com&gt;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_.env.local" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/components/appbar/BasicAppBar.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/appbar/BasicAppBar.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/tableNodes/NodeTable.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/tableNodes/NodeTable.component.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +62,7 @@
       <workItem from="1629476082120" duration="40000" />
       <workItem from="1629476123583" duration="160000" />
       <workItem from="1629488998250" duration="5424000" />
-      <workItem from="1629741650348" duration="966000" />
+      <workItem from="1629741650348" duration="2625000" />
     </task>
     <servers />
   </component>

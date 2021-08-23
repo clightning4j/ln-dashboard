@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
+import Box from "@material-ui/core/Box";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -12,6 +13,7 @@ import useSWR from "swr";
 import Loading from "../genericView/Loading.component";
 import axios from "axios";
 import {JSX} from "@babel/types";
+import theme from "../../theme/DarkTheme"
 
 type NodeTableProps = {
     show: (visible: boolean, message: string) => void
@@ -41,8 +43,8 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
         show(true, "No channels open in this node");
         return <></>
     }
-    show(true, "Channels open");
-    return <React.Fragment>
+    show(true, "Channels open loaded");
+    return <Box mt={theme.spacing(1)}>
         <TableContainer component={Paper}>
             <Table aria-label="Node that shows the list of nodes">
                 <TableHead>
@@ -92,5 +94,5 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
                 </TableBody>
             </Table>
         </TableContainer>
-    </React.Fragment>
+    </Box>
 }
