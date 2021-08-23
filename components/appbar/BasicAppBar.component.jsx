@@ -50,9 +50,9 @@ class BasicAppBar extends React.Component {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-
-                {this.state.ready ? child : <Loading />}
-                <Box mt={theme.spacing(2)} style={{alignItems: "center"}}>
+                <Box mb={theme.spacing(4)} style={{alignItems: "center"}}>
+                    {this.state.ready ? child : <Loading />}
+                </Box>
                 <AppBar position="fixed" className="navigation-style"
                         style={{ backgroundColor: theme.palette.background.paper}}>
                     <BottomNavigation
@@ -67,7 +67,6 @@ class BasicAppBar extends React.Component {
                         <BottomNavigationAction disabled={true} label="Metrics" value="metrics" icon={<PieChart/>} />
                     </BottomNavigation>
                 </AppBar>
-                </Box>
             </Container>
         )
     }
