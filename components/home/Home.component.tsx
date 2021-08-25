@@ -112,7 +112,7 @@ export default function HomeView({nodeInfo, show}: ParentProps) {
                             })}
                         </Select>
                     </FormControl>
-                    <IconButton onClick={() => navigator.clipboard.writeText(`${selectAddr.address}:${selectAddr.port}`)}>
+                    <IconButton onClick={() => navigator.clipboard.writeText(`${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`)}>
                         <FileCopyTwoTone />
                     </IconButton>
                 </Grid>
