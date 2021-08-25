@@ -53,7 +53,8 @@ class BasicAppBar extends React.Component {
                 {this.state.ready ? child : <Loading />}
                 <Box mb={theme.spacing(2)} />
                 <AppBar position="fixed" className="navigation-style"
-                        style={{ backgroundColor: theme.palette.background.paper}}>
+                        style={{ backgroundColor: theme.palette.background.paper,
+                            top: "auto", bottom: 0}}>
                     <BottomNavigation
                         value={value}
                         onChange={(event, newValue) => {

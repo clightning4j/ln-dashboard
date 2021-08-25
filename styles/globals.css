@@ -45,13 +45,3 @@ and (min-resolution: 192dpi) {
     border-top-left-radius: 20px !important;
   }
 }
-
-/* ----------- Others Screens ----------- */
-@media screen
-and (min-device-width: 220px)
-and (max-device-width: 1200px) {
-  .navigation-style {
-    top: auto !important;
-    bottom: 0 !important;
-  }
-}

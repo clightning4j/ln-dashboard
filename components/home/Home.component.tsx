@@ -1,4 +1,4 @@
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -6,8 +6,10 @@ import Chip from "@material-ui/core/Chip";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
+import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputBase from '@material-ui/core/InputBase';
+import FileCopyTwoTone from '@material-ui/icons/FileCopyTwoTone';
 import Box from '@material-ui/core/Box';
 import QRCode from 'qrcode.react';
 import theme from '../../theme/DarkTheme'
@@ -53,9 +55,12 @@ export default function HomeView({nodeInfo, show}: ParentProps) {
         let addr = nodeInfo!.address[i];
         mapAddress.set(addr.type, addr);
     }
-    return  <Grid
+
+
+
+    return <Grid
         container
-        style={{ marginTop: "5em" }}
+        style={{marginTop: "5em"}}
         direction="row"
         justify="center"
         alignItems="center"
@@ -68,14 +73,14 @@ export default function HomeView({nodeInfo, show}: ParentProps) {
                     justify="center"
                     alignItems="center"
                 >
-                        <Box component="span" m={1}>
-                            <Chip
-                                label={nodeInfo!.alias}
-                                style={{
-                                    background: "#" + nodeInfo!.color,
-                                }}
-                            />
-                        </Box>
+                    <Box component="span" m={1}>
+                        <Chip
+                            label={nodeInfo!.alias}
+                            style={{
+                                background: "#" + nodeInfo!.color,
+                            }}
+                        />
+                    </Box>
                 </Grid>
                 <Grid>
                     <QRCode
@@ -100,16 +105,26 @@ export default function HomeView({nodeInfo, show}: ParentProps) {
                             value={selectAddr.type}
                             onChange={(event) => setSelectAddr(mapAddress.get(event.target.value))}
                             label="Address"
-                            input={<BootstrapInput />}
+                            input={<BootstrapInput/>}
                         >
                             {nodeInfo!.address.map((address, index) => {
                                 return <MenuItem key={index} value={address.type}>{address.type}</MenuItem>
                             })}
                         </Select>
                     </FormControl>
+                    <IconButton onClick={() => navigator.clipboard.writeText(`${selectAddr.address}:${selectAddr.port}`)}>
+                        <FileCopyTwoTone />
+                    </IconButton>
                 </Grid>
             </CardContent>
         </Card>
-        <NodeTable show={show}/>
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+        >
+            <NodeTable show={show}/>
+        </Grid>
     </Grid>
 }
