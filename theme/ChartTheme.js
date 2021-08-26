@@ -2,7 +2,7 @@ export default function makeTheme(accentColor, lineColors){
     return {
         background: 'transparent',
         textColor: accentColor,
-        fontSize: 11,
+        fontSize: 12,
         axis: {
             domain: {
                 line: {
@@ -38,7 +38,7 @@ export default function makeTheme(accentColor, lineColors){
             text: {}
         },
         markers: {
-            lineColor: lineColors,
+            lineColor: accentColor,
             lineStrokeWidth: 1,
             text: {}
         },

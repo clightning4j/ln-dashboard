@@ -14,13 +14,25 @@ import Loading from "../genericView/Loading.component";
 import {JSX} from "@babel/types";
 import theme from "../../theme/DarkTheme"
 import {fetcher, pingNode} from "../../utils/AppUtils"
+import {makeStyles} from "@material-ui/styles";
 
 type NodeTableProps = {
     show: (visible: boolean, message: string) => void
 }
 
+const useStyles = makeStyles({
+    root: {
+        width: '100%',
+    },
+    container: {
+        maxHeight: "80vh",
+        maxWidth: "100%",
+    },
+});
+
 export function NodeTable({show}: NodeTableProps): JSX.Element {
     const { data, error } = useSWR('/api/channelsInfo', fetcher)
+    const classes = useStyles();
     if (error) {
         show(true, "Error: " + error)
         return <></>
@@ -32,9 +44,9 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
         return <></>
     }
     show(true, "Ready :)");
-    return <Box mt={theme.spacing(1)}>
-        <TableContainer component={Paper}>
-            <Table aria-label="Node that shows the list of nodes">
+    return <Box mt={theme.spacing(1)} className={classes.root}>
+        <TableContainer component={Paper} className={classes.container}>
+            <Table stickyHeader aria-label="Node that shows the list of nodes">
                 <TableHead>
                     <TableRow>
                         <TableCell>Node Name</TableCell>

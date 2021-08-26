@@ -4,7 +4,7 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import HomeView from '../components/home/Home.component';
 import BasicAppBar from '../components/appbar/BasicAppBar.component';
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 import theme from "../theme/DarkTheme";
 import {GetInfoNode} from "../model/GetInfoNode";
 import axios from "axios";
@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-class Home extends React.Component<AppProps, AppState>  {
+class Home extends React.Component<AppProps, AppState> {
     state: AppState = {
         page: <HomeView show={(visible, message) => console.debug(visible)} nodeInfo={this.props.infoNode}/>,
         pageName: "home",
@@ -61,7 +61,7 @@ class Home extends React.Component<AppProps, AppState>  {
                 pageName = "home"
                 break
             case "metrics":
-                page = <MetricsView show={this.setShowMessage}  nodeInfo={this.props.infoNode}/>
+                page = <MetricsView show={this.setShowMessage} nodeInfo={this.props.infoNode}/>
                 pageName = "metrics"
                 break
             default:
@@ -94,21 +94,29 @@ class Home extends React.Component<AppProps, AppState>  {
     }
 
     render() {
-        let view =  this.state.offline ? <Offline /> : <Loading />
+        let view = this.state.offline ? <Offline/> : <Loading/>
         if (this.props.infoNode !== null) {
-            view = <BasicAppBar nameNode={this.props.infoNode.alias} child={this.state.page} value={this.state.pageName} changeValue={this.changePage}/>
+            view = <BasicAppBar nameNode={this.props.infoNode.alias} child={this.state.page} value={this.state.pageName}
+                                changeValue={this.changePage}/>
         }
-        return  (
+        return (
             <ThemeProvider theme={theme}>
-                <CssBaseline />
+                <CssBaseline/>
                 <Helmet>
-                    <meta charSet="utf-8" />
+                    <meta charSet="utf-8"/>
+                    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+                    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+                    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+                    <link rel="manifest" href="/site.webmanifest"/>
+                    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
+                    <meta name="msapplication-TileColor" content="#da532c"/>
+                    <meta name="theme-color" content="#ffffff"/>
                     <title>Home</title>
-                    <link rel="canonical" href="https://bruce.bublina.eu.org/" />
+                    <link rel="canonical" href="https://bruce.bublina.eu.org/"/>
                 </Helmet>
                 {view}
                 <Snackbar
-                    anchorOrigin={{ vertical: "top", horizontal: "right"}}
+                    anchorOrigin={{vertical: "top", horizontal: "right"}}
                     color={theme.palette.error.main}
                     open={this.state.showMessage}
                     onClose={() => this.setState((_) => ({showMessage: false, messageToShow: ""}))}
@@ -122,4 +130,5 @@ class Home extends React.Component<AppProps, AppState>  {
         );
     }
 }
+
 export default Home;

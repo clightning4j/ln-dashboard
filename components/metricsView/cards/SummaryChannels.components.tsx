@@ -4,6 +4,13 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {GetInfoNode} from "../../../model/GetInfoNode";
 import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import ListItemText from "@material-ui/core/ListItemText";
+import Paper from "@material-ui/core/Paper";
+import FingerprintOutlined from "@material-ui/icons/FingerprintOutlined";
 import {ResponsiveLine, Serie} from '@nivo/line'
 import {metricsOneToTotChannelsByDay} from "../../../utils/AppUtils";
 import {MetricsOne} from "../../../model/Metrics";
@@ -36,25 +43,53 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                   direction="row"
                   justifyContent="center"
                   alignItems="center">
-                <Typography style={{color: color}} gutterBottom>
-                    {nodeInfo.alias}
-                </Typography>
+                <Paper elevation={0}>
+                    <CardContent>
+                        <Typography style={{color: color}} gutterBottom>
+                            {nodeInfo.alias}
+                        </Typography>
+                        <List>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <FingerprintOutlined />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={`c-lightning: ${nodeInfo.version}`} secondary={metricsOne.timezone} />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <FingerprintOutlined />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={metricsOne.os_info.os} secondary={`${metricsOne.os_info.version} on ${metricsOne.os_info.architecture}`} />
+                            </ListItem>
+                        </List>
+                    </CardContent>
+                </Paper>
                 <div className={styles.container}>
                     <ResponsiveLine
-                        xScale={{ type: 'point' }}
-                        yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
-                        yFormat=" >-.2f"
                         data={lineChartData}
                         pointSize={10}
                         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-                        curve="natural"
+                        curve="step"
                         colors={color}
-                        enableArea={true}
-                        pointColor={{theme:  'grid.line.stroke' }}
                         pointBorderWidth={2}
-                        pointBorderColor={{from: 'serieColor'}}
+                        enablePointLabel={true}
+                        enableArea={true}
+                        areaOpacity={0.4}
+                        enableSlices={false}
+                        crosshairType="cross"
+                        pointColor={{ from: 'color', modifiers: [] }}
                         pointLabelYOffset={-12}
                         theme={makeTheme(color, theme.palette.text.primary)}
+                        xScale={{ type: "point"}}
+                        yScale={{
+                            type: "linear",
+                            min: 0,
+                            stacked: false
+                        }}
                         useMesh={true}
                         axisBottom={{
                             orient: 'bottom',
@@ -81,7 +116,7 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                             {
                                 anchor: 'bottom-right',
                                 direction: 'column',
-                                justify: true,
+                                justify: false,
                                 translateX: 100,
                                 translateY: 0,
                                 itemsSpacing: 0,
@@ -92,15 +127,6 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                                 symbolSize: 12,
                                 symbolShape: 'circle',
                                 symbolBorderColor: color,
-                                effects: [
-                                    {
-                                        on: 'hover',
-                                        style: {
-                                            itemBackground: color,
-                                            itemOpacity: 1
-                                        }
-                                    }
-                                ]
                             }
                         ]}
                     />

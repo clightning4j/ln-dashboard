@@ -34,8 +34,8 @@ export const pingNode = async (nodeId: string, show: (visible: boolean, message:
 
 export function metricsOneToTotChannelsByDay(metricsOne: MetricsOne): Array<LineChartItem> {
     let chartItems = []
-    metricsOne.up_time.forEach(item => {
-        chartItems.push(new LineChartItem(new Date(item.timestamp * 1000).toDateString(), item.channels["tot_channels"]));
+    metricsOne.up_time.forEach((item, index) => {
+        chartItems.push(new LineChartItem(new Date(item.timestamp * 1000).toLocaleDateString(), item.channels["tot_channels"]));
     });
     return chartItems
 }
