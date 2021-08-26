@@ -11,24 +11,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import useSWR from "swr";
 import Loading from "../genericView/Loading.component";
-import axios from "axios";
 import {JSX} from "@babel/types";
 import theme from "../../theme/DarkTheme"
+import {fetcher, pingNode} from "../../utils/AppUtils"
 
 type NodeTableProps = {
     show: (visible: boolean, message: string) => void
-}
-
-const fetcher = (url: string) => fetch(url).then((res: Response) => res.json())
-
-const pingNode = async (nodeId: string, show: (visible: boolean, message: string) => void) => {
-    try {
-        const _ = await axios(`/api/pingNode/${nodeId}`)
-        show(true, "The node is up");
-    }catch (e) {
-        console.error(e);
-        show(true, "Error with message: e")
-    }
 }
 
 export function NodeTable({show}: NodeTableProps): JSX.Element {
@@ -43,7 +31,7 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
         show(true, "No channels open in this node");
         return <></>
     }
-    show(true, "Channels open loaded");
+    show(true, "Ready :)");
     return <Box mt={theme.spacing(1)}>
         <TableContainer component={Paper}>
             <Table aria-label="Node that shows the list of nodes">

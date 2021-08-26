@@ -14,6 +14,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import {Close} from "@material-ui/icons";
 import Offline from "../components/genericView/Offline.component";
+import MetricsView from "../components/metricsView/MetricsView.component";
 
 type AppState = {
     page: JSX.Element
@@ -60,7 +61,7 @@ class Home extends React.Component<AppProps, AppState>  {
                 pageName = "home"
                 break
             case "metrics":
-                page = <HomeView show={this.setShowMessage}  nodeInfo={this.props.infoNode}/>
+                page = <MetricsView show={this.setShowMessage}  nodeInfo={this.props.infoNode}/>
                 pageName = "metrics"
                 break
             default:
@@ -81,11 +82,15 @@ class Home extends React.Component<AppProps, AppState>  {
             });
     }
 
-    setShowMessage = (show: boolean, message: string) => this.setState((_) => ({showMessage: show, messageToShow: message}))
+    setShowMessage = (show: boolean, message: string) => {
+        this.setState((_) => ({showMessage: show, messageToShow: message}))
+        console.debug(`Show message is: ${show} with message: ${message}`);
+    }
 
     componentDidMount() {
         console.debug(`Base url is ${process.env.NEXT_PUBLIC_REST_URL}`);
         this.loadDom();
+        this.changePage(this.state.pageName);
     }
 
     render() {

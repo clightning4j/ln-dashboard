@@ -56,13 +56,11 @@ export default function HomeView({nodeInfo, show}: ParentProps) {
         mapAddress.set(addr.type, addr);
     }
 
-
-
     return <Grid
         container
         style={{marginTop: "5em"}}
         direction="row"
-        justify="center"
+        justifyContent="center"
         alignItems="center"
     >
         <Card>
@@ -70,7 +68,7 @@ export default function HomeView({nodeInfo, show}: ParentProps) {
                 <Grid
                     container
                     direction="row"
-                    justify="center"
+                    justifyContent="center"
                     alignItems="center"
                 >
                     <Box component="span" m={1}>
@@ -91,7 +89,7 @@ export default function HomeView({nodeInfo, show}: ParentProps) {
                 </Grid>
                 <Grid container
                       direction="row"
-                      justify="center"
+                      justifyContent="center"
                       alignItems="center">
                     <FormControl variant="outlined" style={{
                         margin: theme.spacing(2),
@@ -121,7 +119,7 @@ export default function HomeView({nodeInfo, show}: ParentProps) {
         <Grid
             container
             direction="row"
-            justify="center"
+            justifyContent="center"
             alignItems="center"
         >
             <NodeTable show={show}/>

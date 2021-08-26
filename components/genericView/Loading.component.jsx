@@ -10,7 +10,7 @@ export default function Loading({ size = 75 }) {
             spacing={0}
             direction="column"
             alignItems="center"
-            justify="center"
+            justifyContent="center"
         >
             <Grid item xs={3}>
                 <ReactLoading  type="bars"/>

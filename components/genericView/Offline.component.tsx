@@ -7,7 +7,7 @@ export default function Offline({ size = 90 }: { size?: number }) {
             spacing={0}
             direction="column"
             alignItems="center"
-            justify="center"
+            justifyContent="center"
         >
             <Grid item xs={3}>
                 <Typography variant="h6" style={{ flex: 1 }}>

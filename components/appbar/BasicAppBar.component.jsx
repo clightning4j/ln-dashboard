@@ -37,24 +37,28 @@ class BasicAppBar extends React.Component {
     render() {
         const {child, value, nameNode, changeValue} = this.props
         return (
-            <Container maxWidth="xl">
+            <Container maxWidth="xl" alignItems="center">
                 <AppBar position="sticky" style={{
                     backgroundColor: theme.palette.background.paper
                 }}>
                     <Toolbar>
-                        <IconButton onClick={()=> console.log("Click on menu icon")} disabled={true} edge="start" color="inherit" aria-label="menu">
-                            <Menu />
+                        <IconButton onClick={() => console.log("Click on menu icon")} disabled={true} edge="start"
+                                    color="inherit" aria-label="menu">
+                            <Menu/>
                         </IconButton>
                         <Typography color="textSecondary" variant="h6">
                             {nameNode}
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                {this.state.ready ? child : <Loading />}
-                <Box mb={theme.spacing(2)} />
+                <Box m={5} mb={9}>
+                    {this.state.ready ? child : <Loading/>}
+                </Box>
                 <AppBar position="fixed" className="navigation-style"
-                        style={{ backgroundColor: theme.palette.background.paper,
-                            top: "auto", bottom: 0}}>
+                        style={{
+                            backgroundColor: theme.palette.background.paper,
+                            top: "auto", bottom: 0, marginTop: 6
+                        }}>
                     <BottomNavigation
                         value={value}
                         onChange={(event, newValue) => {
@@ -63,8 +67,8 @@ class BasicAppBar extends React.Component {
                             this.loadDom()
                         }}
                     >
-                        <BottomNavigationAction label="Home" value="home" icon={<Home/>} />
-                        <BottomNavigationAction disabled={true} label="Metrics" value="metrics" icon={<PieChart/>} />
+                        <BottomNavigationAction label="Home" value="home" icon={<Home/>}/>
+                        <BottomNavigationAction label="Metrics" value="metrics" icon={<PieChart/>}/>
                     </BottomNavigation>
                 </AppBar>
             </Container>
