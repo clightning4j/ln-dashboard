@@ -2,6 +2,7 @@ export default function makeTheme(accentColor, lineColors){
     return {
         background: 'transparent',
         textColor: accentColor,
+        fontSize: 11,
         axis: {
             domain: {
                 line: {

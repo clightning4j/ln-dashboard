@@ -1,10 +1,11 @@
 import axios from "axios";
 import {MetricsOne} from "../model/Metrics";
+import {Datum} from "@nivo/line";
 
-export class LineChartItem {
+export class LineChartItem implements Datum {
+    [key: string]: any;
     public x: string
     public y: number
-
     constructor(key: string, val: number) {
         this.x = key;
         this.y = val;

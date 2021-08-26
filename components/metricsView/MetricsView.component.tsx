@@ -24,7 +24,7 @@ export default function MetricsView({nodeInfo, show}: MetricsViewProps): JSX.Ele
     }
     if (!data)
         return <Loading/>
-    let metricsOne: Object = data.metrics["metric_one"]
+    let metricsOne: any = data.metrics["metric_one"]
     console.debug(`Metric one with the follow payload ${metricsOne.toString()}`);
 
     return <Grid

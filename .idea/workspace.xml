@@ -5,24 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c466067-9377-42e8-9383-cfda2044cecc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/metricsView/MetricsView.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/metricsView/cards/SummaryChannels.components.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Metrics.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/metrics.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles/SummaryChannels.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/theme/ChartTheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/AppUtils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/appbar/BasicAppBar.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/appbar/BasicAppBar.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/genericView/Loading.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/genericView/Loading.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/genericView/Offline.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/genericView/Offline.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/home/Home.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/Home.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/tableNodes/NodeTable.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/tableNodes/NodeTable.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/pingNode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/pingNode/[nodeId].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/metricsView/MetricsView.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/metricsView/MetricsView.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/metricsView/cards/SummaryChannels.components.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/metricsView/cards/SummaryChannels.components.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/theme/ChartTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/theme/ChartTheme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/AppUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/AppUtils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +67,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1629980075996</updated>
-      <workItem from="1629980078402" duration="12277000" />
+      <workItem from="1629980078402" duration="13850000" />
     </task>
     <servers />
   </component>

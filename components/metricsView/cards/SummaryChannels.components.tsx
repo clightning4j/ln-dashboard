@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {GetInfoNode} from "../../../model/GetInfoNode";
 import Grid from "@material-ui/core/Grid";
-import {ResponsiveLine} from '@nivo/line'
+import {ResponsiveLine, Serie} from '@nivo/line'
 import {metricsOneToTotChannelsByDay} from "../../../utils/AppUtils";
 import {MetricsOne} from "../../../model/Metrics";
 import makeTheme from '../../../theme/ChartTheme'
@@ -22,7 +22,7 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
     let {color} = metricsOne
     color = `#${color}`
 
-    let lineChartData: Array<Object> = []
+    let lineChartData: Array<Serie> = []
     //TODO make this operation from a server side
     lineChartData.push({
         id: metricsOne.metric_name,
@@ -41,6 +41,9 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                 </Typography>
                 <div className={styles.container}>
                     <ResponsiveLine
+                        xScale={{ type: 'point' }}
+                        yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+                        yFormat=" >-.2f"
                         data={lineChartData}
                         pointSize={10}
                         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -72,6 +75,8 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                             legendPosition: 'middle',
                             color: color
                         }}
+                        axisTop={null}
+                        axisRight={null}
                         legends={[
                             {
                                 anchor: 'bottom-right',
