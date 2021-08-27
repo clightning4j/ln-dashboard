@@ -7,6 +7,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import SummaryChannels from "./cards/SummaryChannels.components";
+import UpTimeNode from "./cards/UpTimeNode.component";
 
 type MetricsViewProps = {
     nodeInfo: GetInfoNode | null
@@ -35,14 +36,28 @@ export default function MetricsView({nodeInfo, show}: MetricsViewProps): JSX.Ele
         alignItems="center"
     >
         <Grid
-            item
+            container
             direction="row"
             justifyContent="center"
             alignItems="center"
         >
-            <Box m={3}>
-                <SummaryChannels nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
-            </Box>
+            <Grid item xs={12}>
+                <Box m={3}>
+                    <SummaryChannels nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
+                </Box>
+            </Grid>
+        </Grid>
+        <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+        >
+            <Grid item xs={12}>
+                <Box m={3}>
+                    <UpTimeNode nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
+                </Box>
+            </Grid>
         </Grid>
     </Grid>
 }

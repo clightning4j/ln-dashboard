@@ -25,8 +25,8 @@ const useStyles = makeStyles({
         width: '100%',
     },
     container: {
-        maxHeight: "80vh",
-        maxWidth: "100%",
+        maxHeight: "100vh",
+        maxWidth: "100vw",
     },
 });
 
@@ -44,7 +44,7 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
         return <></>
     }
     show(true, "Ready :)");
-    return <Box mt={theme.spacing(1)} className={classes.root}>
+    return <Box mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
         <TableContainer component={Paper} className={classes.container}>
             <Table stickyHeader aria-label="Node that shows the list of nodes">
                 <TableHead>

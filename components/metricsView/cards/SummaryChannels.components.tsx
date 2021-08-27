@@ -1,7 +1,6 @@
 import React from "react";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import {GetInfoNode} from "../../../model/GetInfoNode";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
@@ -16,6 +15,8 @@ import {metricsOneToTotChannelsByDay} from "../../../utils/AppUtils";
 import {MetricsOne} from "../../../model/Metrics";
 import makeTheme from '../../../theme/ChartTheme'
 import theme from '../../../theme/DarkTheme'
+import TodayRounded from "@material-ui/icons/TodayRounded";
+import CardHeader from "@material-ui/core/CardHeader";
 
 import styles from '../../../styles/SummaryChannels.module.css'
 
@@ -24,6 +25,8 @@ type SummaryChannelsProps = {
     metricsOne: MetricsOne
     show: (show: boolean, message: string) => void
 }
+
+
 
 export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryChannelsProps): JSX.Element {
     let {color} = metricsOne
@@ -38,99 +41,111 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
     });
 
     return <Card>
+        <CardHeader
+            avatar={
+                <Avatar aria-label="recipe">
+                    <TodayRounded />
+                </Avatar>
+            }
+            titleTypographyProps={{color: color}}
+            title={`Node ${nodeInfo.alias} General info`.toUpperCase()}
+        />
         <CardContent>
             <Grid container
                   direction="row"
                   justifyContent="center"
                   alignItems="center">
-                <Paper elevation={0}>
-                    <CardContent>
-                        <Typography style={{color: color}} gutterBottom>
-                            {nodeInfo.alias}
-                        </Typography>
-                        <List>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <FingerprintOutlined />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary={`c-lightning: ${nodeInfo.version}`} secondary={metricsOne.timezone} />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <FingerprintOutlined />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary={metricsOne.os_info.os} secondary={`${metricsOne.os_info.version} on ${metricsOne.os_info.architecture}`} />
-                            </ListItem>
-                        </List>
-                    </CardContent>
-                </Paper>
-                <div className={styles.container}>
-                    <ResponsiveLine
-                        data={lineChartData}
-                        pointSize={10}
-                        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-                        curve="step"
-                        colors={color}
-                        pointBorderWidth={2}
-                        enablePointLabel={true}
-                        enableArea={true}
-                        areaOpacity={0.4}
-                        enableSlices={false}
-                        crosshairType="cross"
-                        pointColor={{ from: 'color', modifiers: [] }}
-                        pointLabelYOffset={-12}
-                        theme={makeTheme(color, theme.palette.text.primary)}
-                        xScale={{ type: "point"}}
-                        yScale={{
-                            type: "linear",
-                            min: 0,
-                            stacked: false
-                        }}
-                        useMesh={true}
-                        axisBottom={{
-                            orient: 'bottom',
-                            tickSize: 5,
-                            tickPadding: 5,
-                            tickRotation: 0,
-                            legend: 'Day',
-                            legendOffset: 36,
-                            legendPosition: 'middle',
-                        }}
-                        axisLeft={{
-                            orient: 'left',
-                            tickSize: 5,
-                            tickPadding: 5,
-                            tickRotation: 0,
-                            legend: 'Channels by days',
-                            legendOffset: -40,
-                            legendPosition: 'middle',
-                            color: color
-                        }}
-                        axisTop={null}
-                        axisRight={null}
-                        legends={[
-                            {
-                                anchor: 'bottom-right',
-                                direction: 'column',
-                                justify: false,
-                                translateX: 100,
-                                translateY: 0,
-                                itemsSpacing: 0,
-                                itemDirection: 'left-to-right',
-                                itemWidth: 80,
-                                itemHeight: 20,
-                                itemOpacity: 0.75,
-                                symbolSize: 12,
-                                symbolShape: 'circle',
-                                symbolBorderColor: color,
-                            }
-                        ]}
-                    />
-                </div>
+                <Grid item xs={2}>
+                    <Paper elevation={0}>
+                        <CardContent>
+                            <List>
+                                <ListItem alignItems="flex-start">
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <FingerprintOutlined/>
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText  primary={`c-lightning: ${nodeInfo.version}`}
+                                                  secondary={metricsOne.timezone}/>
+                                </ListItem>
+                                <ListItem alignItems="flex-start">
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <FingerprintOutlined/>
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary={metricsOne.os_info.os}
+                                                  secondary={`${metricsOne.os_info.version} on ${metricsOne.os_info.architecture}`}/>
+                                </ListItem>
+                            </List>
+                        </CardContent>
+                    </Paper>
+                </Grid>
+                <Grid item xs={10}>
+                    <div className={styles.container}>
+                        <ResponsiveLine
+                            data={lineChartData}
+                            pointSize={10}
+                            margin={{top: 50, right: 110, bottom: 50, left: 60}}
+                            curve="step"
+                            colors={color}
+                            pointBorderWidth={2}
+                            enablePointLabel={true}
+                            enableArea={true}
+                            areaOpacity={0.4}
+                            enableSlices={false}
+                            crosshairType="cross"
+                            pointColor={{from: 'color', modifiers: []}}
+                            pointLabelYOffset={-12}
+                            theme={makeTheme(color, theme.palette.text.primary)}
+                            xScale={{type: "point"}}
+                            yScale={{
+                                type: "linear",
+                                min: 0,
+                                stacked: false
+                            }}
+                            useMesh={true}
+                            axisBottom={{
+                                orient: 'bottom',
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                legend: 'Day',
+                                legendOffset: 36,
+                                legendPosition: 'middle',
+                            }}
+                            axisLeft={{
+                                orient: 'left',
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                legend: 'Channels by days',
+                                legendOffset: -40,
+                                legendPosition: 'middle',
+                                color: color
+                            }}
+                            axisTop={null}
+                            axisRight={null}
+                            legends={[
+                                {
+                                    anchor: 'bottom-right',
+                                    direction: 'column',
+                                    justify: false,
+                                    translateX: 100,
+                                    translateY: 0,
+                                    itemsSpacing: 0,
+                                    itemDirection: 'left-to-right',
+                                    itemWidth: 80,
+                                    itemHeight: 20,
+                                    itemOpacity: 0.75,
+                                    symbolSize: 12,
+                                    symbolShape: 'circle',
+                                    symbolBorderColor: color,
+                                }
+                            ]}
+                        />
+                    </div>
+                </Grid>
             </Grid>
         </CardContent>
     </Card>
