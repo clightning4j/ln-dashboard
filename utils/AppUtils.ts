@@ -2,6 +2,7 @@ import axios from "axios";
 import {MetricsOne} from "../model/Metrics";
 import {Datum} from "@nivo/line";
 import {CalendarDatum} from "@nivo/calendar/dist/types/types";
+import dayjs from 'dayjs';
 
 export class LineChartItem implements Datum {
     [key: string]: any;
@@ -47,7 +48,7 @@ export const pingNode = async (nodeId: string, show: (visible: boolean, message:
 
 export function metricsOneToTotChannelsByDay(metricsOne: MetricsOne): Array<LineChartItem> {
     let chartItems = []
-    metricsOne.up_time.forEach((item, index) => {
+    metricsOne.up_time.forEach((item, _) => {
         chartItems.push(new LineChartItem(new Date(item.timestamp * 1000).toLocaleDateString(), item.channels["tot_channels"]));
     });
     return chartItems
@@ -63,8 +64,9 @@ export function metricsOneToContributionNode(metricsOne: MetricsOne): Array<Cale
     metricsOne.up_time.forEach(contribution => {
         //There are difference timestamp with the same day.
         if (contribution.timestamp !== 0) {
-            let date: Date = new Date(contribution.timestamp * 1000);
-            let key: string = `${date.getFullYear()}-${(date.getMonth() + 1 < 10) ? ('0' + (date.getMonth() + 1)) : date.getMonth() + 1}-${(date.getDay() < 10) ? '0' + date.getDay() : date.getDay()}`;
+            let date = dayjs.unix(contribution.timestamp);
+            let key: string = date.format('YYYY-MM-DD');
+            console.debug(`The date string is ${key}`);
             if (sumContrByDay.has(key))
                 sumContrByDay.set(key, sumContrByDay.get(key) + 1);
             else {

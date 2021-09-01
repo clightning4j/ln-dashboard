@@ -37,7 +37,7 @@ class BasicAppBar extends React.Component {
     render() {
         const {child, value, nameNode, changeValue} = this.props
         return (
-            <Container maxWidth="xl" alignItems="center">
+            <Container maxWidth="xl">
                 <AppBar position="sticky" style={{
                     backgroundColor: theme.palette.background.paper
                 }}>

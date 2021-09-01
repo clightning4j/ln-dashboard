@@ -43,7 +43,6 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
         show(true, "No channels open in this node");
         return <></>
     }
-    show(true, "Ready :)");
     return <Box mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
         <TableContainer component={Paper} className={classes.container}>
             <Table stickyHeader aria-label="Node that shows the list of nodes">

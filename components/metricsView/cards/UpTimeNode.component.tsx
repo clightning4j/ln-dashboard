@@ -10,7 +10,7 @@ import {metricsOneToContributionNode} from "../../../utils/AppUtils";
 import styles from "../../../styles/SummaryChannels.module.css";
 import {GetInfoNode} from "../../../model/GetInfoNode";
 import TodayRounded from "@material-ui/icons/TodayRounded"
-import {makeStyles} from "@material-ui/styles";
+import theme from '../../../theme/DarkTheme';
 
 type UpTimeProps = {
     nodeInfo: GetInfoNode
@@ -43,14 +43,16 @@ export default function UpTimeNode({nodeInfo, metricsOne, show}: UpTimeProps): J
                             data={data}
                             from={data[0].day}
                             to={data[data.length - 1].day}
-                            emptyColor="#eeffff"
+                            emptyColor={theme.palette.secondary.main}
                             colors={['#ff5370', '#f07178', '#c3e88d', color]}
                             margin={{top: 0, right: 40, bottom: 0, left: 40}}
-                            yearSpacing={40}
+                            yearSpacing={10}
                             maxValue={44}
-                            monthBorderColor={color}
+                            minValue="auto"
+                            daySpacing={4}
+                            monthBorderColor={theme.palette.background.default}
                             dayBorderWidth={2}
-                            dayBorderColor={color}
+                            dayBorderColor={theme.palette.background.default}
                             legends={[
                                 {
                                     anchor: 'bottom-right',
