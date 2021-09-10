@@ -11,6 +11,7 @@ import styles from "../../../styles/SummaryChannels.module.css";
 import {GetInfoNode} from "../../../model/GetInfoNode";
 import TodayRounded from "@material-ui/icons/TodayRounded"
 import theme from '../../../theme/DarkTheme';
+import makeTheme from "../../../theme/ChartTheme";
 
 type UpTimeProps = {
     nodeInfo: GetInfoNode
@@ -50,6 +51,7 @@ export default function UpTimeNode({nodeInfo, metricsOne, show}: UpTimeProps): J
                             maxValue={44}
                             minValue="auto"
                             daySpacing={4}
+                            theme={makeTheme(color, theme.palette.text.primary)}
                             monthBorderColor={theme.palette.background.default}
                             dayBorderWidth={2}
                             dayBorderColor={theme.palette.background.default}

@@ -8,7 +8,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
-import Paper from "@material-ui/core/Paper";
 import FingerprintOutlined from "@material-ui/icons/FingerprintOutlined";
 import {ResponsiveLine, Serie} from '@nivo/line'
 import {metricsOneToTotChannelsByDay} from "../../../utils/AppUtils";
@@ -107,10 +106,10 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                             }}
                             useMesh={true}
                             axisBottom={{
-                                orient: 'bottom',
+                                orient: '',
                                 tickSize: 5,
                                 tickPadding: 5,
-                                tickRotation: 0,
+                                tickRotation: 50,
                                 legend: 'Day',
                                 legendOffset: 36,
                                 legendPosition: 'middle',
@@ -119,7 +118,7 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                                 orient: 'left',
                                 tickSize: 5,
                                 tickPadding: 5,
-                                tickRotation: 0,
+                                tickRotation: 3,
                                 legend: 'Channels by days',
                                 legendOffset: -40,
                                 legendPosition: 'middle',

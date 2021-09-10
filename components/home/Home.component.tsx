@@ -58,7 +58,6 @@ export default function HomeView({nodeInfo, show}: ParentProps) {
 
     return <Grid
         container
-        style={{marginTop: "5em"}}
         direction="row"
         justifyContent="center"
         alignItems="center"

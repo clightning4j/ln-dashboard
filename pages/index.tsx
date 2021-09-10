@@ -96,7 +96,7 @@ class Home extends React.Component<AppProps, AppState> {
     render() {
         let view = this.state.offline ? <Offline/> : <Loading/>
         if (this.props.infoNode !== null) {
-            view = <BasicAppBar nameNode={this.props.infoNode.alias} child={this.state.page} value={this.state.pageName}
+            view = <BasicAppBar nameNode={this.props.infoNode.alias} child={this.state.page} network={this.props.infoNode.network} value={this.state.pageName}
                                 changeValue={this.changePage}/>
         }
         return (
