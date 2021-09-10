@@ -27,7 +27,6 @@ type SummaryChannelsProps = {
 }
 
 
-
 export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryChannelsProps): JSX.Element {
     let {color} = metricsOne
     color = `#${color}`
@@ -44,7 +43,7 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
         <CardHeader
             avatar={
                 <Avatar aria-label="recipe">
-                    <TodayRounded />
+                    <TodayRounded/>
                 </Avatar>
             }
             titleTypographyProps={{color: color}}
@@ -55,33 +54,35 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                   direction="row"
                   justifyContent="center"
                   alignItems="center">
-                <Grid item xs={2}>
-                    <Paper elevation={0}>
-                        <CardContent>
-                            <List>
-                                <ListItem alignItems="flex-start">
-                                    <ListItemAvatar>
-                                        <Avatar>
-                                            <FingerprintOutlined/>
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText  primary={`c-lightning: ${nodeInfo.version}`}
-                                                  secondary={metricsOne.timezone}/>
-                                </ListItem>
-                                <ListItem alignItems="flex-start">
-                                    <ListItemAvatar>
-                                        <Avatar>
-                                            <FingerprintOutlined/>
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary={metricsOne.os_info.os}
-                                                  secondary={`${metricsOne.os_info.version} on ${metricsOne.os_info.architecture}`}/>
-                                </ListItem>
-                            </List>
-                        </CardContent>
-                    </Paper>
-                </Grid>
-                <Grid item xs={10}>
+                    <Grid item direction="row"
+                          justifyContent="center"
+                          alignItems="center">
+                        <List style={{display: 'flex', flexDirection: 'row', padding: 0}}>
+                            <ListItem alignItems="center" style={{margin: 5}}>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <FingerprintOutlined/>
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={`c-lightning: ${nodeInfo.version}`}
+                                              secondary={metricsOne.timezone}/>
+                            </ListItem>
+                            <ListItem alignItems="center" style={{margin: 5}}>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <FingerprintOutlined/>
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={metricsOne.os_info.os}
+                                              secondary={`${metricsOne.os_info.version} on ${metricsOne.os_info.architecture}`}/>
+                            </ListItem>
+                        </List>
+                    </Grid>
+            </Grid>
+            <Grid container
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center">
                     <div className={styles.container}>
                         <ResponsiveLine
                             data={lineChartData}
@@ -145,7 +146,6 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                             ]}
                         />
                     </div>
-                </Grid>
             </Grid>
         </CardContent>
     </Card>

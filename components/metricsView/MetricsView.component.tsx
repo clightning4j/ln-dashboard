@@ -20,7 +20,7 @@ export default function MetricsView({nodeInfo, show}: MetricsViewProps): JSX.Ele
     const {data, error} = useSWR('/api/metrics', fetcher)
     if (error) {
         //TODO adding an error view
-        show(true, "Error: " + error)
+        show(true, `Error: ${error.toString()}`);
         return <></>
     }
     if (!data)
@@ -30,34 +30,18 @@ export default function MetricsView({nodeInfo, show}: MetricsViewProps): JSX.Ele
 
     return <Grid
         container
+        spacing={2}
         style={{marginTop: "5em"}}
         direction="row"
         justifyContent="center"
         alignItems="center"
     >
-        <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-        >
-            <Grid item xs={12}>
-                <Box m={3}>
-                    <SummaryChannels nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
-                </Box>
-            </Grid>
+        <Grid item xs={12}>
+            <SummaryChannels nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
         </Grid>
-        <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-        >
-            <Grid item xs={12}>
-                <Box m={3}>
-                    <UpTimeNode nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
-                </Box>
-            </Grid>
+
+        <Grid item xs={12}>
+            <UpTimeNode nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
         </Grid>
     </Grid>
 }

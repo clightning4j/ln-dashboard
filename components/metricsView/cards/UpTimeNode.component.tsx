@@ -37,7 +37,7 @@ export default function UpTimeNode({nodeInfo, metricsOne, show}: UpTimeProps): J
                   direction="row"
                   justifyContent="center"
                   alignItems="center">
-                <Grid item xs={12}>
+                <Grid item>
                     <div className={styles.container}>
                         <ResponsiveCalendar
                             data={data}
