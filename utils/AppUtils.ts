@@ -86,17 +86,20 @@ export function metricsOneToContributionNode(metricsOne: MetricsOne): Array<Cale
  */
 export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOne): Object {
     let result: Array<any> = []
+    if (!metricsOne.channels_info)
+        return result
     metricsOne.channels_info.forEach(channelInfo => {
         let collectionMap: Map<string, any> = new Map<string, any>();
         collectionMap["node"] = channelInfo.node_alias
         let failed: number = 0;
         let success: number = 0;
-        channelInfo.forwards.forEach(forward => {
-            if (forward.status.includes("failed"))
-                failed++;
-            else
-                success++;
-        });
+        if (channelInfo.forwards)
+            channelInfo.forwards.forEach(forward => {
+                if (forward.status.includes("failed"))
+                    failed++;
+                else
+                    success++;
+            });
         // TODO: include also the internal failure.
         collectionMap["failed"] = failed;
         collectionMap["success"] = success;
