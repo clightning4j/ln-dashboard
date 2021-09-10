@@ -22,5 +22,29 @@ export type MetricsOne = {
     }
     timezone: string
     up_time: Array<UpTime>
-    channels_info: Array<Object>
+    channels_info: Array<ChannelInfo>
+}
+
+export type ChannelInfo = {
+    node_alias: string
+    node_id: string,
+    channel_id: string,
+    capacity: number,
+    online: boolean,
+    color: string,
+    direction: string,
+    forwards: Array<Forward>
+    last_update: number,
+    public: boolean,
+    up_times: Array<Uptime>,
+}
+
+export type Uptime = {
+    status: string,
+    timestamp: number,
+}
+
+export type Forward = {
+    direction: string,
+    status: string,
 }

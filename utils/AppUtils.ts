@@ -16,6 +16,7 @@ export class LineChartItem implements Datum {
     }
 }
 
+
 export class CalendarChartItem implements CalendarDatum {
     day: string;
     value: number;
@@ -77,4 +78,32 @@ export function metricsOneToContributionNode(metricsOne: MetricsOne): Array<Cale
     });
     sumContrByDay.forEach((value, key) => chartItems.push(new CalendarChartItem(key, value)));
     return chartItems
+}
+
+/**
+ * TODO: docs it
+ * @param metricsOne
+ */
+export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOne): Object {
+    let result: Array<any> = []
+    metricsOne.channels_info.forEach(channelInfo => {
+        let collectionMap: Map<string, any> = new Map<string, any>();
+        collectionMap["node"] = channelInfo.node_alias
+        let failed: number = 0;
+        let success: number = 0;
+        channelInfo.forwards.forEach(forward => {
+            if (forward.status.includes("failed"))
+                failed++;
+            else
+                success++;
+        });
+        // TODO: include also the internal failure.
+        collectionMap["failed"] = failed;
+        collectionMap["success"] = success;
+        result.push(collectionMap)
+    })
+    return {
+        data: result,
+        labels: ["failed", "success"],
+    };
 }

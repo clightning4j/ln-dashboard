@@ -72,7 +72,7 @@ class BasicAppBar extends React.Component {
                         </Grid>
                     </Toolbar>
                 </AppBar>
-                <Box m={theme.spacing(1)}>
+                <Box m={theme.spacing(1)} mb={theme.spacing(2)}>
                     {this.state.ready ? child : <Loading/>}
                 </Box>
                 <AppBar position="fixed" className="navigation-style"
