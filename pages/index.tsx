@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react'
 import {GetServerSideProps} from 'next'
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,7 +9,6 @@ import theme from "../theme/DarkTheme";
 import {GetInfoNode} from "../model/GetInfoNode";
 import axios from "axios";
 import Loading from "../components/genericView/Loading.component";
-import {JSX} from "@babel/types";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import {Close} from "@material-ui/icons";
@@ -25,8 +24,9 @@ type AppState = {
 }
 
 type AppProps = {
-    infoNode: GetInfoNode | null
-}
+  infoNode: GetInfoNode | null;
+  metricsSupport: any
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     let infoNode = null;
@@ -58,7 +58,7 @@ export enum ViewName {
     METRICS = "metrics",
 }
 
-class Home extends React.Component<AppProps, AppState> {
+class Home extends Component<AppProps, AppState> {
     state: AppState = {
         page: <HomeView show={(visible, message) => console.debug(visible)} nodeInfo={this.props.infoNode}/>,
         pageName: "home",

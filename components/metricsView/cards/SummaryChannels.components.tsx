@@ -45,7 +45,7 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                     <TodayRounded/>
                 </Avatar>
             }
-            titleTypographyProps={{color: color}}
+            titleTypographyProps={{color: color as any}}
             title={`Node ${nodeInfo.alias} General info`.toUpperCase()}
         />
         <CardContent>
@@ -107,7 +107,7 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                             }}
                             useMesh={true}
                             axisBottom={{
-                                orient: '',
+                                // orient: '',
                                 tickSize: 5,
                                 tickPadding: 5,
                                 tickRotation: 50,
@@ -116,14 +116,14 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                                 legendPosition: 'middle',
                             }}
                             axisLeft={{
-                                orient: 'left',
+                                // orient: 'left',
                                 tickSize: 5,
                                 tickPadding: 5,
                                 tickRotation: 3,
                                 legend: 'Channels by days',
                                 legendOffset: -40,
                                 legendPosition: 'middle',
-                                color: color
+                                // color: color
                             }}
                             axisTop={null}
                             axisRight={null}

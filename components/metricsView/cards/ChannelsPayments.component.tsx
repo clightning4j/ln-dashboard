@@ -66,7 +66,7 @@ export default function ChannelsPayments({nodeInfo, metricsOne, show}: ChannelsP
                             fillOpacity={0.25}
                             blendMode="multiply"
                             animate={true}
-                            motionConfig="wobbly"
+                            // motionConfig="wobbly"
                             isInteractive={true}
                             theme={makeTheme(color, theme.palette.text.primary)}
                             legends={[

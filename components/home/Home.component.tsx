@@ -45,17 +45,17 @@ type ParentProps = {
 }
 
 export default function HomeView({nodeInfo, show}: ParentProps) {
-    if (nodeInfo === null)
-        return <>NodeInfo null</>
     let addr: NodeAddress = nodeInfo!.address.length > 0 ? nodeInfo!.address[0] : nodeInfo!.binding[0]
     const [selectAddr, setSelectAddr] = useState(addr)
-
+    
     let mapAddress = new Map();
     for (let i = 0; i < nodeInfo!.address.length; i++) {
         let addr = nodeInfo!.address[i];
         mapAddress.set(addr.type, addr);
     }
-
+    
+    if (nodeInfo === null)
+        return <>NodeInfo null</>
     return <Grid
         container
         direction="row"

@@ -77,9 +77,9 @@ export const getPrices = async (ticker: string = "BTC-USD", show: (visible: bool
 }
 
 export function metricsOneToTotChannelsByDay(metricsOne: MetricsOne): Array<LineChartItem> {
-    let chartItems = []
+    const chartItems: LineChartItem[] = []
     metricsOne.up_time.forEach((item, _) => {
-        chartItems.push(new LineChartItem(new Date(item.timestamp * 1000).toLocaleDateString(), item.channels["tot_channels"]));
+        chartItems.push(new LineChartItem(new Date(item.timestamp * 1000).toLocaleDateString(), (item.channels as any)["tot_channels"]));
     });
     return chartItems
 }
@@ -89,8 +89,8 @@ export function metricsOneToTotChannelsByDay(metricsOne: MetricsOne): Array<Line
  * @param metricsOne
  */
 export function metricsOneToContributionNode(metricsOne: MetricsOne): Array<CalendarChartItem> {
-    let chartItems = []
-    let sumContrByDay = new Map<string, number>();
+    const chartItems: CalendarChartItem[] = []
+    const sumContrByDay = new Map<string, number>();
     metricsOne.up_time.forEach(contribution => {
         //There are difference timestamp with the same day.
         if (contribution.timestamp !== 0) {
@@ -98,7 +98,7 @@ export function metricsOneToContributionNode(metricsOne: MetricsOne): Array<Cale
             let key: string = date.format('YYYY-MM-DD');
             console.debug(`The date string is ${key}`);
             if (sumContrByDay.has(key))
-                sumContrByDay.set(key, sumContrByDay.get(key) + 1);
+                sumContrByDay.set(key, (sumContrByDay.get(key) as number) + 1);
             else {
                 //TODO: JS init a number with 0? if yes we can avoid this if else
                 sumContrByDay.set(key, 1);
@@ -113,15 +113,15 @@ export function metricsOneToContributionNode(metricsOne: MetricsOne): Array<Cale
  * TODO: docs it
  * @param metricsOne
  */
-export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOne): Object {
+export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOne): { data: any[], labels: string[]} {
     let result: Array<any> = []
     if (!metricsOne.channels_info)
-        return result
+        return result as any
     metricsOne.channels_info.forEach(channelInfo => {
         console.debug("Channel info is reported below");
         console.debug(channelInfo);
-        let collectionMap: Map<string, any> = new Map<string, any>();
-        collectionMap["node"] = channelInfo.node_alias === "unknown" ? channelInfo.node_id : channelInfo.node_alias;
+        const collectionMap: Map<string, any> = new Map<string, any>();
+        collectionMap.set('node', channelInfo.node_alias === "unknown" ? channelInfo.node_id : channelInfo.node_alias)
         let failed: number = 0;
         let success: number = 0;
         if (channelInfo.forwards)
@@ -132,8 +132,8 @@ export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOn
                     success++;
             });
         // TODO: include also the internal failure.
-        collectionMap["failed"] = failed;
-        collectionMap["success"] = success;
+        collectionMap.set("failed",failed);
+        collectionMap.set("success", success);
         result.push(collectionMap)
     })
     return {
