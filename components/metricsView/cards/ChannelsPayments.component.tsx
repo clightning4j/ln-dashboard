@@ -10,7 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import makeTheme from "../../../theme/ChartTheme";
 import theme from "../../../theme/DarkTheme";
 import styles from "../../../styles/SummaryChannels.module.css";
-import {metricsOneToContributionNode, metricsOneToPaymentsContributionByChannels} from "../../../utils/AppUtils";
+import {metricsOneToPaymentsContributionByChannels} from "../../../utils/AppUtils";
 
 
 type ChannelsPaymentsProps = {
@@ -24,7 +24,9 @@ export default function ChannelsPayments({nodeInfo, metricsOne, show}: ChannelsP
     color = `#${color}`
     let {data, labels} = metricsOneToPaymentsContributionByChannels(metricsOne)
 
-    console.debug(JSON.stringify(data));
+    console.info(JSON.stringify(data));
+    console.info(JSON.stringify(labels));
+
     return <Card>
         <CardHeader
             avatar={

@@ -32,6 +32,7 @@ export class CalendarChartItem implements CalendarDatum {
  * @param url
  */
 export const fetcher = (url: string) => fetch(url).then((res: Response) => res.json())
+
 /**
  * TODO: docs it
  * @param nodeId
@@ -89,6 +90,8 @@ export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOn
     if (!metricsOne.channels_info)
         return result
     metricsOne.channels_info.forEach(channelInfo => {
+        console.debug("Channel info is reported below");
+        console.debug(channelInfo);
         let collectionMap: Map<string, any> = new Map<string, any>();
         collectionMap["node"] = channelInfo.node_alias
         let failed: number = 0;

@@ -12,6 +12,7 @@ import theme from '../../theme/DarkTheme'
 import Loading from "../genericView/Loading.component"
 import Chip from "@material-ui/core/Chip";
 import Grid from "@material-ui/core/Grid";
+import {ViewName} from "../../pages";
 
 const colorByNetwork = {
     "bitcoin": "f2a900",
@@ -43,7 +44,8 @@ class BasicAppBar extends React.Component {
     }
 
     render() {
-        const {child, value, nameNode, network, changeValue} = this.props
+        const {child, value, mappingButton, network, changeValue} = this.props
+        console.log(mappingButton);
         return (
             <Container maxWidth="xl">
                 <AppBar position="sticky" style={{
@@ -88,8 +90,8 @@ class BasicAppBar extends React.Component {
                             this.loadDom()
                         }}
                     >
-                        <BottomNavigationAction label="Home" value="home" icon={<Home/>}/>
-                        <BottomNavigationAction label="Metrics" value="metrics" icon={<PieChart/>}/>
+                        <BottomNavigationAction label="Home" value={ViewName.HOME} disabled={mappingButton[ViewName.HOME] === false} icon={<Home/>}/>
+                        <BottomNavigationAction label="Metrics" value={ViewName.METRICS} disabled={mappingButton[ViewName.METRICS] === false} icon={<PieChart/>}/>
                     </BottomNavigation>
                 </AppBar>
             </Container>

@@ -30,16 +30,32 @@ type AppProps = {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     let infoNode = null;
+    let metricsSupport = false;
     try {
         infoNode = (await axios.get(`${process.env.NEXT_PUBLIC_REST_URL}/utility/getinfo`)).data;
     } catch (e) {
         console.error(e);
     }
+    try {
+        // Check if the endpoint expose the metrics api, if not the node doesn't support the metrics view
+        (await axios.get(`${process.env.NEXT_PUBLIC_REST_URL}/plugin/diagnostic?metrics_id=1`)).data;
+        metricsSupport = true;
+    } catch (e) {
+        console.info("Metrics View disable because we got an error!");
+        console.debug(`Error message ${e}`);
+    }
     return {
         props: {
-            infoNode: infoNode
+            infoNode: infoNode,
+            metricsSupport: metricsSupport,
         }
     }
+}
+
+//FIXME: move it in a view utils
+export enum ViewName {
+    HOME = "home",
+    METRICS = "metrics",
 }
 
 class Home extends React.Component<AppProps, AppState> {
@@ -56,13 +72,13 @@ class Home extends React.Component<AppProps, AppState> {
         let pageName: string;
         console.debug("Value is: ", value)
         switch (value) {
-            case "home":
+            case ViewName.HOME:
                 page = <HomeView show={this.setShowMessage} nodeInfo={this.props.infoNode}/>
-                pageName = "home"
+                pageName = ViewName.HOME
                 break
-            case "metrics":
+            case ViewName.METRICS:
                 page = <MetricsView show={this.setShowMessage} nodeInfo={this.props.infoNode}/>
-                pageName = "metrics"
+                pageName = ViewName.METRICS
                 break
             default:
                 throw new Error("Error page not exist")
@@ -78,7 +94,7 @@ class Home extends React.Component<AppProps, AppState> {
             .then(() => {
                 // In case of error we can remove the loading view
                 if (this.props.infoNode === null)
-                    this.setState({offline: true}); // showing the app
+                    this.setState((_) => ({offline: true})); // showing the app
             });
     }
 
@@ -96,8 +112,16 @@ class Home extends React.Component<AppProps, AppState> {
     render() {
         let view = this.state.offline ? <Offline/> : <Loading/>
         if (this.props.infoNode !== null) {
-            view = <BasicAppBar nameNode={this.props.infoNode.alias} child={this.state.page} network={this.props.infoNode.network} value={this.state.pageName}
-                                changeValue={this.changePage}/>
+            let mappingView = new Map([
+                [ViewName.HOME, true],
+                [ViewName.METRICS, this.props.metricsSupport]
+            ]);
+            view = <BasicAppBar child={this.state.page}
+                network={this.props.infoNode.network}
+                mappingButton={mappingView}
+                value={this.state.pageName}
+                changeValue={this.changePage}
+            />
         }
         return (
             <ThemeProvider theme={theme}>

@@ -8,7 +8,6 @@ import Grid from "@material-ui/core/Grid";
 import SummaryChannels from "./cards/SummaryChannels.components";
 import UpTimeNode from "./cards/UpTimeNode.component";
 import ChannelsPayments from "./cards/ChannelsPayments.component";
-import {Box} from "@material-ui/core";
 
 type MetricsViewProps = {
     nodeInfo: GetInfoNode | null
