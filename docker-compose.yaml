@@ -14,4 +14,4 @@ services:
     restart: on-failure
     network_mode: "host"
     environment:
-      - NEXT_PUBLIC_REST_URL=http://127.0.0.1:8080/rest
+      - NEXT_PUBLIC_REST_URL=http://127.0.0.1:7000
