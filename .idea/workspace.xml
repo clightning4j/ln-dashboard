@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c466067-9377-42e8-9383-cfda2044cecc" name="Changes" comment="# Title: &#10;&#10;Signed-off-by: Vincenzo Palazzo &lt;vincenzopalazzodev@gmail.com&gt;">
-      <change afterPath="$PROJECT_DIR$/pages/api/prices/[ticker].ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/tableNodes/NodeTable.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/tableNodes/NodeTable.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/metricsView/MetricsView.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/metricsView/MetricsView.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/metricsView/cards/ChannelsPayments.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/metricsView/cards/ChannelsPayments.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/metricsView/cards/SummaryChannels.components.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/metricsView/cards/SummaryChannels.components.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/metricsView/cards/UpTimeNode.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/metricsView/cards/UpTimeNode.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/AppUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/AppUtils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +87,7 @@
       <workItem from="1631285030602" duration="98000" />
       <workItem from="1633117270779" duration="319000" />
       <workItem from="1633207593468" duration="722000" />
-      <workItem from="1634111669354" duration="7191000" />
+      <workItem from="1634111669354" duration="9481000" />
     </task>
     <servers />
   </component>

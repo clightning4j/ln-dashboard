@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
-import {ResponsiveCalendar} from '@nivo/calendar'
+import {ResponsiveCalendarCanvas} from '@nivo/calendar'
 import {metricsOneToContributionNode} from "../../../utils/AppUtils";
 import styles from "../../../styles/SummaryChannels.module.css";
 import {GetInfoNode} from "../../../model/GetInfoNode";
@@ -38,15 +38,15 @@ export default function UpTimeNode({nodeInfo, metricsOne, show}: UpTimeProps): J
                   direction="row"
                   justifyContent="center"
                   alignItems="center">
-                <Grid item>
+                <Grid item xs={12} xl={12} sm={12}>
                     <div className={styles.container}>
-                        <ResponsiveCalendar
+                        <ResponsiveCalendarCanvas
                             data={data}
                             from={data[0].day}
                             to={data[data.length - 1].day}
                             emptyColor={theme.palette.secondary.main}
                             colors={['#ff5370', '#f07178', '#c3e88d', color]}
-                            margin={{top: 0, right: 40, bottom: 0, left: 40}}
+                            margin={{top: 50, right: 50, bottom: 50, left: 50}}
                             yearSpacing={10}
                             maxValue={44}
                             minValue="auto"

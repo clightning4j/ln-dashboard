@@ -8,6 +8,8 @@ import Grid from "@material-ui/core/Grid";
 import SummaryChannels from "./cards/SummaryChannels.components";
 import UpTimeNode from "./cards/UpTimeNode.component";
 import ChannelsPayments from "./cards/ChannelsPayments.component";
+import theme from "../../theme/DarkTheme";
+import {Box} from "@material-ui/core";
 
 type MetricsViewProps = {
     nodeInfo: GetInfoNode | null
@@ -28,24 +30,24 @@ export default function MetricsView({nodeInfo, show}: MetricsViewProps): JSX.Ele
     let metricsOne: any = data.metrics["metric_one"]
     console.debug(`Metric one with the follow payload ${metricsOne.toString()}`);
 
-    return <Grid
+    return <Box mt={theme.spacing(1)} mb={theme.spacing(2)}><Grid
         container
-        spacing={2}
         style={{marginTop: "5em"}}
         direction="row"
         justifyContent="center"
         alignItems="center"
     >
-        <Grid item xs={12}>
+        <Grid item xs={12} xl={12} sm={12}>
             <SummaryChannels nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} xl={12} sm={12}>
             <UpTimeNode nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} xl={12} sm={12}>
             <ChannelsPayments nodeInfo={nodeInfo} metricsOne={metricsOne} show={show}/>
         </Grid>
     </Grid>
+    </Box>
 }

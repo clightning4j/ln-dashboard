@@ -121,7 +121,7 @@ export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOn
         console.debug("Channel info is reported below");
         console.debug(channelInfo);
         let collectionMap: Map<string, any> = new Map<string, any>();
-        collectionMap["node"] = channelInfo.node_alias
+        collectionMap["node"] = channelInfo.node_alias === "unknown" ? channelInfo.node_id : channelInfo.node_alias;
         let failed: number = 0;
         let success: number = 0;
         if (channelInfo.forwards)

@@ -81,12 +81,13 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
             <Grid container
                   direction="row"
                   justifyContent="center"
+                  item xs={12} xl={12} sm={12}
                   alignItems="center">
                     <div className={styles.container}>
                         <ResponsiveLine
                             data={lineChartData}
                             pointSize={10}
-                            margin={{top: 50, right: 110, bottom: 50, left: 60}}
+                            margin={{top: 50, right: 50, bottom: 50, left: 50}}
                             curve="step"
                             colors={color}
                             pointBorderWidth={2}
@@ -128,15 +129,15 @@ export default function SummaryChannels({nodeInfo, metricsOne, show}: SummaryCha
                             axisRight={null}
                             legends={[
                                 {
-                                    anchor: 'bottom-right',
+                                    anchor: 'top',
                                     direction: 'column',
                                     justify: false,
-                                    translateX: 100,
-                                    translateY: 0,
+                                    translateX: 0,
+                                    translateY: -20,
                                     itemsSpacing: 0,
                                     itemDirection: 'left-to-right',
                                     itemWidth: 80,
-                                    itemHeight: 20,
+                                    itemHeight: 0,
                                     itemOpacity: 0.75,
                                     symbolSize: 12,
                                     symbolShape: 'circle',
