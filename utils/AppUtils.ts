@@ -34,6 +34,19 @@ export class CalendarChartItem implements CalendarDatum {
 export const fetcher = (url: string) => fetch(url).then((res: Response) => res.json())
 
 /**
+ * TODO docs it
+ */
+
+export function intoSatoshi(priceBitcoin: number, satoshi: number): number {
+    console.info(priceBitcoin);
+    console.info(satoshi);
+    let toBtc = satoshi / 100_000_000;
+    console.info(toBtc);
+    let withPrice = priceBitcoin * toBtc;
+    return Math.round((withPrice + Number.EPSILON) * 100) / 100;
+}
+
+/**
  * TODO: docs it
  * @param nodeId
  * @param show
@@ -43,8 +56,23 @@ export const pingNode = async (nodeId: string, show: (visible: boolean, message:
         const _ = await axios(`/api/pingNode/${nodeId}`)
         show(true, "The node is up");
     } catch (e) {
+        show(true, `Error with message: ${e}`);
         console.error(e);
-        show(true, "Error with message: e");
+    }
+}
+
+/**
+ * TODO: docs it
+ * @param ticker
+ * @param satoshi
+ * @param show
+ */
+export const getPrices = async (ticker: string = "BTC-USD", show: (visible: boolean, message: string) => void) =>  {
+    try {
+        return (await axios(`/api/prices/${ticker}`)).data
+    } catch (e) {
+        show(true, `Error with message: ${e}`);
+        console.error(e);
     }
 }
 
