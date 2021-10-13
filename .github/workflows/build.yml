@@ -1,0 +1,15 @@
+name: Check build in production mode
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        run: |
+          npm install
+          npm build

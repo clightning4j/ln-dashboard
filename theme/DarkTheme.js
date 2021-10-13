@@ -1,6 +1,6 @@
-import { createTheme } from "@material-ui/core";
+import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
-const oceanic = createTheme({
+const oceanic = responsiveFontSizes(createTheme({
     palette: {
         type: "dark",
         primary: {
@@ -37,6 +37,6 @@ const oceanic = createTheme({
             color: "#607D8B",
         },
     },
-});
+}));
 
 export default oceanic;

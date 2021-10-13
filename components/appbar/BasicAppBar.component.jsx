@@ -6,11 +6,20 @@ import {
     Container,
     IconButton,
     Toolbar,
-    Typography
 } from "@material-ui/core"
 import {Menu, Home, PieChart} from "@material-ui/icons"
 import theme from '../../theme/DarkTheme'
 import Loading from "../genericView/Loading.component"
+import Chip from "@material-ui/core/Chip";
+import Grid from "@material-ui/core/Grid";
+import {ViewName} from "../../pages";
+
+const colorByNetwork = {
+    "bitcoin": "f2a900",
+    "testnet": "4d4d4e",
+    "liquid": "009688",
+    "litecoin": "",
+}
 
 class BasicAppBar extends React.Component {
     constructor(props, context) {
@@ -35,26 +44,44 @@ class BasicAppBar extends React.Component {
     }
 
     render() {
-        const {child, value, nameNode, changeValue} = this.props
+        const {child, value, mappingButton, network, changeValue} = this.props
+        console.log(mappingButton);
         return (
             <Container maxWidth="xl">
                 <AppBar position="sticky" style={{
                     backgroundColor: theme.palette.background.paper
                 }}>
                     <Toolbar>
-                        <IconButton onClick={()=> console.log("Click on menu icon")} disabled={true} edge="start" color="inherit" aria-label="menu">
-                            <Menu />
-                        </IconButton>
-                        <Typography color="textSecondary" variant="h6">
-                            {nameNode}
-                        </Typography>
+                        <Grid justifyContent="space-between"
+                              alignItems="center"
+                              container
+                        >
+                            <Grid item>
+                                <IconButton onClick={() => console.log("Click on menu icon")} disabled={true}
+                                            edge="start"
+                                            color="inherit" aria-label="menu">
+                                    <Menu/>
+                                </IconButton>
+                            </Grid>
+                            <Grid item>
+                                <Chip
+                                    label={network}
+                                    style={{
+                                        background: "#" + colorByNetwork[network],
+                                    }}
+                                />
+                            </Grid>
+                        </Grid>
                     </Toolbar>
                 </AppBar>
-                {this.state.ready ? child : <Loading />}
-                <Box mb={theme.spacing(2)} />
+                <Box m={theme.spacing(1)} mb={theme.spacing(2)}>
+                    {this.state.ready ? child : <Loading/>}
+                </Box>
                 <AppBar position="fixed" className="navigation-style"
-                        style={{ backgroundColor: theme.palette.background.paper,
-                            top: "auto", bottom: 0}}>
+                        style={{
+                            backgroundColor: theme.palette.background.paper,
+                            top: "auto", bottom: 0
+                        }}>
                     <BottomNavigation
                         value={value}
                         onChange={(event, newValue) => {
@@ -63,8 +90,8 @@ class BasicAppBar extends React.Component {
                             this.loadDom()
                         }}
                     >
-                        <BottomNavigationAction label="Home" value="home" icon={<Home/>} />
-                        <BottomNavigationAction disabled={true} label="Metrics" value="metrics" icon={<PieChart/>} />
+                        <BottomNavigationAction label="Home" value={ViewName.HOME} disabled={mappingButton[ViewName.HOME] === false} icon={<Home/>}/>
+                        <BottomNavigationAction label="Metrics" value={ViewName.METRICS} disabled={mappingButton[ViewName.METRICS] === false} icon={<PieChart/>}/>
                     </BottomNavigation>
                 </AppBar>
             </Container>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
@@ -11,48 +11,57 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import useSWR from "swr";
 import Loading from "../genericView/Loading.component";
-import axios from "axios";
 import {JSX} from "@babel/types";
 import theme from "../../theme/DarkTheme"
+import {fetcher, pingNode, intoSatoshi, getPrices} from "../../utils/AppUtils"
+import {makeStyles} from "@material-ui/styles";
+import axios from "axios";
 
 type NodeTableProps = {
     show: (visible: boolean, message: string) => void
 }
 
-const fetcher = (url: string) => fetch(url).then((res: Response) => res.json())
-
-const pingNode = async (nodeId: string, show: (visible: boolean, message: string) => void) => {
-    try {
-        const _ = await axios(`/api/pingNode/${nodeId}`)
-        show(true, "The node is up");
-    }catch (e) {
-        console.error(e);
-        show(true, "Error with message: e")
-    }
-}
+const useStyles = makeStyles({
+    root: {
+        width: '100%',
+    },
+    container: {
+        maxHeight: "100vh",
+        maxWidth: "100vw",
+    },
+});
 
 export function NodeTable({show}: NodeTableProps): JSX.Element {
-    const { data, error } = useSWR('/api/channelsInfo', fetcher)
+    const {data, error} = useSWR('/api/channelsInfo', fetcher)
+    const [btcPrice, setBtcPrice] = useState(-1);
+    useEffect( () => {
+        getPrices("BTC-USD", show).then(price => {
+            setBtcPrice(price["price"]);
+        })
+    });
+
+    const classes = useStyles();
     if (error) {
         show(true, "Error: " + error)
         return <></>
     }
-    if (!data)
-        return <Loading />
+    if (!data || btcPrice === -1)
+        return <Loading/>
     if (data.channels.length == 0) {
         show(true, "No channels open in this node");
         return <></>
     }
-    show(true, "Channels open loaded");
-    return <Box mt={theme.spacing(1)}>
-        <TableContainer component={Paper}>
-            <Table aria-label="Node that shows the list of nodes">
+    console.debug("BTC price " + btcPrice);
+    return <Box mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
+        <TableContainer component={Paper} className={classes.container}>
+            <Table stickyHeader aria-label="Node that shows the list of nodes">
                 <TableHead>
                     <TableRow>
                         <TableCell>Node Name</TableCell>
                         <TableCell>Node Id</TableCell>
                         <TableCell>Status</TableCell>
-                        <TableCell>Size</TableCell>
+                        <TableCell>Sat Size</TableCell>
+                        <TableCell>USD Size</TableCell>
                         <TableCell>Status</TableCell>
                         <TableCell>Actions</TableCell>
                     </TableRow>
@@ -63,7 +72,7 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
                             <TableCell component="th" scope="row">
                                 <Chip
                                     label={channel.nodeInfo["alias"]}
-                                    style={{ background: "#" + channel.nodeInfo["color"] }}
+                                    style={{background: "#" + channel.nodeInfo["color"]}}
                                 />
                             </TableCell>
                             <TableCell component="th" scope="row">
@@ -72,7 +81,7 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
                             <TableCell component="th" scope="row">
                                 <Chip
                                     label={channel["connected"] ? "Online" : "Offine"}
-                                    style={{ background: "#" +  (channel["connected"] ? "82ad44" : "f07178")}}
+                                    style={{background: "#" + (channel["connected"] ? "82ad44" : "f07178")}}
                                 />
                                 {}
                             </TableCell>
@@ -80,7 +89,10 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
                                 {channel["channelTotalSat"] + " sats"}
                             </TableCell>
                             <TableCell component="th" scope="row">
-                                {channel["state"]}
+                                {channel["channelTotalSat"] + " sats"}
+                            </TableCell>
+                            <TableCell component="th" scope="row">
+                                {intoSatoshi(Number(btcPrice), Number(channel["channelTotalSat"])) + " USD"}
                             </TableCell>
                             <TableCell component="th" scope="row">
                                 <Button

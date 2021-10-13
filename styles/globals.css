@@ -45,3 +45,10 @@ and (min-resolution: 192dpi) {
     border-top-left-radius: 20px !important;
   }
 }
+
+.container-table {
+  overflow-x: auto;
+  padding: 10px;
+  margin: 10px;
+}
+
