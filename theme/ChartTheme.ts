@@ -1,4 +1,6 @@
-export default function makeTheme(accentColor, lineColors){
+import { Theme } from '@nivo/core';
+
+export default function makeTheme(accentColor: string, lineColors: string): Theme{
     return {
         background: 'transparent',
         textColor: accentColor,

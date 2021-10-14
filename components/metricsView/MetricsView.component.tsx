@@ -17,9 +17,9 @@ type MetricsViewProps = {
 }
 
 export default function MetricsView({nodeInfo, show}: MetricsViewProps): JSX.Element {
+    const {data, error} = useSWR('/api/metrics', fetcher)
     if (!nodeInfo)
         return <Offline/>
-    const {data, error} = useSWR('/api/metrics', fetcher)
     if (error) {
         //TODO adding an error view
         show(true, `Error: ${error.toString()}`);
