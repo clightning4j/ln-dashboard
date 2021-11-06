@@ -92,7 +92,7 @@ export function NodeTable({show}: NodeTableProps): JSX.Element {
                                 {intoSatoshi(Number(btcPrice), Number(channel["channelTotalSat"])) + " USD"}
                             </TableCell>
                             <TableCell component="th" scope="row">
-                                {channel["status"]}
+                                {channel["state"]}
                             </TableCell>
                             <TableCell component="th" scope="row">
                                 <Button
