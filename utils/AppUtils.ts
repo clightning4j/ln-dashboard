@@ -111,10 +111,14 @@ export function metricsOneToContributionNode(metricsOne: MetricsOne): Array<Cale
  * TODO: docs it
  * @param metricsOne
  */
-export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOne): { data: any[]; labels: string[] } {
-  let result: Array<any> = [];
-  if (!metricsOne.channels_info) return result as any;
-  metricsOne.channels_info.forEach((channelInfo) => {
+export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOne): { data: Array<Map<string, any>>; labels: string[] } {
+  let result: Array<Map<string, any>> = [];
+  if (!metricsOne.channels_info) return {
+    data: result,
+    labels: ['failed', 'success']
+  };
+
+  for (const channelInfo of metricsOne.channels_info) {
     console.debug('Channel info is reported below');
     console.debug(channelInfo);
     const collectionMap: Map<string, any> = new Map<string, any>();
@@ -123,15 +127,17 @@ export function metricsOneToPaymentsContributionByChannels(metricsOne: MetricsOn
     let failed = 0;
     let success = 0;
     if (channelInfo.forwards)
-      channelInfo.forwards.forEach((forward) => {
-        if (forward.status.includes('failed')) failed++;
-        else success++;
-      });
-    // TODO: include also the internal failure.
-    collectionMap.set('failed', failed);
-    collectionMap.set('success', success);
-    result.push(collectionMap);
-  });
+      for (const forward of channelInfo.forwards) {
+        if (forward.status.includes('failed')) {
+          failed++;
+        } else {
+          success++;
+        }
+      }
+      collectionMap.set('failed', failed);
+      collectionMap.set('success', success);
+      result.push(collectionMap);
+  }
   return {
     data: result,
     labels: ['failed', 'success'],
