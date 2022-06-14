@@ -1,22 +1,22 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import { GetInfoNode } from '../../../model/GetInfoNode';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import FingerprintOutlined from '@material-ui/icons/FingerprintOutlined';
+import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import ListItemText from '@mui/material/ListItemText';
+import FingerprintOutlined from '@mui/icons-material/FingerprintOutlined';
 import { LineSvgProps, ResponsiveLine as Line, Serie } from '@nivo/line';
 import { AxisProps } from '@nivo/axes';
 import { metricsOneToTotChannelsByDay } from '../../../utils/AppUtils';
 import { MetricsOne } from '../../../model/Metrics';
 import makeTheme from '../../../theme/ChartTheme';
 import theme from '../../../theme/DarkTheme';
-import TodayRounded from '@material-ui/icons/TodayRounded';
-import CardHeader from '@material-ui/core/CardHeader';
+import TodayRounded from '@mui/icons-material/TodayRounded';
+import CardHeader from '@mui/material/CardHeader';
 
 import styles from '../../../styles/SummaryChannels.module.css';
 

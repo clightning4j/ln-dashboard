@@ -1,16 +1,16 @@
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Chip from '@material-ui/core/Chip';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputBase from '@material-ui/core/InputBase';
-import FileCopyTwoTone from '@material-ui/icons/FileCopyTwoTone';
-import Box from '@material-ui/core/Box';
+import withStyles from '@mui/styles/withStyles';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Chip from '@mui/material/Chip';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import InputBase from '@mui/material/InputBase';
+import FileCopyTwoTone from '@mui/icons-material/FileCopyTwoTone';
+import Box from '@mui/material/Box';
 import QRCode from 'qrcode.react';
 import theme from '../../theme/DarkTheme';
 import { GetInfoNode, NodeAddress } from '../../model/GetInfoNode';
@@ -97,7 +97,9 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
                 })}
               </Select>
             </FormControl>
-            <IconButton onClick={() => navigator.clipboard.writeText(`${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`)}>
+            <IconButton
+              onClick={() => navigator.clipboard.writeText(`${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`)}
+              size="large">
               <FileCopyTwoTone />
             </IconButton>
           </Grid>

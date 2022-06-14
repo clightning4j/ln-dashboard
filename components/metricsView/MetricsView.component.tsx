@@ -4,12 +4,12 @@ import useSWR from "swr";
 import {fetcher} from "../../utils/AppUtils";
 import Loading from "../genericView/Loading.component";
 import React from "react";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import SummaryChannels from "./cards/SummaryChannels.components";
 import UpTimeNode from "./cards/UpTimeNode.component";
 import ChannelsPayments from "./cards/ChannelsPayments.component";
 import theme from "../../theme/DarkTheme";
-import {Box} from "@material-ui/core";
+import {Box} from "@mui/material";
 
 type MetricsViewProps = {
     nodeInfo: GetInfoNode | null

@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@mui/material";
 
 export default function Offline({ size = 90 }: { size?: number }) {
     return (
