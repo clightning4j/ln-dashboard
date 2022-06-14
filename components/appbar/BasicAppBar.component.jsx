@@ -5,13 +5,13 @@ import {
     BottomNavigationAction, Box,
     Container,
     IconButton,
-    Toolbar,
-} from "@material-ui/core"
-import {Menu, Home, PieChart} from "@material-ui/icons"
+    Toolbar
+} from "@mui/material"
+import {Menu, Home, PieChart} from "@mui/icons-material"
 import theme from '../../theme/DarkTheme'
 import Loading from "../genericView/Loading.component"
-import Chip from "@material-ui/core/Chip";
-import Grid from "@material-ui/core/Grid";
+import Chip from "@mui/material/Chip";
+import Grid from "@mui/material/Grid";
 import {ViewName} from "../../pages";
 
 const colorByNetwork = {
@@ -57,9 +57,13 @@ class BasicAppBar extends React.Component {
                               container
                         >
                             <Grid item>
-                                <IconButton onClick={() => console.log("Click on menu icon")} disabled={true}
-                                            edge="start"
-                                            color="inherit" aria-label="menu">
+                                <IconButton
+                                    onClick={() => console.log("Click on menu icon")}
+                                    disabled={true}
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="menu"
+                                    size="large">
                                     <Menu/>
                                 </IconButton>
                             </Grid>
@@ -95,7 +99,7 @@ class BasicAppBar extends React.Component {
                     </BottomNavigation>
                 </AppBar>
             </Container>
-        )
+        );
     }
 }
 

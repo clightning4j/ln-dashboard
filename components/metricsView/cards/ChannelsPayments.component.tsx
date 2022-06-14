@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
 import { GetInfoNode } from '../../../model/GetInfoNode';
 import { MetricsOne } from '../../../model/Metrics';
-import { Card, Grid } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
-import TodayRounded from '@material-ui/icons/TodayRounded';
-import CardHeader from '@material-ui/core/CardHeader';
+import { Card, Grid } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import TodayRounded from '@mui/icons-material/TodayRounded';
+import CardHeader from '@mui/material/CardHeader';
 import { RadarProps, ResponsiveRadar as Radar } from '@nivo/radar';
-import CardContent from '@material-ui/core/CardContent';
+import CardContent from '@mui/material/CardContent';
 import makeTheme from '../../../theme/ChartTheme';
 import theme from '../../../theme/DarkTheme';
 import styles from '../../../styles/SummaryChannels.module.css';
