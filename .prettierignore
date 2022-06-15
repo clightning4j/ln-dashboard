@@ -1,3 +1,7 @@
 # Ignore artifacts:
 build
 coverage
+.next
+.github
+CONTRIBUTING.md
+README.md
