@@ -13,5 +13,7 @@ jobs:
         run: npm ci --silent
       - name: tsc and eslint check
         run: npm run typecheck
+      - name: check code formatting
+        run: npx prettier --check .
       - name: Build
         run: npm run build
