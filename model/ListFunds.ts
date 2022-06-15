@@ -1,4 +1,4 @@
 export type ListFounds = {
-    outputs: Array<Object>
-    channels: Array<Object>
-}
+  outputs: Array<Object>;
+  channels: Array<Object>;
+};
