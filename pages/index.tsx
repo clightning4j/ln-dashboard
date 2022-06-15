@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { GetServerSideProps } from 'next';
-import { createTheme, ThemeProvider, CssBaseline} from '@mui/material';
+import { CssBaseline} from '@mui/material';
+import {ThemeProvider, createTheme} from '@mui/material/styles';
 import HomeView from '../components/home/Home.component';
 import BasicAppBar from '../components/appbar/BasicAppBar.component';
 import { Helmet } from 'react-helmet';
