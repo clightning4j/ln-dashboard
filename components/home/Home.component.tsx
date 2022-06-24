@@ -68,7 +68,7 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
             </Box>
           </Grid>
           <Grid>
-            <QRCode value={`${selectAddr.address}:${selectAddr.port}`} size={300} level='H' />
+            <QRCode value={`${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`} size={300} level='H' />
           </Grid>
           <Grid container direction='row' justifyContent='center' alignItems='center'>
             <FormControl
