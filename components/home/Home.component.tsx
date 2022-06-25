@@ -75,7 +75,7 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
           </Grid>
           <Grid>
             <QRCode
-              value={`${selectAddr.address}:${selectAddr.port}`}
+              value={`${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`}
               size={300}
               level="H"
             />
