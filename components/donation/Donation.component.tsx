@@ -14,8 +14,11 @@ import Box from "@mui/material/Box";
 import QRCode from "qrcode.react";
 import theme from "../../theme/DarkTheme";
 import { GetInfoNode, NodeAddress } from "../../model/GetInfoNode";
+import AppAPI from "../../api/AppAPI";
+
 import { useState } from "react";
 import { NodeTable } from "../tableNodes/NodeTable.component";
+import { AppRegistrationSharp } from "@mui/icons-material";
 
 const BootstrapInput = withStyles((_) => ({
   root: {
@@ -44,7 +47,7 @@ type ParentProps = {
   show: (visible: boolean, message: string) => void;
 };
 
-export default function HomeView({ nodeInfo, show }: ParentProps) {
+export default function DonationView({ nodeInfo, show }: ParentProps) {
   let addr: NodeAddress =
     nodeInfo!.address.length > 0 ? nodeInfo!.address[0] : nodeInfo!.binding[0];
   const [selectAddr, setSelectAddr] = useState(addr);
@@ -108,7 +111,6 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
                 input={<BootstrapInput />}
               >
                 {nodeInfo!.address.map((address, index) => {
-                  console.log(address.type);
                   return (
                     <MenuItem key={index} value={address.type}>
                       {address.type}
@@ -127,6 +129,7 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
             >
               <FileCopyTwoTone />
             </IconButton>
+            <p>this.AppAPI.getInfo </p>
           </Grid>
         </CardContent>
       </Card>

@@ -8,7 +8,7 @@ import {
   IconButton,
   Toolbar,
 } from "@mui/material";
-import { Menu, Home, PieChart } from "@mui/icons-material";
+import { Menu, Home, PieChart, Paid } from "@mui/icons-material";
 import theme from "../../theme/DarkTheme";
 import Loading from "../genericView/Loading.component";
 import Chip from "@mui/material/Chip";
@@ -103,6 +103,12 @@ class BasicAppBar extends React.Component {
               value={ViewName.HOME}
               disabled={mappingButton[ViewName.HOME] === false}
               icon={<Home />}
+            />
+            <BottomNavigationAction
+              label="Donation"
+              value={ViewName.DONATION}
+              disabled={mappingButton[ViewName.DONATION] === false}
+              icon={<Paid />}
             />
             {/* Commenting out this code since we are developing the api for metrics and currently the page is breaking */}
             {/* <BottomNavigationAction

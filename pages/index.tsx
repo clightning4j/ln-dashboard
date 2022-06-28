@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import HomeView from "../components/home/Home.component";
+import DonationView from "../components/donation/Donation.component";
 import BasicAppBar from "../components/appbar/BasicAppBar.component";
 import { Helmet } from "react-helmet";
 import theme from "../theme/DarkTheme";
@@ -13,6 +14,8 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import { Close } from "@mui/icons-material";
 import Offline from "../components/genericView/Offline.component";
+import { StyledEngineProvider } from '@mui/material/styles';
+
 //import MetricsView from '../components/metricsView/MetricsView.component';
 
 type AppState = {
@@ -60,6 +63,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 //FIXME: move it in a view utils
 export enum ViewName {
   HOME = "home",
+  DONATION = "donation"
   // METRICS = 'metrics',
 }
 
@@ -87,6 +91,12 @@ class Home extends Component<AppProps, AppState> {
           <HomeView show={this.setShowMessage} nodeInfo={this.props.infoNode} />
         );
         pageName = ViewName.HOME;
+        break;
+      case ViewName.DONATION:
+        page = (
+          <DonationView show={this.setShowMessage} nodeInfo={this.props.infoNode} />
+        );
+        pageName = ViewName.DONATION;
         break;
       // case ViewName.METRICS:
       //   page = <MetricsView show={this.setShowMessage} nodeInfo={this.props.infoNode} />;
@@ -127,6 +137,7 @@ class Home extends Component<AppProps, AppState> {
     if (this.props.infoNode !== null) {
       let mappingView = new Map([
         [ViewName.HOME, true],
+        [ViewName.DONATION, true],
         // [ViewName.METRICS, this.props.metricsSupport],
       ]);
       view = (
@@ -140,6 +151,7 @@ class Home extends Component<AppProps, AppState> {
       );
     }
     return (
+      <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Helmet>
@@ -192,6 +204,7 @@ class Home extends Component<AppProps, AppState> {
           }
         />
       </ThemeProvider>
+      </StyledEngineProvider>
     );
   }
 }
