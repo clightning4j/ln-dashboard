@@ -13,6 +13,8 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import { Close } from "@mui/icons-material";
 import Offline from "../components/genericView/Offline.component";
+import { StyledEngineProvider } from "@mui/material/styles";
+
 //import MetricsView from '../components/metricsView/MetricsView.component';
 
 type AppState = {
@@ -140,58 +142,67 @@ class Home extends Component<AppProps, AppState> {
       );
     }
     return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Helmet>
-          <meta charSet="utf-8" />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Helmet>
+            <meta charSet="utf-8" />
+            <link
+              rel="apple-touch-icon"
+              sizes="180x180"
+              href="/apple-touch-icon.png"
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="/favicon-32x32.png"
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href="/favicon-16x16.png"
+            />
+            <link rel="manifest" href="/site.webmanifest" />
+            <link
+              rel="mask-icon"
+              href="/safari-pinned-tab.svg"
+              color="#5bbad5"
+            />
+            <meta name="msapplication-TileColor" content="#da532c" />
+            <meta
+              name="theme-color"
+              content="theme.palette.background.default"
+            />
+            <title>Home</title>
+            <link rel="canonical" href="https://bruce.bublina.eu.org/" />
+          </Helmet>
+          {view}
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            color={theme.palette.error.main}
+            open={this.state.showMessage}
+            onClose={() =>
+              this.setState((_) => ({ showMessage: false, messageToShow: "" }))
+            }
+            message={this.state.messageToShow}
+            action={
+              <IconButton
+                onClick={() =>
+                  this.setState((_) => ({
+                    showMessage: false,
+                    messageToShow: "",
+                  }))
+                }
+                size="large"
+              >
+                <Close color="secondary" />
+              </IconButton>
+            }
           />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
-          />
-          <link rel="manifest" href="/site.webmanifest" />
-          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="theme.palette.background.default" />
-          <title>Home</title>
-          <link rel="canonical" href="https://bruce.bublina.eu.org/" />
-        </Helmet>
-        {view}
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          color={theme.palette.error.main}
-          open={this.state.showMessage}
-          onClose={() =>
-            this.setState((_) => ({ showMessage: false, messageToShow: "" }))
-          }
-          message={this.state.messageToShow}
-          action={
-            <IconButton
-              onClick={() =>
-                this.setState((_) => ({
-                  showMessage: false,
-                  messageToShow: "",
-                }))
-              }
-              size="large"
-            >
-              <Close color="secondary" />
-            </IconButton>
-          }
-        />
-      </ThemeProvider>
+        </ThemeProvider>
+      </StyledEngineProvider>
     );
   }
 }
