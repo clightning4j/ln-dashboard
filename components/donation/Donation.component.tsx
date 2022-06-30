@@ -14,7 +14,10 @@ import Box from "@mui/material/Box";
 import QRCode from "qrcode.react";
 import theme from "../../theme/DarkTheme";
 import { GetInfoNode, NodeAddress } from "../../model/GetInfoNode";
+import useSWR from "swr";
 import AppAPI from "../../api/AppAPI";
+import { fetcher } from "../../utils/AppUtils";
+import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { useState } from "react";
 import { NodeTable } from "../tableNodes/NodeTable.component";
@@ -47,16 +50,21 @@ type ParentProps = {
   show: (visible: boolean, message: string) => void;
 };
 
-export default function DonationView({ nodeInfo, show }: ParentProps) {
-  let addr: NodeAddress =
-    nodeInfo!.address.length > 0 ? nodeInfo!.address[0] : nodeInfo!.binding[0];
-  const [selectAddr, setSelectAddr] = useState(addr);
-  let mapAddress = new Map();
-  for (let i = 0; i < nodeInfo!.address.length; i++) {
-    let addr = nodeInfo!.address[i];
-    mapAddress.set(addr.type, addr);
-  }
-  if (nodeInfo === null) return <>NodeInfo null</>;
+export default function DonationView({ nodeInfo, show }: ParentProps,) {
+
+  // let addr: NodeAddress =
+  //   nodeInfo!.address.length > 0 ? nodeInfo!.address[0] : nodeInfo!.binding[0];
+  // const [selectAddr, setSelectAddr] = useState(addr);
+  // let mapAddress = new Map();
+  // for (let i = 0; i < nodeInfo!.address.length; i++) {
+  //   let addr = nodeInfo!.address[i];
+  //   mapAddress.set(addr.type, addr);
+  // }
+
+  const resp = useSWR("/api/offer", fetcher);
+  let bolt12: string = resp.data != undefined ? resp.data.offer.invoice : null;
+
+  if (bolt12 === null) return <>Bol12 not available</>;
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Card>
@@ -76,9 +84,14 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
               />
             </Box>
           </Grid>
-          <Grid>
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
             <QRCode
-              value={`${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`}
+              value={`${bolt12}`}
               size={300}
               level="H"
             />
@@ -89,7 +102,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
             justifyContent="center"
             alignItems="center"
           >
-            <FormControl
+            {/* <FormControl
               variant="outlined"
               style={{
                 margin: theme.spacing(2),
@@ -118,18 +131,39 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
                   );
                 })}
               </Select>
-            </FormControl>
+            </FormControl> */}
+             <Grid>
+            <SyntaxHighlighter language="json" 
+            useInlineStyles={false}
+                customStyle={{
+                  backgroundColor: theme.palette.background.paper,
+                  color: theme.palette.text.primary,
+                  width: 600,
+                  top: "auto",
+                  bottom: 0,
+                  overflow: "scroll",
+                }}
+              // codeTagProps={{
+              //     style: {
+              //         color: theme.palette.text.primary,
+              //     },
+              // }}
+            >
+              {
+                JSON.stringify(resp.data.offer, null, 2)
+              }
+            </SyntaxHighlighter>
+            </Grid>
             <IconButton
               onClick={() =>
                 navigator.clipboard.writeText(
-                  `${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`
+                  `${bolt12}`
                 )
               }
               size="large"
             >
               <FileCopyTwoTone />
             </IconButton>
-            <p>this.AppAPI.getInfo </p>
           </Grid>
         </CardContent>
       </Card>

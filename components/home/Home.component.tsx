@@ -108,7 +108,6 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
                 input={<BootstrapInput />}
               >
                 {nodeInfo!.address.map((address, index) => {
-                  console.log(address.type);
                   return (
                     <MenuItem key={index} value={address.type}>
                       {address.type}

@@ -3,8 +3,8 @@ import { GetServerSideProps } from "next";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import HomeView from "../components/home/Home.component";
-import DonationView from "../components/donation/Donation.component";
 import BasicAppBar from "../components/appbar/BasicAppBar.component";
+import DonationView from "../components/donation/Donation.component";
 import { Helmet } from "react-helmet";
 import theme from "../theme/DarkTheme";
 import { GetInfoNode } from "../model/GetInfoNode";
@@ -14,7 +14,7 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import { Close } from "@mui/icons-material";
 import Offline from "../components/genericView/Offline.component";
-import { StyledEngineProvider } from '@mui/material/styles';
+import { StyledEngineProvider } from "@mui/material/styles";
 
 //import MetricsView from '../components/metricsView/MetricsView.component';
 
@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 //FIXME: move it in a view utils
 export enum ViewName {
   HOME = "home",
-  DONATION = "donation"
+  DONATION = "donation",
   // METRICS = 'metrics',
 }
 
@@ -152,58 +152,65 @@ class Home extends Component<AppProps, AppState> {
     }
     return (
       <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Helmet>
-          <meta charSet="utf-8" />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Helmet>
+            <meta charSet="utf-8" />
+            <link
+              rel="apple-touch-icon"
+              sizes="180x180"
+              href="/apple-touch-icon.png"
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="/favicon-32x32.png"
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href="/favicon-16x16.png"
+            />
+            <link rel="manifest" href="/site.webmanifest" />
+            <link
+              rel="mask-icon"
+              href="/safari-pinned-tab.svg"
+              color="#5bbad5"
+            />
+            <meta name="msapplication-TileColor" content="#da532c" />
+            <meta
+              name="theme-color"
+              content="theme.palette.background.default"
+            />
+            <title>Home</title>
+            <link rel="canonical" href="https://bruce.bublina.eu.org/" />
+          </Helmet>
+          {view}
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            color={theme.palette.error.main}
+            open={this.state.showMessage}
+            onClose={() =>
+              this.setState((_) => ({ showMessage: false, messageToShow: "" }))
+            }
+            message={this.state.messageToShow}
+            action={
+              <IconButton
+                onClick={() =>
+                  this.setState((_) => ({
+                    showMessage: false,
+                    messageToShow: "",
+                  }))
+                }
+                size="large"
+              >
+                <Close color="secondary" />
+              </IconButton>
+            }
           />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
-          />
-          <link rel="manifest" href="/site.webmanifest" />
-          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="theme.palette.background.default" />
-          <title>Home</title>
-          <link rel="canonical" href="https://bruce.bublina.eu.org/" />
-        </Helmet>
-        {view}
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          color={theme.palette.error.main}
-          open={this.state.showMessage}
-          onClose={() =>
-            this.setState((_) => ({ showMessage: false, messageToShow: "" }))
-          }
-          message={this.state.messageToShow}
-          action={
-            <IconButton
-              onClick={() =>
-                this.setState((_) => ({
-                  showMessage: false,
-                  messageToShow: "",
-                }))
-              }
-              size="large"
-            >
-              <Close color="secondary" />
-            </IconButton>
-          }
-        />
-      </ThemeProvider>
+        </ThemeProvider>
       </StyledEngineProvider>
     );
   }
