@@ -7,7 +7,9 @@ export default async function handler(
 ) {
   try {
     let offer = await (
-      await axios.get(`https://bootstrap.bolt12.org/fetchinvoice/lno1pg257enxv4ezqcneype82um50ynhxgrwdajx283qfwdpl28qqmc78ymlvhmxcsywdk5wrjnj36jryg488qwlrnzyjczs/100`)
+      await axios.get(
+        `https://bootstrap.bolt12.org/fetchinvoice/lno1pg257enxv4ezqcneype82um50ynhxgrwdajx283qfwdpl28qqmc78ymlvhmxcsywdk5wrjnj36jryg488qwlrnzyjczs/100`
+      )
     ).data;
     let resp = offer;
     console.debug(resp);

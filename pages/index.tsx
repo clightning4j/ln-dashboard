@@ -94,7 +94,10 @@ class Home extends Component<AppProps, AppState> {
         break;
       case ViewName.DONATION:
         page = (
-          <DonationView show={this.setShowMessage} nodeInfo={this.props.infoNode} />
+          <DonationView
+            show={this.setShowMessage}
+            nodeInfo={this.props.infoNode}
+          />
         );
         pageName = ViewName.DONATION;
         break;

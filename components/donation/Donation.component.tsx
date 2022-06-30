@@ -17,7 +17,7 @@ import { GetInfoNode, NodeAddress } from "../../model/GetInfoNode";
 import useSWR from "swr";
 import AppAPI from "../../api/AppAPI";
 import { fetcher } from "../../utils/AppUtils";
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import SyntaxHighlighter from "react-syntax-highlighter";
 
 import { useState } from "react";
 import { NodeTable } from "../tableNodes/NodeTable.component";
@@ -50,8 +50,7 @@ type ParentProps = {
   show: (visible: boolean, message: string) => void;
 };
 
-export default function DonationView({ nodeInfo, show }: ParentProps,) {
-
+export default function DonationView({ nodeInfo, show }: ParentProps) {
   // let addr: NodeAddress =
   //   nodeInfo!.address.length > 0 ? nodeInfo!.address[0] : nodeInfo!.binding[0];
   // const [selectAddr, setSelectAddr] = useState(addr);
@@ -90,11 +89,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps,) {
             justifyContent="center"
             alignItems="center"
           >
-            <QRCode
-              value={`${bolt12}`}
-              size={300}
-              level="H"
-            />
+            <QRCode value={`${bolt12}`} size={300} level="H" />
           </Grid>
           <Grid
             container
@@ -132,9 +127,10 @@ export default function DonationView({ nodeInfo, show }: ParentProps,) {
                 })}
               </Select>
             </FormControl> */}
-             <Grid>
-            <SyntaxHighlighter language="json" 
-            useInlineStyles={false}
+            <Grid>
+              <SyntaxHighlighter
+                language="json"
+                useInlineStyles={false}
                 customStyle={{
                   backgroundColor: theme.palette.background.paper,
                   color: theme.palette.text.primary,
@@ -143,23 +139,17 @@ export default function DonationView({ nodeInfo, show }: ParentProps,) {
                   bottom: 0,
                   overflow: "scroll",
                 }}
-              // codeTagProps={{
-              //     style: {
-              //         color: theme.palette.text.primary,
-              //     },
-              // }}
-            >
-              {
-                JSON.stringify(resp.data.offer, null, 2)
-              }
-            </SyntaxHighlighter>
+                // codeTagProps={{
+                //     style: {
+                //         color: theme.palette.text.primary,
+                //     },
+                // }}
+              >
+                {JSON.stringify(resp.data.offer, null, 2)}
+              </SyntaxHighlighter>
             </Grid>
             <IconButton
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  `${bolt12}`
-                )
-              }
+              onClick={() => navigator.clipboard.writeText(`${bolt12}`)}
               size="large"
             >
               <FileCopyTwoTone />
