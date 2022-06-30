@@ -34,6 +34,7 @@
     "@types/qrcode.react": "^1.0.2",
     "@types/react": "17.0.19",
     "@types/react-helmet": "^6.1.2",
+    "@types/react-syntax-highlighter": "^15.5.2",
     "@types/styled-components": "^5.1.14",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
