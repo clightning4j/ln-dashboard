@@ -1,21 +1,9 @@
-export type Offer = {
-  changes: {};
-  decoded: {
-    amount_msat: string;
-    created_at: number;
-    description: string;
-    features: string;
-    min_final_cltv_expiry: number;
-    node_id: string;
-    offer_id: string;
-    payer_info: string;
-    payer_key: string;
-    payment_hash: string;
-    relative_expiry: number;
-    signature: string;
-    timestamp: number;
-    type: string;
-    valid: boolean;
-  };
-  invoice: string;
+export type OfferInfo = {
+  offer_id: string;
+  active: boolean;
+  single_use: boolean;
+  bolt12: string;
+  bolt12_unsingned: string;
+  used: boolean;
+  created: boolean;
 };

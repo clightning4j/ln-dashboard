@@ -7,7 +7,7 @@
 
 import { GetInfoNode, ListFunds } from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
-import { Offer } from "../model/Offer";
+import { OfferInfo } from "../model/Offer";
 
 export default interface AppAPI {
   /**
@@ -23,7 +23,7 @@ export default interface AppAPI {
   /**
    * Get all the information about the offer by running the offer command.
    */
-  offer(): Offer;
+  getOfferInfo(): OfferInfo;
 
   /**
    * Get all the information about the metrics of the node if exist otherwise undefined

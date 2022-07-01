@@ -15,7 +15,6 @@ import QRCode from "qrcode.react";
 import theme from "../../theme/DarkTheme";
 import { GetInfoNode, NodeAddress } from "../../model/GetInfoNode";
 import useSWR from "swr";
-import AppAPI from "../../api/AppAPI";
 import { fetcher } from "../../utils/AppUtils";
 import SyntaxHighlighter from "react-syntax-highlighter";
 
@@ -61,7 +60,8 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
   // }
 
   const resp = useSWR("/api/offer", fetcher);
-  let bolt12: string = resp.data != undefined ? resp.data.offer.invoice : null;
+
+  let bolt12: string = resp.data != undefined ? resp.data.offer.bolt12 : null;
 
   if (bolt12 === null) return <>Bol12 not available</>;
   return (
@@ -139,13 +139,14 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
                   bottom: 0,
                   overflow: "scroll",
                 }}
-                // codeTagProps={{
-                //     style: {
-                //         color: theme.palette.text.primary,
-                //     },
-                // }}
+                codeTagProps={{
+                  style: {
+                    color: theme.palette.text.primary,
+                  },
+                }}
               >
-                {JSON.stringify(resp.data.offer, null, 2)}
+                fetchinvoice offer [msatoshi] [quantity] [recurrence_counter]
+                [recurrence_start] [recurrence_label] [timeout] [payer_note]{" "}
               </SyntaxHighlighter>
             </Grid>
             <IconButton
