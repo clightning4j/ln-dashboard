@@ -7,3 +7,7 @@
 const crypto = require("crypto");
 const crypto_orig_createHash = crypto.createHash;
 crypto.createHash = () => crypto_orig_createHash("sha256");
+
+module.exports = {
+    swcMinify: true,
+}
