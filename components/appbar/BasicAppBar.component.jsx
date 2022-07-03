@@ -49,7 +49,7 @@ class BasicAppBar extends React.Component {
       <Container maxWidth="xl">
         <AppBar
           position="sticky"
-          style={{
+          sx={{
             backgroundColor: theme.palette.background.paper,
           }}
         >
@@ -70,7 +70,7 @@ class BasicAppBar extends React.Component {
               <Grid item>
                 <Chip
                   label={network}
-                  style={{
+                  sx={{
                     background: "#" + colorByNetwork[network],
                   }}
                 />
@@ -81,15 +81,6 @@ class BasicAppBar extends React.Component {
         <Box m={theme.spacing(1)} mb={theme.spacing(2)}>
           {this.state.ready ? child : <Loading />}
         </Box>
-        <AppBar
-          position="fixed"
-          className="navigation-style"
-          style={{
-            backgroundColor: theme.palette.background.paper,
-            top: "auto",
-            bottom: 0,
-          }}
-        >
           <BottomNavigation
             value={value}
             onChange={(event, newValue) => {
@@ -112,7 +103,6 @@ class BasicAppBar extends React.Component {
               icon={<PieChart />}
             /> */}
           </BottomNavigation>
-        </AppBar>
       </Container>
     );
   }

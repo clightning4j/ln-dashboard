@@ -1,4 +1,3 @@
-import withStyles from "@mui/styles/withStyles";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -16,28 +15,6 @@ import theme from "../../theme/DarkTheme";
 import { GetInfoNode, NodeAddress } from "../../model/GetInfoNode";
 import { useState } from "react";
 import { NodeTable } from "../tableNodes/NodeTable.component";
-
-const BootstrapInput = withStyles((_) => ({
-  root: {
-    "label + &": {
-      marginTop: theme.spacing(2),
-    },
-  },
-  input: {
-    borderRadius: 4,
-    position: "relative",
-    backgroundColor: theme.palette.background.paper,
-    border: "1px solid " + theme.palette.primary.light,
-    padding: "20px 26px 20px 12px",
-    transition: theme.transitions.create(["border-color", "box-shadow"]),
-    // Use the system font instead of the default Roboto font.
-    "&:focus": {
-      borderRadius: 4,
-      borderColor: theme.palette.divider,
-      boxShadow: "0 0 0 0.2rem " + theme.palette.divider,
-    },
-  },
-}))(InputBase);
 
 type ParentProps = {
   nodeInfo: GetInfoNode | null;
@@ -67,7 +44,7 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
             <Box component="span" m={1}>
               <Chip
                 label={nodeInfo!.alias}
-                style={{
+                sx={{
                   background: "#" + nodeInfo!.color,
                 }}
               />
@@ -88,7 +65,7 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
           >
             <FormControl
               variant="outlined"
-              style={{
+              sx={{
                 margin: theme.spacing(2),
                 minWidth: 230,
                 textAlign: "center",
@@ -105,7 +82,6 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
                   setSelectAddr(mapAddress.get(event.target.value))
                 }
                 label="Address"
-                input={<BootstrapInput />}
               >
                 {nodeInfo!.address.map((address, index) => {
                   return (

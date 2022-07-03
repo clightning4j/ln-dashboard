@@ -1,7 +1,7 @@
 import { createTheme, responsiveFontSizes, Theme } from "@mui/material/styles";
 
 const oceanic: Theme = responsiveFontSizes(
-  createTheme({
+  createTheme(adaptV4Theme({
     palette: {
       mode: "dark",
       common: {
@@ -54,7 +54,7 @@ const oceanic: Theme = responsiveFontSizes(
         },
       },
     },
-  })
+  }))
 );
 
 export default oceanic;
