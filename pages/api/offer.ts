@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import AppAPI from "../../api/AppAPI";
 import MockAPI from "../../api/MockAPI";
 
-let api: AppAPI = new MockAPI()
+let api: AppAPI = new MockAPI();
 
 export default async function handler(
   req: NextApiRequest,
