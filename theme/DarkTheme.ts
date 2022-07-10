@@ -38,22 +38,6 @@ const oceanic: Theme = responsiveFontSizes(
       },
       divider: "#009688",
     },
-    components: {
-      MuiCardContent: {
-        styleOverrides: {
-          root: ({ theme }) => ({
-            backgroundColor: theme.palette.background.paper,
-          }),
-        },
-      },
-      MuiToolbar: {
-        styleOverrides: {
-          root: ({ theme }) => ({
-            backgroundColor: theme.palette.background.paper,
-          }),
-        },
-      },
-    },
   })
 );
 

@@ -47,13 +47,12 @@ class BasicAppBar extends React.Component {
     console.log(mappingButton);
     return (
       <Container maxWidth="xl">
-        <AppBar
-          position="sticky"
-          style={{
-            backgroundColor: theme.palette.background.paper,
-          }}
-        >
-          <Toolbar>
+        <AppBar position="sticky">
+          <Toolbar
+            style={{
+              backgroundColor: theme.palette.background.paper,
+            }}
+          >
             <Grid justifyContent="space-between" alignItems="center" container>
               <Grid item>
                 <IconButton

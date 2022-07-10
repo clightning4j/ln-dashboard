@@ -57,7 +57,11 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Card>
-        <CardContent>
+        <CardContent
+          style={{
+            backgroundColor: theme.palette.background.paper,
+          }}
+        >
           <Grid
             container
             direction="row"
