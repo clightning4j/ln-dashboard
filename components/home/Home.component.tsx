@@ -60,7 +60,8 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
         <CardContent
           style={{
             backgroundColor: theme.palette.background.paper,
-          }}>
+          }}
+        >
           <Grid
             container
             direction="row"
