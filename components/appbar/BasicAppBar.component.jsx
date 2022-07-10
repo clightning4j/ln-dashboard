@@ -49,11 +49,11 @@ class BasicAppBar extends React.Component {
       <Container maxWidth="xl">
         <AppBar
           position="sticky"
-          style={{
-            backgroundColor: theme.palette.background.paper,
-          }}
         >
-          <Toolbar>
+          <Toolbar
+            style={{
+              backgroundColor: theme.palette.background.paper,
+            }}>
             <Grid justifyContent="space-between" alignItems="center" container>
               <Grid item>
                 <IconButton
