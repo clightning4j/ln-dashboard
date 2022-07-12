@@ -2,7 +2,6 @@ import { GetInfoNode, ListFunds } from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
 import { OfferInfo } from "../model/Offer";
 import AppAPI from "./AppAPI";
-import { OfferInfo } from "../model/Offer";
 
 /**
  * API implementation that use the Rest Protocol and the plugin jrest
