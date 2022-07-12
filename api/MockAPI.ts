@@ -3,10 +3,13 @@ import { GetInfoNode, ListFunds } from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
 import { OfferInfo } from "../model/Offer";
 import AppAPI from "./AppAPI";
+import { OfferInfo } from "../model/Offer";
+import { singleton } from "tsyringe";
 
 /**
  * Mock API implementation
  */
+@singleton()
 export default class MockAPI implements AppAPI {
   getInfo(): GetInfoNode {
     return {

@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import AppAPI from "../../api/AppAPI";
 import MockAPI from "../../api/MockAPI";
-
-let api: AppAPI = new MockAPI();
+import { container } from "tsyringe";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  let api: AppAPI = container.resolve(MockAPI);
   try {
     let resp = api.getOfferInfo();
     console.debug(resp);
