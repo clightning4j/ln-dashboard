@@ -99,16 +99,16 @@ class BasicAppBar extends React.Component {
             }}
           >
             <BottomNavigationAction
-              label="Home"
-              value={ViewName.HOME}
-              disabled={mappingButton[ViewName.HOME] === false}
-              icon={<Home />}
-            />
-            <BottomNavigationAction
               label="Donation"
               value={ViewName.DONATION}
               disabled={mappingButton[ViewName.DONATION] === false}
               icon={<Paid />}
+            />
+            <BottomNavigationAction
+              label="Home"
+              value={ViewName.HOME}
+              disabled={mappingButton[ViewName.HOME] === false}
+              icon={<Home />}
             />
             {/* Commenting out this code since we are developing the api for metrics and currently the page is breaking */}
             {/* <BottomNavigationAction

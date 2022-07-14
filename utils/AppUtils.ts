@@ -82,6 +82,27 @@ export const getPrices = async (
   }
 };
 
+/**
+ * TODO: docs it
+ * @param nodeId
+ * @param show
+ */
+export const selectedOffer = async (
+  bolt12: string,
+  show: (visible: boolean, message: string) => void
+) => {
+  try {
+    /**
+      We can add the API for getting the bolt11 string as well
+      const _ = await axios(`/api/`);
+    */
+    return bolt12;
+  } catch (e) {
+    show(true, `Error with message: ${e}`);
+    console.error(e);
+  }
+};
+
 export function metricsOneToTotChannelsByDay(
   metricsOne: MetricsOne
 ): Array<LineChartItem> {

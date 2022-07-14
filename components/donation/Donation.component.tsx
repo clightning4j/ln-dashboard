@@ -19,7 +19,7 @@ import { fetcher } from "../../utils/AppUtils";
 import SyntaxHighlighter from "react-syntax-highlighter";
 
 import { useState } from "react";
-import { NodeTable } from "../tableNodes/NodeTable.component";
+import { OfferTable } from "../tableNodes/OfferTable.component";
 import { AppRegistrationSharp } from "@mui/icons-material";
 
 const BootstrapInput = withStyles((_) => ({
@@ -61,7 +61,15 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
 
   const resp = useSWR("/api/offer", fetcher);
 
-  let bolt12: string = resp.data != undefined ? resp.data.offer.bolt12 : null;
+  let bolt12: string =
+    resp.data != undefined ? resp.data.offer[0].bolt12 : null;
+
+  const commandFetchInvoice =
+    "fetchinvoice " +
+    bolt12 +
+    " [msatoshi] [quantity] [recurrence_counter] [recurrence_start] [recurrence_label] [timeout] [payer_note] \n";
+  const commandPay =
+    "pay bolt11 [msatoshi] [label] [riskfactor] [maxfeepercent] [retry_for] [maxdelay] [exemptfee] [localofferid] [exclude] [maxfee] [description]";
 
   if (bolt12 === null) return <>Bol12 not available</>;
   return (
@@ -131,6 +139,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
               <SyntaxHighlighter
                 language="json"
                 useInlineStyles={false}
+                wrapLines={true}
                 customStyle={{
                   backgroundColor: theme.palette.background.paper,
                   color: theme.palette.text.primary,
@@ -145,8 +154,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
                   },
                 }}
               >
-                fetchinvoice offer [msatoshi] [quantity] [recurrence_counter]
-                [recurrence_start] [recurrence_label] [timeout] [payer_note]{" "}
+                {commandFetchInvoice + commandPay}
               </SyntaxHighlighter>
             </Grid>
             <IconButton
@@ -164,7 +172,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
         justifyContent="center"
         alignItems="center"
       >
-        <NodeTable show={show} />
+        <OfferTable show={show} />
       </Grid>
     </Grid>
   );
