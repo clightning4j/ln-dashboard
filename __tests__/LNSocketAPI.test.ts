@@ -20,6 +20,7 @@ test("Configure lnsocket", async function () {
     /*address*/ "127.0.0.1:19735",
     /*rune*/ runeRPC.rune
   );
+  console.debug(`Node id ${nodeID} + Rune ${runeRPC.rune}`);
   await client.connect();
   try {
     let getInfo = await client.getInfo();

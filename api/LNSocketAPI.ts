@@ -34,13 +34,15 @@ export default class LNSocketAPI implements AppAPI {
       host: this.address,
       rune: this.rune,
     };
-    return (await axios.post(`${this.lambda}/lnsocket`, lambdaRequest, {
+    return (
+      await axios.post(`${this.lambda}/lnsocket`, lambdaRequest, {
         headers: {
           post: {
-            'Content-Type': 'application/json',
-          }
-        }
-    })).data["result"];
+            "Content-Type": "application/json",
+          },
+        },
+      })
+    ).data["result"];
   }
 
   async close(): Promise<void> {}
