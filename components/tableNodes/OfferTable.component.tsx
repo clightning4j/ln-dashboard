@@ -62,7 +62,7 @@ export function OfferTable({ show }: OfferTableProps): JSX.Element {
                   <Chip
                     label={offer["label"] ? offer["label"] : "-----"}
                     style={{
-                       background: "#" + color,
+                      background: "#" + color,
                     }}
                   />
                   {}
