@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 export function OfferTable({ show }: OfferTableProps): JSX.Element {
   const { data, error } = useSWR("/api/listoffers", fetcher);
   const classes = useStyles();
-  const color = Math.random().toString(16).substr(-6);
+//   const color = Math.random().toString(16).substr(-6);
 
   if (error) {
     show(true, "Error: " + error);
@@ -62,7 +62,7 @@ export function OfferTable({ show }: OfferTableProps): JSX.Element {
                   <Chip
                     label={offer["label"] ? offer["label"] : "-----"}
                     style={{
-                      background: "#" + color,
+                      background: "#" + Math.random().toString(16).substr(-6),
                     }}
                   />
                   {}
