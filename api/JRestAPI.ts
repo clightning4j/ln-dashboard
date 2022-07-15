@@ -1,6 +1,7 @@
 import { GetInfoNode, ListFunds } from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
 import { OfferInfo } from "../model/Offer";
+import { ListOffers } from "../model/ListOffers";
 import AppAPI from "./AppAPI";
 
 /**
@@ -18,6 +19,9 @@ export default class JRestAPI implements AppAPI {
     throw new Error("Method not implemented.");
   }
   getOfferInfo(): OfferInfo {
+    throw new Error("Method not implemented.");
+  }
+  listOffers(): ListOffers {
     throw new Error("Method not implemented.");
   }
   getMetricOne(network: string, nodeId: string): MetricsOne | undefined {

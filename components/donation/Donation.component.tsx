@@ -62,14 +62,14 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
   const resp = useSWR("/api/offer", fetcher);
 
   let bolt12: string =
-    resp.data != undefined ? resp.data.offer[0].bolt12 : null;
+    resp.data != undefined ? resp.data.offer.bolt12 : null;
 
   const commandFetchInvoice =
-    "fetchinvoice " +
+    "lightning-cli fetchinvoice " +
     bolt12 +
-    " [msatoshi] [quantity] [recurrence_counter] [recurrence_start] [recurrence_label] [timeout] [payer_note] \n";
+    "\n";
   const commandPay =
-    "pay bolt11 [msatoshi] [label] [riskfactor] [maxfeepercent] [retry_for] [maxdelay] [exemptfee] [localofferid] [exclude] [maxfee] [description]";
+    "pay {invoice}";
 
   if (bolt12 === null) return <>Bol12 not available</>;
   return (

@@ -9,7 +9,8 @@ export default async function handler(
 ) {
   let api: AppAPI = container.resolve(MockAPI);
   try {
-    let resp = api.getOfferInfo();
+    let resp: Array<any> = [];
+    resp = api.listOffers();
     console.debug(resp);
     res.status(200).json({ offer: resp });
   } catch (error) {

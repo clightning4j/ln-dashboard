@@ -22,7 +22,7 @@ type OfferTableProps = {
 
 const useStyles = makeStyles({
   root: {
-    width: "100%",
+    width: "65%",
   },
   container: {
     maxHeight: "100vh",
@@ -31,9 +31,10 @@ const useStyles = makeStyles({
 });
 
 export function OfferTable({ show }: OfferTableProps): JSX.Element {
-  const { data, error } = useSWR("/api/offer", fetcher);
-
+  const { data, error } = useSWR("/api/listoffers", fetcher);
   const classes = useStyles();
+  const color = Math.random().toString(16).substr(-6);
+
   if (error) {
     show(true, "Error: " + error);
     return <></>;
@@ -49,41 +50,36 @@ export function OfferTable({ show }: OfferTableProps): JSX.Element {
         <Table stickyHeader aria-label="Node that shows the list of offers">
           <TableHead>
             <TableRow>
-              <TableCell>Select</TableCell>
-              <TableCell>Offer Id</TableCell>
+              <TableCell>Label</TableCell>
               <TableCell>Active</TableCell>
-              <TableCell>Use</TableCell>
+              <TableCell>Select</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.offer.map((offer: any, index: number) => (
               <TableRow key={index} hover>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => selectedOffer(offer["bolt12"], show)}>
-                    Select
-                  </Button>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {offer["offer_id"]}
+                  <Chip
+                    label={offer["label"] ? offer["label"] : "-----"}
+                    style={{
+                       background: "#" + color,
+                    }}
+                  />
+                  {}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   <Chip
                     label={offer["active"] ? "Active" : "Offline"}
                     style={{
-                      background: "#" + (offer["active"] ? "82ad44" : "f07178"),
+                      background: "#" + (offer["label"] ? "82ad44" : "f07178"),
                     }}
                   />
                   {}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Chip
-                    label={offer["single_use"] ? "Single Use" : "Multiple Use"}
-                    style={{
-                      background:
-                        "#" + (offer["single_use"] ? "82ad44" : "f07178"),
-                    }}
-                  />
-                  {}
+                  <Button onClick={() => selectedOffer(offer["bolt12"], show)}>
+                    Select
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

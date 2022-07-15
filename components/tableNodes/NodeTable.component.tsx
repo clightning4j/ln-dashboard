@@ -38,8 +38,6 @@ const useStyles = makeStyles({
 
 export function NodeTable({ show }: NodeTableProps): JSX.Element {
   const { data, error } = useSWR("/api/channelsInfo", fetcher);
-  console.log("HERE IS DATA");
-  console.log(data);
   const [btcPrice, setBtcPrice] = useState(-1);
   useEffect(() => {
     getPrices("BTC-USD", show).then((price) => {
