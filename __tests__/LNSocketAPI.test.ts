@@ -13,15 +13,16 @@ test("Configure lnsocket", async function () {
   let runeRPC: any = await rpcClient.call<Rune>("commando-rune", {
     restrictions: "readonly",
   });
-  // @ts-nocheck
+  console.log(`Node id ${nodeID} + Rune ${runeRPC.rune}`);
   let client = new LNSocketAPI(
+    "http://localhost:9002",
     /*node id*/ nodeID.toString(),
     /*address*/ "127.0.0.1:19735",
     /*rune*/ runeRPC.rune
   );
   await client.connect();
   try {
-    let getInfo= await client.getInfo();
+    let getInfo = await client.getInfo();
     console.log(`GetInfo ${getInfo}`);
     expect(getInfo["id"]).toBe(nodeID);
     client.close();

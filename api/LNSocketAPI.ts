@@ -1,8 +1,7 @@
 import AppAPI from "./AppAPI";
 import { GetInfoNode, ListFunds } from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
-// @ts-ignore
-import LNSocket from "lnsocket";
+import axios from "axios";
 
 /**
  * Experimental feature.
@@ -11,43 +10,53 @@ import LNSocket from "lnsocket";
  * the node API without use of any additional services.
  */
 export default class LNSocketAPI implements AppAPI {
-  private client: LNSocket;
   private address: string;
   private nodeID: string;
   private rune: string;
+  private lambda: string;
 
-  constructor(nodeId: string, adderss: string, rune: string) {
+  constructor(lambda: string, nodeId: string, adderss: string, rune: string) {
     this.nodeID = nodeId;
     this.address = adderss;
     this.rune = rune;
+    this.lambda = lambda;
   }
 
-  async close(): Promise<void> {
-    await this.client.destroy();
+  private async call<ReturnType>(
+    method: string,
+    params: object
+  ): Promise<ReturnType> {
+    console.log("Running request");
+    let lambdaRequest = {
+      method: method,
+      params: params,
+      node_id: this.nodeID,
+      host: this.address,
+      rune: this.rune,
+    };
+    return (await axios.post(`${this.lambda}/lnsocket`, lambdaRequest, {
+        headers: {
+          post: {
+            'Content-Type': 'application/json',
+          }
+        }
+    })).data["result"];
   }
+
+  async close(): Promise<void> {}
 
   async listOffers(): Promise<any[]> {
-    return await this.client.rpc({ method: "listoffers", rune: this.rune })[
-      "result"
-    ];
+    return await this.call("listoffers", {});
   }
 
-  async connect(): Promise<void> {
-    this.client = await LNSocket();
-    this.client.genkey();
-    await this.client.connect_and_init(this.nodeID, this.address);
-  }
+  async connect(): Promise<void> {}
 
   async getInfo(): Promise<GetInfoNode> {
-    return await this.client.rpc({ method: "getinfo", rune: this.rune })[
-      "result"
-    ];
+    return await this.call<GetInfoNode>("getinfo", {});
   }
 
   async listFunds(): Promise<ListFunds> {
-    return await this.client.rpc({ method: "listfunds", rune: this.rune })[
-      "result"
-    ];
+    return await this.call("listfunds", {});
   }
 
   async getMetricOne(
