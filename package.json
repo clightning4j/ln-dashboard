@@ -30,6 +30,7 @@
     "swr": "^0.5.6"
   },
   "devDependencies": {
+    "@core-ln/core": "^0.2.1-beta.1",
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
     "@types/jest": "^28.1.5",
     "@types/node": "^17.0.44",

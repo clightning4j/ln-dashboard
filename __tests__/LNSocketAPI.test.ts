@@ -1,12 +1,15 @@
 import LNSocketAPI from "../api/LNSocketAPI";
+import RPCClient from "@core-ln/core";
 
 test("Configure lnsocket", async () => {
-  let nodeID =
-    "03b39d1ddf13ce486de74e9e44e0538f960401a9ec75534ba9cfe4100d65426880";
+  let rpcClient = new RPCClient(process.env.CLN_UNIX!);
+  let getInfoRpc = await rpcClient.call<Map<string, unknown>>("getinfo", {});
+  let nodeID = getInfoRpc.get("id");
+  let runeRPC: any = await rpcClient.call<Map<string, unknown>>("commando-rune", {"restrictions": "readonly"});
   let client = new LNSocketAPI(
-    /*node id*/ nodeID,
+    /*node id*/ nodeID as string,
     /*address*/ "127.0.0.1:19735",
-    /*rune*/ "PdQYLhm7IZkORiBWmXymbXIAu0uLgpP46PP5q2LEsx49MiZtZXRob2RebGlzdHxtZXRob2ReZ2V0fG1ldGhvZD1zdW1tYXJ5Jm1ldGhvZC9nZXRzaGFyZWRzZWNyZXQmbWV0aG9kL2xpc3RkYXRhc3RvcmU="
+    /*rune*/ runeRPC.get("rune") as string,
   );
   await client.connect();
   let getInfo = await client.getInfo();
