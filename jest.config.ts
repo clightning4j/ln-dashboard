@@ -25,12 +25,12 @@ export default {
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
 
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  preset: "ts-jest",
+  testEnvironment: "node",
   transform: {
-    '^.+\\.ts?$': 'ts-jest',
+    "^.+\\.ts?$": "ts-jest",
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+  transformIgnorePatterns: ["<rootDir>/node_modules/"],
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
   //   "/node_modules/"

@@ -22,25 +22,38 @@ export default class LNSocketAPI implements AppAPI {
     this.rune = rune;
   }
 
-  async listOffers(): Promise<any[]> {
-    return await this.client.rpc({ method: "listoffers", rune: this.rune })
-    }
+  async close(): Promise<void> {
+    await this.client.destroy();
+  }
 
-  async connect() {
+  async listOffers(): Promise<any[]> {
+    return await this.client.rpc({ method: "listoffers", rune: this.rune })[
+      "result"
+    ];
+  }
+
+  async connect(): Promise<void> {
     this.client = await LNSocket();
-    this.client.genkey()
+    this.client.genkey();
     await this.client.connect_and_init(this.nodeID, this.address);
   }
 
   async getInfo(): Promise<GetInfoNode> {
-    return  await this.client.rpc({ method: "getinfo", rune: this.rune })
+    return await this.client.rpc({ method: "getinfo", rune: this.rune })[
+      "result"
+    ];
   }
 
   async listFunds(): Promise<ListFunds> {
-    return await this.client.rpc({ method: "listfunds", rune: this.rune })
+    return await this.client.rpc({ method: "listfunds", rune: this.rune })[
+      "result"
+    ];
   }
 
-  async  getMetricOne(network: string, nodeId: string): Promise<MetricsOne | undefined> {
+  async getMetricOne(
+    network: string,
+    nodeId: string
+  ): Promise<MetricsOne | undefined> {
     throw new Error("Method not implemented.");
   }
 }
