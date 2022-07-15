@@ -1,8 +1,8 @@
 import LNSocketAPI from "../api/LNSocketAPI";
-import RPCClient from "@core-ln/core";
+import SocketApiClient from "@core-ln/core";
 
 test("Configure lnsocket", async () => {
-  let rpcClient = new RPCClient(process.env.CLN_UNIX!);
+  let rpcClient = new SocketApiClient(process.env.CLN_UNIX!);
   let getInfoRpc = await rpcClient.call<Map<string, unknown>>("getinfo", {});
   let nodeID = getInfoRpc.get("id");
   let runeRPC: any = await rpcClient.call<Map<string, unknown>>("commando-rune", {"restrictions": "readonly"});
