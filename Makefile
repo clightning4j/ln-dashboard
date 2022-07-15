@@ -7,10 +7,10 @@ fmt:
 	npx prettier --write .
 
 clean:
-	@echo "Nothing to clean"
+	@rm -rf node_modules
 
 check:
-	@echo "Nothing to check"
+	npm run test
 
 build:
 	npm run build

@@ -10,13 +10,25 @@ import AppAPI from "./AppAPI";
  * and feel use this class to call the method inside the pages modules.
  */
 export default class JRestAPI implements AppAPI {
-  getInfo(): GetInfoNode {
+  getInfo(): Promise<GetInfoNode> {
     throw new Error("Method not implemented.");
   }
-  listFunds(): ListFunds {
+  listFunds(): Promise<ListFunds> {
     throw new Error("Method not implemented.");
   }
-  getMetricOne(network: string, nodeId: string): MetricsOne | undefined {
+  getMetricOne(
+    network: string,
+    nodeId: string
+  ): Promise<MetricsOne | undefined> {
+    throw new Error("Method not implemented.");
+  }
+  listOffers(): Promise<any[]> {
+    throw new Error("Method not implemented.");
+  }
+  connect(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+  close(): Promise<void> {
     throw new Error("Method not implemented.");
   }
 }

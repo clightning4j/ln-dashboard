@@ -6,8 +6,19 @@ import AppAPI from "./AppAPI";
  * Mock API implementation
  */
 class MockAPI implements AppAPI {
-  getInfo(): GetInfoNode {
-    return {
+  listOffers(): Promise<any[]> {
+    return Promise.resolve([]);
+  }
+  connect(): Promise<void> {
+    return Promise.resolve();
+  }
+
+  close(): Promise<void> {
+    return Promise.resolve();
+  }
+
+  getInfo(): Promise<GetInfoNode> {
+    return Promise.resolve({
       id: "",
       alias: "String",
       color: "",
@@ -29,17 +40,20 @@ class MockAPI implements AppAPI {
       msatoshi_fees_collected: 0,
       fees_collected_msat: "",
       lightning_dir: "",
-    };
+    });
   }
 
-  listFunds(): ListFunds {
-    return {
+  listFunds(): Promise<ListFunds> {
+    return Promise.resolve({
       outputs: [],
       channels: [],
-    };
+    });
   }
 
-  getMetricOne(network: string, nodeId: string): MetricsOne | undefined {
+  getMetricOne(
+    network: string,
+    nodeId: string
+  ): Promise<MetricsOne | undefined> {
     throw new Error("Method not implemented.");
   }
 }
