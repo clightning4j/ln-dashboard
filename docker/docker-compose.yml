@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   lightningd:
-    image: vincenzopalazzo/clightning4j-node:v0.11.1
+    image: vincenzopalazzo/clightning4j-node:v0.11.2-dev6
     volumes:
       - ./data:/home/clightning4j
     network_mode: "host"
@@ -16,6 +16,7 @@ services:
       --proxy=127.0.0.1:9050
       --addr=statictor:127.0.0.1:9051
       --plugin=/opt/btcli4j.sh
+      --rpc-file-mode=0777
       --log-file=/home/clightning4j/.lightning/log.log
       --daemon
   dashboard_test:
@@ -26,4 +27,4 @@ services:
     depends_on:
       - lightningd
     volumes:
-      - ./data/.lightning:/.lightning
+      - ./data/.lightning:/.l

@@ -7,7 +7,7 @@
     "typecheck": "tsc && eslint '**/*.{ts,tsx}'",
     "build": "next build",
     "start": "next start",
-    "test": "jest"
+    "test": "jest --detectOpenHandles --forceExit"
   },
   "dependencies": {
     "@mui/icons-material": "^5.8.3",
