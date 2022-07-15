@@ -12,15 +12,20 @@ export default interface AppAPI {
   /**
    * Get all the information about the node by running the getinfo command.
    */
-  getInfo(): GetInfoNode;
+  getInfo(): Promise<GetInfoNode>
 
   /**
    * Get all the information about the node by running the listfunds command.
    */
-  listFunds(): ListFunds;
+  listFunds(): Promise<ListFunds>;
 
   /**
    * Get all the information about the metrics of the node if exist otherwise undefined
    */
-  getMetricOne(network: string, nodeId: string): MetricsOne | undefined;
+  getMetricOne(network: string, nodeId: string): Promise<MetricsOne | undefined>;
+
+  /**
+   * Get list of offers
+   */
+  listOffers(): Promise<Array<any>>;
 }
