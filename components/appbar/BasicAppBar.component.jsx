@@ -103,7 +103,7 @@ class BasicAppBar extends React.Component {
               disabled={mappingButton[ViewName.DONATION] === false}
               icon={<Paid />}
             />
-            
+
             <BottomNavigationAction
               label="Home"
               value={ViewName.HOME}
