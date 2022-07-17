@@ -69,7 +69,7 @@ export const pingNode = async (
  * @param nodeId
  * @param show
  */
- export const selectedOffer = async (
+export const selectedOffer = async (
   bolt12: string,
   show: (visible: boolean, message: string) => void
 ) => {
