@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import HomeView from "../components/home/Home.component";
+import DonationView from "../components/donation/Donation.component";
 import BasicAppBar from "../components/appbar/BasicAppBar.component";
 import { Helmet } from "react-helmet";
 import theme from "../theme/DarkTheme";
@@ -62,6 +63,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 //FIXME: move it in a view utils
 export enum ViewName {
   HOME = "home",
+  DONATION = "donation",
   // METRICS = 'metrics',
 }
 
@@ -84,6 +86,15 @@ class Home extends Component<AppProps, AppState> {
     let pageName: string;
     console.debug("Value is: ", value);
     switch (value) {
+      case ViewName.DONATION:
+        page = (
+          <DonationView
+            show={this.setShowMessage}
+            nodeInfo={this.props.infoNode}
+          />
+        );
+        pageName = ViewName.DONATION;
+        break;
       case ViewName.HOME:
         page = (
           <HomeView show={this.setShowMessage} nodeInfo={this.props.infoNode} />
@@ -129,6 +140,7 @@ class Home extends Component<AppProps, AppState> {
     if (this.props.infoNode !== null) {
       let mappingView = new Map([
         [ViewName.HOME, true],
+        [ViewName.DONATION, true],
         // [ViewName.METRICS, this.props.metricsSupport],
       ]);
       view = (

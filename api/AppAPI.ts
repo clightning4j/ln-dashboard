@@ -7,6 +7,7 @@
 
 import { GetInfoNode, ListFunds } from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
+import { OfferInfo } from "../model/Offer";
 
 export default interface AppAPI {
   /**
@@ -26,6 +27,8 @@ export default interface AppAPI {
     network: string,
     nodeId: string
   ): Promise<MetricsOne | undefined>;
+
+  getOfferInfo(): OfferInfo;
 
   /**
    * Get list of offers

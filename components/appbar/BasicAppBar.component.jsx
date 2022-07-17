@@ -8,7 +8,7 @@ import {
   IconButton,
   Toolbar,
 } from "@mui/material";
-import { Menu, Home, PieChart } from "@mui/icons-material";
+import { Menu, Home, PieChart, Paid } from "@mui/icons-material";
 import theme from "../../theme/DarkTheme";
 import Loading from "../genericView/Loading.component";
 import Chip from "@mui/material/Chip";
@@ -97,6 +97,13 @@ class BasicAppBar extends React.Component {
               this.loadDom();
             }}
           >
+            <BottomNavigationAction
+              label="Donation"
+              value={ViewName.DONATION}
+              disabled={mappingButton[ViewName.DONATION] === false}
+              icon={<Paid />}
+            />
+            
             <BottomNavigationAction
               label="Home"
               value={ViewName.HOME}
