@@ -66,6 +66,23 @@ export const pingNode = async (
 
 /**
  * TODO: docs it
+ * @param nodeId
+ * @param show
+ */
+ export const selectedOffer = async (
+  bolt12: string,
+  show: (visible: boolean, message: string) => void
+) => {
+  try {
+    return bolt12;
+  } catch (e) {
+    show(true, `Error with message: ${e}`);
+    console.error(e);
+  }
+};
+
+/**
+ * TODO: docs it
  * @param ticker
  * @param satoshi
  * @param show
