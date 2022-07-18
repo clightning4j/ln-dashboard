@@ -46,8 +46,8 @@ export default class MockAPI implements AppAPI {
     });
   }
 
-  getOfferInfo(): OfferInfo {
-    return {
+  getOfferInfo(): Promise<OfferInfo> {
+    return Promise.resolve({
       offer_id:
         "28522b52ac39fa518ce3a5b3e4a9a96372487e78ba5eb1540ec4d9f02ca82718",
       active: true,
@@ -58,7 +58,7 @@ export default class MockAPI implements AppAPI {
         "lno1pg257enxv4ezqcneype82um50ynhxgrwdajx283qfwdpl28qqmc78ymlvhmxcsywdk5wrjnj36jryg488qwlrnzyjczs ",
       used: false,
       created: false,
-    };
+    });
   }
 
   listFunds(): Promise<ListFunds> {
