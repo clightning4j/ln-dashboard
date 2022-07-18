@@ -8,12 +8,13 @@ export default async function handler(
   res: NextApiResponse
 ) {
   let api: AppAPI = container.resolve(MockAPI);
-  try {
-    let resp = api.getOfferInfo();
-    console.debug(resp);
-    res.status(200).json({ offer: resp });
-  } catch (error) {
+  let resp = api.getOfferInfo();
+  resp.then((value) => {
+    console.debug(value);
+    res.status(200).json({ offer: value });
+  });
+  resp.catch((error) => {
     console.error(error);
     res.status(500).json({ error: error });
-  }
+  });
 }

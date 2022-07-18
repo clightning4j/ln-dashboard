@@ -61,6 +61,8 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
 
   const resp = useSWR("/api/offer", fetcher);
 
+  console.log(resp);
+
   let bolt12: string = resp.data != undefined ? resp.data.offer.bolt12 : null;
 
   const commandFetchInvoice = "lightning-cli fetchinvoice " + bolt12 + "\n";

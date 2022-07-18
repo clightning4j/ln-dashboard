@@ -28,7 +28,7 @@ export default interface AppAPI {
     nodeId: string
   ): Promise<MetricsOne | undefined>;
 
-  getOfferInfo(): OfferInfo;
+  getOfferInfo(): Promise<OfferInfo>;
 
   /**
    * Get list of offers

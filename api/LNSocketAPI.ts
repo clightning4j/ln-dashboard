@@ -2,6 +2,7 @@ import AppAPI from "./AppAPI";
 import { GetInfoNode, ListFunds } from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
 import axios from "axios";
+import { OfferInfo } from "../model/Offer";
 
 /**
  * Experimental feature.
@@ -49,6 +50,10 @@ export default class LNSocketAPI implements AppAPI {
 
   async listOffers(): Promise<any[]> {
     return await this.call("listoffers", {});
+  }
+
+  async getOfferInfo(): Promise<OfferInfo> {
+    return await this.call("getofferinfo", {});
   }
 
   async connect(): Promise<void> {}
