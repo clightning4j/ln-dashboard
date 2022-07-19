@@ -55,6 +55,13 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
     show(true, "No channels open in this node");
     return <></>;
   }
+
+  function convert(param: any): number {
+    if (param instanceof Number) {
+      return param as number;
+    }
+    return parseInt(param);
+  }
   console.debug("BTC price " + btcPrice);
   return (
     <Box mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
@@ -94,10 +101,10 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
                   {}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {channel.amount_msat + " msats"}
+                  {channel.amount_msat + "s"}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {intoSatoshi(Number(btcPrice), Number(channel.amount_msat)) +
+                  {intoSatoshi(Number(btcPrice), convert(channel.amount_msat)) +
                     " USD"}
                 </TableCell>
                 <TableCell component="th" scope="row">

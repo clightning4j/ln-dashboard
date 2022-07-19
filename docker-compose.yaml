@@ -7,10 +7,8 @@ services:
     ports:
       - "3000:8080"
     environment:
-    #  - NEXT_PUBLIC_REST_URL=http://127.0.0.1:8080/rest
+      #  - NEXT_PUBLIC_REST_URL=http://127.0.0.1:8080/rest
       - NEXT_NODE_ID=<node id>
       - NEXT_ADDR=<ip>:<port>
       - NEXT_RUNE=<>
       - NEXT_LAMBDA=http://ec2-52-55-124-1.compute-1.amazonaws.com:9002
-
-
