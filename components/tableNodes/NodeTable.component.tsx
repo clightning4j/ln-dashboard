@@ -11,7 +11,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import useSWR from "swr";
 import Loading from "../genericView/Loading.component";
-import { JSX } from "@babel/types";
 import theme from "../../theme/DarkTheme";
 import {
   fetcher,
@@ -20,7 +19,7 @@ import {
   getPrices,
 } from "../../utils/AppUtils";
 import { makeStyles } from "@mui/styles";
-import axios from "axios";
+import { Channel } from "../../model/CoreLN";
 
 type NodeTableProps = {
   show: (visible: boolean, message: string) => void;
@@ -38,6 +37,7 @@ const useStyles = makeStyles({
 
 export function NodeTable({ show }: NodeTableProps): JSX.Element {
   const { data, error } = useSWR("/api/channelsInfo", fetcher);
+  console.debug(data);
   const [btcPrice, setBtcPrice] = useState(-1);
   useEffect(() => {
     getPrices("BTC-USD", show).then((price) => {
@@ -72,41 +72,39 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.channels.map((channel: any, index: number) => (
+            {data.channels.map((channel: Channel, index: number) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   <Chip
-                    label={channel.nodeInfo["alias"]}
-                    style={{ background: "#" + channel.nodeInfo["color"] }}
+                    label={channel.node_info.alias}
+                    style={{ background: "#" + channel.node_info.color }}
                   />
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {channel["peerId"]}
+                  {channel.peer_id}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   <Chip
-                    label={channel["connected"] ? "Online" : "Offine"}
+                    label={channel.connected ? "Online" : "Offine"}
                     style={{
                       background:
-                        "#" + (channel["connected"] ? "82ad44" : "f07178"),
+                        "#" + (channel.connected ? "82ad44" : "f07178"),
                     }}
                   />
                   {}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {channel["channelTotalSat"] + " sats"}
+                  {channel.amount_msat + " msats"}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {intoSatoshi(
-                    Number(btcPrice),
-                    Number(channel["channelTotalSat"])
-                  ) + " USD"}
+                  {intoSatoshi(Number(btcPrice), Number(channel.amount_msat)) +
+                    " USD"}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {channel["state"]}
+                  {channel.state}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => pingNode(channel["peerId"], show)}>
+                  <Button onClick={() => pingNode(channel.peer_id, show)}>
                     Ping
                   </Button>
                 </TableCell>

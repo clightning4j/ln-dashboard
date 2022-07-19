@@ -8,14 +8,13 @@ import BasicAppBar from "../components/appbar/BasicAppBar.component";
 import { Helmet } from "react-helmet";
 import theme from "../theme/DarkTheme";
 import { GetInfoNode } from "../model/GetInfoNode";
-import axios from "axios";
 import Loading from "../components/genericView/Loading.component";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import { Close } from "@mui/icons-material";
 import Offline from "../components/genericView/Offline.component";
 import { StyledEngineProvider } from "@mui/material/styles";
-
+import APIProvider from "../api/APIProvider";
 //import MetricsView from '../components/metricsView/MetricsView.component';
 
 type AppState = {
@@ -35,9 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let infoNode = null;
   // let metricsSupport = false;
   try {
-    infoNode = (
-      await axios.get(`${process.env.NEXT_PUBLIC_REST_URL}/utility/getinfo`)
-    ).data;
+    infoNode = await APIProvider.api().getInfo();
   } catch (e) {
     console.error(e);
   }

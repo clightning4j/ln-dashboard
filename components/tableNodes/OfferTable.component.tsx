@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
@@ -9,20 +8,19 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import useSWR from "swr";
-import Loading from "../genericView/Loading.component";
-import { JSX } from "@babel/types";
 import theme from "../../theme/DarkTheme";
-import { fetcher, selectedOffer } from "../../utils/AppUtils";
+import { selectedOffer } from "../../utils/AppUtils";
 import { makeStyles } from "@mui/styles";
+import { OfferInfo } from "../../model/CoreLN";
 
 type OfferTableProps = {
+  listOffers: Array<OfferInfo>;
   show: (visible: boolean, message: string) => void;
 };
 
 const useStyles = makeStyles({
   root: {
-    width: "65%",
+    width: "85%",
   },
   container: {
     maxHeight: "100vh",
@@ -30,54 +28,41 @@ const useStyles = makeStyles({
   },
 });
 
-export function OfferTable({ show }: OfferTableProps): JSX.Element {
-  const { data, error } = useSWR("/api/listoffers", fetcher);
-  console.log(data);
+export function OfferTable({ show, listOffers }: OfferTableProps): JSX.Element {
   const classes = useStyles();
-
-  if (error) {
-    show(true, "Error: " + error);
-    return <></>;
-  }
-  if (!data) return <Loading />;
-  if (data.offer.length == 0) {
-    show(true, "No offers currently");
-    return <></>;
-  }
   return (
     <Box mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
       <TableContainer component={Paper} className={classes.container}>
         <Table stickyHeader aria-label="Node that shows the list of offers">
           <TableHead>
             <TableRow>
-              <TableCell>Label</TableCell>
               <TableCell>Active</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>Single Use</TableCell>
               <TableCell>Select</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.offer.map((offer: any, index: number) => (
+            {listOffers.map((offer: OfferInfo, index: number) => (
               <TableRow key={index} hover>
                 <TableCell component="th" scope="row">
                   <Chip
-                    label={offer["label"] ? offer["label"] : "-----"}
+                    label={offer.active ? "Active" : "Offline"}
                     style={{
-                      background: "#" + Math.random().toString(16).substr(-6),
+                      background: "#" + (offer.active ? "82ad44" : "f07178"),
                     }}
                   />
                   {}
                 </TableCell>
+
                 <TableCell component="th" scope="row">
-                  <Chip
-                    label={offer["active"] ? "Active" : "Offline"}
-                    style={{
-                      background: "#" + (offer["label"] ? "82ad44" : "f07178"),
-                    }}
-                  />
-                  {}
+                  {offer.info.description}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => selectedOffer(offer["bolt12"], show)}>
+                  {offer.single_use ? "Yes" : "No"}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  <Button onClick={() => selectedOffer(offer.bolt12, show)}>
                     Select
                   </Button>
                 </TableCell>

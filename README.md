@@ -1,6 +1,7 @@
 ## LN-DASHBOARD
 
-|[![Docker Pulls](https://img.shields.io/docker/pulls/vincenzopalazzo/ln-dashboard?style=flat-square)](https://hub.docker.com/repository/docker/vincenzopalazzo/ln-dashboard)
+[![Docker Pulls](https://img.shields.io/docker/pulls/vincenzopalazzo/ln-dashboard?style=flat-square)](https://hub.docker.com/repository/docker/vincenzopalazzo/ln-dashboard)
+
 
 ## Table of Content
 

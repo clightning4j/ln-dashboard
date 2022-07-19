@@ -32,6 +32,7 @@ export default {
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
   testTimeout: 60000,
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
   //   "/node_modules/"

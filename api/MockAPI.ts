@@ -1,4 +1,10 @@
-import { GetInfoNode, ListFunds } from "../model/CoreLN";
+import {
+  GetInfoNode,
+  ListFunds,
+  ListNodes,
+  ListOffers,
+  OfferDecode,
+} from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
 import { OfferInfo } from "../model/Offer";
 import AppAPI from "./AppAPI";
@@ -9,8 +15,17 @@ import { singleton } from "tsyringe";
  */
 @singleton()
 export default class MockAPI implements AppAPI {
-  listOffers(): Promise<any[]> {
-    return Promise.resolve([]);
+  ping(node_id: string): Promise<boolean> {
+    throw new Error("Method not implemented.");
+  }
+  decode(invoice: string): Promise<OfferDecode> {
+    throw new Error("Method not implemented.");
+  }
+  listNodes(): Promise<ListNodes> {
+    return Promise.resolve({ nodes: [] });
+  }
+  listOffers(): Promise<ListOffers> {
+    return Promise.resolve({ offers: [] });
   }
   connect(): Promise<void> {
     return Promise.resolve();

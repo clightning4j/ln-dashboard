@@ -5,7 +5,13 @@
  * author: https://github.com/vincenzopalazzo
  */
 
-import { GetInfoNode, ListFunds } from "../model/CoreLN";
+import {
+  GetInfoNode,
+  ListFunds,
+  ListNodes,
+  ListOffers,
+  OfferDecode,
+} from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
 import { OfferInfo } from "../model/Offer";
 
@@ -33,7 +39,13 @@ export default interface AppAPI {
   /**
    * Get list of offers
    */
-  listOffers(): Promise<Array<any>>;
+  listOffers(): Promise<ListOffers>;
+
+  listNodes(node_id: string | null): Promise<ListNodes>;
+
+  decode(invoice: string): Promise<OfferDecode>;
+
+  ping(node_id: string): Promise<boolean>;
 
   connect(): Promise<void>;
 
