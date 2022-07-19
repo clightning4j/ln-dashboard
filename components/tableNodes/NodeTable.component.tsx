@@ -66,7 +66,7 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
     if (param instanceof Number) {
       return "msats";
     }
-    return ""
+    return "";
   }
   console.debug("BTC price " + btcPrice);
   return (
@@ -107,7 +107,8 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
                   {}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {channel.amount_msat + check_ammount_msat(channel.amount_msat)}
+                  {channel.amount_msat +
+                    check_ammount_msat(channel.amount_msat)}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {intoSatoshi(Number(btcPrice), convert(channel.amount_msat)) +
