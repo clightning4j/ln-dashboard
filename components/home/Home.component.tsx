@@ -24,19 +24,14 @@ const classes = {
   input: `${PREFIX}-input`,
 };
 
-const StyledGrid = styled(Grid)(({ _ }) => ({
-  [`& .${classes.root}`]: {
-    "label + &": {
-      marginTop: theme.spacing(2),
-    },
-  },
-
+const StyledGrid = styled(Grid)(() => ({
   [`& .${classes.input}`]: {
     borderRadius: 4,
     position: "relative",
     backgroundColor: theme.palette.background.paper,
     border: "1px solid " + theme.palette.primary.light,
     padding: "20px 26px 20px 12px",
+    marginTop: theme.spacing(2),
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     // Use the system font instead of the default Roboto font.
     "&:focus": {
