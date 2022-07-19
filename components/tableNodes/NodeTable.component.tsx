@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { styled } from '@mui/material/styles';
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
@@ -18,22 +19,28 @@ import {
   intoSatoshi,
   getPrices,
 } from "../../utils/AppUtils";
-import { makeStyles } from "@mui/styles";
 import { Channel } from "../../model/CoreLN";
 
-type NodeTableProps = {
-  show: (visible: boolean, message: string) => void;
+const PREFIX = 'NodeTable';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  container: `${PREFIX}-container`
 };
 
-const useStyles = makeStyles({
-  root: {
+const StyledBox = styled(Box)({
+  [`&.${classes.root}`]: {
     width: "100%",
   },
-  container: {
+  [`& .${classes.container}`]: {
     maxHeight: "100vh",
     maxWidth: "100vw",
   },
 });
+
+type NodeTableProps = {
+  show: (visible: boolean, message: string) => void;
+};
 
 export function NodeTable({ show }: NodeTableProps): JSX.Element {
   const { data, error } = useSWR("/api/channelsInfo", fetcher);
@@ -45,7 +52,7 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
     });
   });
 
-  const classes = useStyles();
+
   if (error) {
     show(true, "Error: " + error);
     return <></>;
@@ -57,7 +64,7 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
   }
   console.debug("BTC price " + btcPrice);
   return (
-    <Box mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
+    <StyledBox mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
       <TableContainer component={Paper} className={classes.container}>
         <Table stickyHeader aria-label="Node that shows the list of nodes">
           <TableHead>
@@ -113,6 +120,6 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
           </TableBody>
         </Table>
       </TableContainer>
-    </Box>
+    </StyledBox>
   );
 }
