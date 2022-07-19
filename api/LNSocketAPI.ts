@@ -1,8 +1,15 @@
 import AppAPI from "./AppAPI";
-import { GetInfoNode, ListFunds } from "../model/CoreLN";
+import {
+  GetInfoNode,
+  ListFunds,
+  ListNodes,
+  ListOffers,
+  OfferDecode,
+} from "../model/CoreLN";
 import { MetricsOne } from "../model/Metrics";
 import axios from "axios";
 import { OfferInfo } from "../model/Offer";
+import { inject, singleton } from "tsyringe";
 
 /**
  * Experimental feature.
@@ -10,24 +17,38 @@ import { OfferInfo } from "../model/Offer";
  * Implementing the API with the LNSocketAPI to use a native connection to call directly
  * the node API without use of any additional services.
  */
+@singleton()
 export default class LNSocketAPI implements AppAPI {
   private address: string;
   private nodeID: string;
   private rune: string;
   private lambda: string;
 
-  constructor(lambda: string, nodeId: string, adderss: string, rune: string) {
+  constructor(
+    @inject("lambda") lambda: string,
+    @inject("nodeID") nodeId: string,
+    @inject("address") adderss: string,
+    @inject("rune") rune: string
+  ) {
     this.nodeID = nodeId;
     this.address = adderss;
     this.rune = rune;
     this.lambda = lambda;
   }
 
+  async ping(node_id: string): Promise<boolean> {
+    return await this.call("ping", { id: node_id });
+  }
+
+  async decode(invoice: string): Promise<OfferDecode> {
+    return await this.call("decode", { string: invoice });
+  }
+
   private async call<ReturnType>(
     method: string,
     params: object
   ): Promise<ReturnType> {
-    console.log("Running request");
+    console.log(`Running request ${method}`);
     let lambdaRequest = {
       method: method,
       params: params,
@@ -35,7 +56,7 @@ export default class LNSocketAPI implements AppAPI {
       host: this.address,
       rune: this.rune,
     };
-    return (
+    let result = (
       await axios.post(`${this.lambda}/lnsocket`, lambdaRequest, {
         headers: {
           post: {
@@ -43,12 +64,20 @@ export default class LNSocketAPI implements AppAPI {
           },
         },
       })
-    ).data["result"];
+    ).data;
+    if (result["errors"] != undefined) {
+      throw new Error(result["errors"]);
+    }
+    return result["result"];
+  }
+
+  async listNodes(node_id: string | null): Promise<ListNodes> {
+    return await this.call("listnodes", { id: node_id });
   }
 
   async close(): Promise<void> {}
 
-  async listOffers(): Promise<any[]> {
+  async listOffers(): Promise<ListOffers> {
     return await this.call("listoffers", {});
   }
 

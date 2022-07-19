@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import LNSocketAPI from "../api/LNSocketAPI";
 import RpcClient from "@core-ln/core";
 import { GetInfoNode } from "../model/GetInfoNode";

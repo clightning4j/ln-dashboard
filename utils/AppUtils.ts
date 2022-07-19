@@ -3,6 +3,7 @@ import { MetricsOne } from "../model/Metrics";
 import { Datum } from "@nivo/line";
 import { CalendarDatum } from "@nivo/calendar/dist/types/types";
 import dayjs from "dayjs";
+import APIProvider from "../api/APIProvider";
 
 export class LineChartItem implements Datum {
   [key: string]: any;
@@ -38,10 +39,7 @@ export const fetcher = (url: string) =>
  */
 
 export function intoSatoshi(priceBitcoin: number, satoshi: number): number {
-  console.info(priceBitcoin);
-  console.info(satoshi);
   let toBtc = satoshi / 100_000_000;
-  console.info(toBtc);
   let withPrice = priceBitcoin * toBtc;
   return Math.round((withPrice + Number.EPSILON) * 100) / 100;
 }
@@ -55,12 +53,11 @@ export const pingNode = async (
   nodeId: string,
   show: (visible: boolean, message: string) => void
 ) => {
-  try {
-    const _ = await axios(`/api/pingNode/${nodeId}`);
+  const response = await APIProvider.api().ping(nodeId);
+  if (response) {
     show(true, "The node is up");
-  } catch (e) {
-    show(true, `Error with message: ${e}`);
-    console.error(e);
+  } else {
+    show(true, `The node is down`);
   }
 };
 

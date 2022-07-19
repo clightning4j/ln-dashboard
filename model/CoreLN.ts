@@ -24,5 +24,40 @@ export type NodeAddress = {
 
 export type ListFunds = {
   outputs: Array<Object>;
-  channels: Array<Object>;
+  channels: Array<Channel>;
+};
+
+export type Channel = {
+  peer_id: string;
+  our_amount_msat: string | number;
+  amount_msat: string | number;
+  node_info: LNNode;
+  connected: boolean;
+  state: string;
+};
+
+export type ListNodes = {
+  nodes: Array<LNNode>;
+};
+
+export type LNNode = {
+  node_id: string;
+  alias: string;
+  color: string;
+};
+
+export type ListOffers = {
+  offers: Array<OfferInfo>;
+};
+
+export type OfferInfo = {
+  bolt12: string;
+  active: boolean;
+  info: OfferDecode;
+  single_use: boolean;
+};
+
+export type OfferDecode = {
+  label: string | undefined;
+  description: string;
 };
