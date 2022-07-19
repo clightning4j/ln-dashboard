@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
@@ -21,11 +21,11 @@ import {
 } from "../../utils/AppUtils";
 import { Channel } from "../../model/CoreLN";
 
-const PREFIX = 'NodeTable';
+const PREFIX = "NodeTable";
 
 const classes = {
   root: `${PREFIX}-root`,
-  container: `${PREFIX}-container`
+  container: `${PREFIX}-container`,
 };
 
 const StyledBox = styled(Box)({
@@ -51,7 +51,6 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
       setBtcPrice(price["price"]);
     });
   });
-
 
   if (error) {
     show(true, "Error: " + error);
@@ -82,7 +81,11 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
   }
   console.debug("BTC price " + btcPrice);
   return (
-    <StyledBox mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
+    <StyledBox
+      mt={theme.spacing(1)}
+      mb={theme.spacing(2)}
+      className={classes.root}
+    >
       <TableContainer component={Paper} className={classes.container}>
         <Table stickyHeader aria-label="Node that shows the list of nodes">
           <TableHead>

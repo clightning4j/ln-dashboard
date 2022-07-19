@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -13,11 +13,11 @@ import theme from "../../theme/DarkTheme";
 import { selectedOffer } from "../../utils/AppUtils";
 import { OfferInfo } from "../../model/CoreLN";
 
-const PREFIX = 'OfferTable';
+const PREFIX = "OfferTable";
 
 const classes = {
   root: `${PREFIX}-root`,
-  container: `${PREFIX}-container`
+  container: `${PREFIX}-container`,
 };
 
 const StyledBox = styled(Box)({
@@ -36,9 +36,12 @@ type OfferTableProps = {
 };
 
 export function OfferTable({ show, listOffers }: OfferTableProps): JSX.Element {
-
   return (
-    <StyledBox mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
+    <StyledBox
+      mt={theme.spacing(1)}
+      mb={theme.spacing(2)}
+      className={classes.root}
+    >
       <TableContainer component={Paper} className={classes.container}>
         <Table stickyHeader aria-label="Node that shows the list of offers">
           <TableHead>
