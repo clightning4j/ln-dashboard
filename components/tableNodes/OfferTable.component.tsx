@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import { styled } from '@mui/material/styles';
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -10,28 +11,34 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import theme from "../../theme/DarkTheme";
 import { selectedOffer } from "../../utils/AppUtils";
-import { makeStyles } from "@mui/styles";
 import { OfferInfo } from "../../model/CoreLN";
+
+const PREFIX = 'OfferTable';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  container: `${PREFIX}-container`
+};
+
+const StyledBox = styled(Box)({
+  [`&.${classes.root}`]: {
+    width: "85%",
+  },
+  [`& .${classes.container}`]: {
+    maxHeight: "100vh",
+    maxWidth: "100vw",
+  },
+});
 
 type OfferTableProps = {
   listOffers: Array<OfferInfo>;
   show: (visible: boolean, message: string) => void;
 };
 
-const useStyles = makeStyles({
-  root: {
-    width: "85%",
-  },
-  container: {
-    maxHeight: "100vh",
-    maxWidth: "100vw",
-  },
-});
-
 export function OfferTable({ show, listOffers }: OfferTableProps): JSX.Element {
-  const classes = useStyles();
+
   return (
-    <Box mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
+    <StyledBox mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
       <TableContainer component={Paper} className={classes.container}>
         <Table stickyHeader aria-label="Node that shows the list of offers">
           <TableHead>
@@ -71,6 +78,6 @@ export function OfferTable({ show, listOffers }: OfferTableProps): JSX.Element {
           </TableBody>
         </Table>
       </TableContainer>
-    </Box>
+    </StyledBox>
   );
 }
