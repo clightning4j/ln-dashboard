@@ -13,16 +13,9 @@ export default async function handler(
         await APIProvider.api().listNodes(channel.peer_id)
       ).nodes[0];
     }
-    for (const channel of funds.channels) {
-      if (channel.node_info == undefined) {
-        let removeIndex = funds.channels
-          .map(function (item) {
-            return item.peer_id;
-          })
-          .indexOf(channel.peer_id);
-        funds.channels.splice(removeIndex, 1);
-      }
-    }
+    funds.channels = funds.channels.filter(
+      (channel) => channel.node_info != null
+    );
     console.debug(funds.channels);
     res.status(200).json({ channels: funds.channels });
   } catch (error) {
