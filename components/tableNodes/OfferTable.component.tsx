@@ -9,13 +9,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import theme from "../../theme/DarkTheme";
-import { selectedOffer } from "../../utils/AppUtils";
 import { makeStyles } from "@mui/styles";
 import { OfferInfo } from "../../model/CoreLN";
 
 type OfferTableProps = {
   listOffers: Array<OfferInfo>;
   show: (visible: boolean, message: string) => void;
+  selectedOffer: any;
 };
 
 const useStyles = makeStyles({
@@ -28,7 +28,11 @@ const useStyles = makeStyles({
   },
 });
 
-export function OfferTable({ show, listOffers }: OfferTableProps): JSX.Element {
+export function OfferTable({
+  show,
+  listOffers,
+  selectedOffer,
+}: OfferTableProps): JSX.Element {
   const classes = useStyles();
   return (
     <Box mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
@@ -62,7 +66,7 @@ export function OfferTable({ show, listOffers }: OfferTableProps): JSX.Element {
                   {offer.single_use ? "Yes" : "No"}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => selectedOffer(offer.bolt12, show)}>
+                  <Button onClick={() => selectedOffer(offer.bolt12)}>
                     Select
                   </Button>
                 </TableCell>

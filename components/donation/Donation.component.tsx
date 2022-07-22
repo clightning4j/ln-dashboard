@@ -16,6 +16,7 @@ import { CodeBlock, dracula } from "react-code-blocks";
 import { OfferTable } from "../tableNodes/OfferTable.component";
 import { ListOffers, OfferInfo } from "../../model/CoreLN";
 import Loading from "../genericView/Loading.component";
+import { useState } from "react";
 
 type ParentProps = {
   nodeInfo: GetInfoNode | null;
@@ -29,6 +30,8 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
   );
   let offer: OfferInfo | null = null;
   let listOffers: Array<OfferInfo> = [];
+  let [bolt12, setbolt12] = useState("");
+
   if (error) {
     //TODO adding an error view
     show(true, `Error: ${error.toString()}`);
@@ -74,7 +77,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
             justifyContent="center"
             alignItems="center"
           >
-            <QRCode value={`${offer.bolt12}`} size={300} level="H" />
+            <QRCode value={`${bolt12}`} size={300} level="H" />
           </Grid>
           <Grid
             container
@@ -112,7 +115,11 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
         justifyContent="center"
         alignItems="center"
       >
-        <OfferTable show={show} listOffers={listOffers} />
+        <OfferTable
+          show={show}
+          listOffers={listOffers}
+          selectedOffer={setbolt12}
+        />
       </Grid>
     </Grid>
   );
