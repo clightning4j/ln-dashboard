@@ -36,7 +36,11 @@ const StyledBox = styled(Box)({
   },
 });
 
-export function OfferTable({ show, listOffers, selectedOffer }: OfferTableProps): JSX.Element {
+export function OfferTable({
+  show,
+  listOffers,
+  selectedOffer,
+}: OfferTableProps): JSX.Element {
   return (
     <StyledBox
       mt={theme.spacing(1)}
@@ -73,9 +77,7 @@ export function OfferTable({ show, listOffers, selectedOffer }: OfferTableProps)
                   {offer.single_use ? "Yes" : "No"}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => selectedOffer(offer)}>
-                    Select
-                  </Button>
+                  <Button onClick={() => selectedOffer(offer)}>Select</Button>
                 </TableCell>
               </TableRow>
             ))}
