@@ -13,6 +13,12 @@ import theme from "../../theme/DarkTheme";
 import { selectedOffer } from "../../utils/AppUtils";
 import { OfferInfo } from "../../model/CoreLN";
 
+type OfferTableProps = {
+  listOffers: Array<OfferInfo>;
+  show: (visible: boolean, message: string) => void;
+  selectedOffer: (offer123: OfferInfo) => void;
+};
+
 const PREFIX = "OfferTable";
 
 const classes = {
@@ -30,12 +36,7 @@ const StyledBox = styled(Box)({
   },
 });
 
-type OfferTableProps = {
-  listOffers: Array<OfferInfo>;
-  show: (visible: boolean, message: string) => void;
-};
-
-export function OfferTable({ show, listOffers }: OfferTableProps): JSX.Element {
+export function OfferTable({ show, listOffers, selectedOffer }: OfferTableProps): JSX.Element {
   return (
     <StyledBox
       mt={theme.spacing(1)}
@@ -72,7 +73,7 @@ export function OfferTable({ show, listOffers }: OfferTableProps): JSX.Element {
                   {offer.single_use ? "Yes" : "No"}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => selectedOffer(offer.bolt12, show)}>
+                  <Button onClick={() => selectedOffer(offer)}>
                     Select
                   </Button>
                 </TableCell>
