@@ -4,6 +4,7 @@ import { Datum } from "@nivo/line";
 import { CalendarDatum } from "@nivo/calendar/dist/types/types";
 import dayjs from "dayjs";
 import APIProvider from "../api/APIProvider";
+import { OfferInfo } from "../model/CoreLN";
 
 export class LineChartItem implements Datum {
   [key: string]: any;
@@ -67,11 +68,12 @@ export const pingNode = async (
  * @param show
  */
 export const selectedOffer = async (
-  bolt12: string,
+  offer: OfferInfo,
   show: (visible: boolean, message: string) => void
 ) => {
   try {
-    return bolt12;
+    console.log(offer.bolt12)
+    return offer.bolt12;
   } catch (e) {
     show(true, `Error with message: ${e}`);
     console.error(e);
