@@ -9,14 +9,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import theme from "../../theme/DarkTheme";
-import { selectedOffer } from "../../utils/AppUtils";
 import { makeStyles } from "@mui/styles";
 import { OfferInfo } from "../../model/CoreLN";
 
 type OfferTableProps = {
   listOffers: Array<OfferInfo>;
   show: (visible: boolean, message: string) => void;
-  selectedOffer: (offer123: OfferInfo) => void;
+  selectedOffer: any;
 };
 
 const useStyles = makeStyles({
@@ -67,7 +66,9 @@ export function OfferTable({
                   {offer.single_use ? "Yes" : "No"}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => selectedOffer(offer)}>Select</Button>
+                  <Button onClick={() => selectedOffer(offer.bolt12)}>
+                    Select
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
