@@ -72,7 +72,7 @@ export const selectedOffer = async (
   show: (visible: boolean, message: string) => void
 ) => {
   try {
-    console.log(offer.bolt12)
+    console.log(offer.bolt12);
     return offer.bolt12;
   } catch (e) {
     show(true, `Error with message: ${e}`);
