@@ -48,9 +48,9 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
   const commandPay = "lightning-cli pay {invoice}";
 
   function updatebolt12(selectedOffer: OfferInfo) {
-     bolt12 = selectedOffer.bolt12;
-     setbolt12(bolt12);
-     console.log(bolt12);
+    bolt12 = selectedOffer.bolt12;
+    setbolt12(bolt12);
+    console.log(bolt12);
   }
 
   return (
@@ -120,7 +120,11 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
         justifyContent="center"
         alignItems="center"
       >
-        <OfferTable show={show} listOffers={listOffers} selectedOffer={updatebolt12} />
+        <OfferTable
+          show={show}
+          listOffers={listOffers}
+          selectedOffer={updatebolt12}
+        />
       </Grid>
     </Grid>
   );

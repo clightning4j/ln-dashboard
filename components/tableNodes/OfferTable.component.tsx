@@ -29,7 +29,11 @@ const useStyles = makeStyles({
   },
 });
 
-export function OfferTable({ show, listOffers, selectedOffer }: OfferTableProps): JSX.Element {
+export function OfferTable({
+  show,
+  listOffers,
+  selectedOffer,
+}: OfferTableProps): JSX.Element {
   const classes = useStyles();
   return (
     <Box mt={theme.spacing(1)} mb={theme.spacing(2)} className={classes.root}>
@@ -63,9 +67,7 @@ export function OfferTable({ show, listOffers, selectedOffer }: OfferTableProps)
                   {offer.single_use ? "Yes" : "No"}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => selectedOffer(offer)}>
-                    Select
-                  </Button>
+                  <Button onClick={() => selectedOffer(offer)}>Select</Button>
                 </TableCell>
               </TableRow>
             ))}
