@@ -14,7 +14,7 @@ import { CodeBlock, dracula } from "react-code-blocks";
 import { OfferTable } from "../tableNodes/OfferTable.component";
 import { ListOffers, OfferInfo } from "../../model/CoreLN";
 import Loading from "../genericView/Loading.component";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type ParentProps = {
   nodeInfo: GetInfoNode | null;
@@ -29,6 +29,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
   let offer: OfferInfo | null = null;
   let listOffers: Array<OfferInfo> = [];
   let [bolt12, setbolt12] = useState("");
+
   if (error) {
     //TODO adding an error view
     show(true, `Error: ${error.toString()}`);
@@ -44,12 +45,6 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
   if (offer === null) return <>No Offers available at the moment</>;
   const commandFetchInvoice = "lightning-cli fetchinvoice {bol12 offer}\n";
   const commandPay = "lightning-cli pay {invoice}";
-
-  function updatebolt12(selectedOffer: OfferInfo) {
-    bolt12 = selectedOffer.bolt12;
-    setbolt12(bolt12);
-    console.log(bolt12);
-  }
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -121,7 +116,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
         <OfferTable
           show={show}
           listOffers={listOffers}
-          selectedOffer={updatebolt12}
+          selectedOffer={setbolt12}
         />
       </Grid>
     </Grid>
