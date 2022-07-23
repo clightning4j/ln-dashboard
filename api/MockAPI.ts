@@ -24,7 +24,7 @@ export default class MockAPI implements AppAPI {
   listNodes(): Promise<ListNodes> {
     return Promise.resolve({ nodes: [] });
   }
-  listOffers(): Promise<ListOffers> {
+  listOffers(withInfo: boolean = false): Promise<ListOffers> {
     return Promise.resolve({ offers: [] });
   }
   connect(): Promise<void> {

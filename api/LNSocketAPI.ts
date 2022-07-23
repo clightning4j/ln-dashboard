@@ -77,8 +77,15 @@ export default class LNSocketAPI implements AppAPI {
 
   async close(): Promise<void> {}
 
-  async listOffers(): Promise<ListOffers> {
-    return await this.call("listoffers", {});
+  async listOffers(withInfo: boolean = false): Promise<ListOffers> {
+    let offers = await this.call<ListOffers>("listoffers", {});
+    if (withInfo) {
+      for await (const offer of offers.offers) {
+        offer.info = await this.decode(offer.bolt12);
+      }
+    }
+    console.log(JSON.stringify(offers));
+    return offers;
   }
 
   async getOfferInfo(): Promise<OfferInfo> {
