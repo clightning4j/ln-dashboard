@@ -6,42 +6,58 @@ import IconButton from "@mui/material/IconButton";
 import FileCopyTwoTone from "@mui/icons-material/FileCopyTwoTone";
 import Box from "@mui/material/Box";
 import QRCode from "qrcode.react";
-import theme from "../../theme/DarkTheme";
-import { GetInfoNode } from "../../model/GetInfoNode";
-import useSWR from "swr";
-import { fetcher } from "../../utils/AppUtils";
+import theme from "../theme/DarkTheme";
+import { GetInfoNode } from "../model/GetInfoNode";
 import { CodeBlock, dracula } from "react-code-blocks";
-import { OfferTable } from "../tableNodes/OfferTable.component";
-import { ListOffers, OfferInfo } from "../../model/CoreLN";
-import Loading from "../genericView/Loading.component";
-import { useState } from "react";
+import { OfferTable } from "../components/tableNodes/OfferTable.component";
+import APIProvider from "../api/APIProvider";
+import { GetServerSideProps } from "next";
+import { ListOffers, OfferInfo } from "../model/CoreLN";
+import {useState} from "react";
 
 type ParentProps = {
   nodeInfo: GetInfoNode | null;
   show: (visible: boolean, message: string) => void;
 };
 
-export default function DonationView({ nodeInfo, show }: ParentProps) {
-  const { data, error } = useSWR<{ data: ListOffers }, Error>(
-    "/api/listOffers",
-    fetcher
-  );
-  let offer: OfferInfo | null = null;
-  let listOffers: Array<OfferInfo> = [];
-  let [bolt12, setbolt12] = useState("");
+type DonationViewProps = {
+  listOffers: ListOffers | null;
+  offer: OfferInfo | null,
+  error: any | null,
+};
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  let offers = null;
+  try {
+    offers = await APIProvider.api().listOffers();
+  } catch (e) {
+    console.error(e);
+    return {
+      props: {
+        listOffers: null,
+        offer: null,
+        error: e,
+      }
+    }
+  }
+  // TODO make this code safe.
+  return {
+    props: {
+      listOffers: offers,
+      offer: offers!.offers[0],
+      error: null,
+    },
+  };
+};
+
+export default function DonationView({ nodeInfo, show }: ParentProps, {listOffers, offer, error}: DonationViewProps) {
   if (error) {
     //TODO adding an error view
     show(true, `Error: ${error.toString()}`);
     return <></>;
   }
-  if (!data) return <Loading />;
-  console.log(`Data received is: ${JSON.stringify(data)}`);
-  if (error === undefined && data!.data.offers.length > 0) {
-    offer = data!.data.offers[0];
-    listOffers = data!.data.offers;
-  }
-
+  let  [offerSelected, setOfferSelected] = useState(offer);
+  console.log(`Data received is: ${JSON.stringify(listOffers)}`);
   if (offer === null) return <>No Offers available at the moment</>;
   const commandFetchInvoice = "lightning-cli fetchinvoice {bol12 offer}\n";
   const commandPay = "lightning-cli pay {invoice}";
@@ -75,7 +91,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
             justifyContent="center"
             alignItems="center"
           >
-            <QRCode value={`${bolt12}`} size={300} level="H" />
+            <QRCode value={`${offerSelected.bolt12}`} size={300} level="H" />
           </Grid>
           <Grid
             container
@@ -115,8 +131,8 @@ export default function DonationView({ nodeInfo, show }: ParentProps) {
       >
         <OfferTable
           show={show}
-          listOffers={listOffers}
-          selectedOffer={setbolt12}
+          listOffers={listOffers?.offers!}
+          selectedOffer={setOfferSelected}
         />
       </Grid>
     </Grid>
