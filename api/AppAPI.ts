@@ -39,7 +39,7 @@ export default interface AppAPI {
   /**
    * Get list of offers
    */
-  listOffers(): Promise<ListOffers>;
+  listOffers(withInfo: boolean): Promise<ListOffers>;
 
   listNodes(node_id: string | null): Promise<ListNodes>;
 

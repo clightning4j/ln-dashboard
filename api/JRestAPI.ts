@@ -59,7 +59,7 @@ export default class JRestAPI implements AppAPI {
   getOfferInfo(): Promise<OfferInfo> {
     throw new Error("Method not implemented.");
   }
-  listOffers(): Promise<ListOffers> {
+  listOffers(withInfo: boolean = false): Promise<ListOffers> {
     throw new Error("Method not implemented.");
   }
   connect(): Promise<void> {
