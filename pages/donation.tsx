@@ -13,7 +13,7 @@ import { OfferTable } from "../components/tableNodes/OfferTable.component";
 import APIProvider from "../api/APIProvider";
 import { GetServerSideProps } from "next";
 import { ListOffers, OfferInfo } from "../model/CoreLN";
-import {useState} from "react";
+import { useState } from "react";
 
 type ParentProps = {
   nodeInfo: GetInfoNode | null;
@@ -22,41 +22,52 @@ type ParentProps = {
 
 type DonationViewProps = {
   listOffers: ListOffers | null;
-  offer: OfferInfo | null,
-  error: any | null,
+  offer: OfferInfo | null;
+  error: any | null;
+  info: GetInfoNode | null;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let offers = null;
+  let info = null;
   try {
     offers = await APIProvider.api().listOffers();
+    info = await APIProvider.api().getInfo();
+    console.log(info);
   } catch (e) {
     console.error(e);
     return {
       props: {
         listOffers: null,
         offer: null,
+        info: null,
         error: e,
-      }
-    }
+      },
+    };
   }
   // TODO make this code safe.
   return {
     props: {
       listOffers: offers,
-      offer: offers!.offers[0],
+      offer: offers?.offers[0],
       error: null,
+      info: info,
     },
   };
 };
 
-export default function DonationView({ nodeInfo, show }: ParentProps, {listOffers, offer, error}: DonationViewProps) {
+export default function DonationView(
+  { nodeInfo, show }: ParentProps,
+  { listOffers, offer, info, error }: DonationViewProps
+) {
   if (error) {
     //TODO adding an error view
     show(true, `Error: ${error.toString()}`);
     return <></>;
   }
-  let  [offerSelected, setOfferSelected] = useState(offer);
+  nodeInfo = info;
+  console.log(nodeInfo);
+  let [offerSelected, setOfferSelected] = useState(offer);
   console.log(`Data received is: ${JSON.stringify(listOffers)}`);
   if (offer === null) return <>No Offers available at the moment</>;
   const commandFetchInvoice = "lightning-cli fetchinvoice {bol12 offer}\n";
@@ -91,7 +102,7 @@ export default function DonationView({ nodeInfo, show }: ParentProps, {listOffer
             justifyContent="center"
             alignItems="center"
           >
-            <QRCode value={`${offerSelected.bolt12}`} size={300} level="H" />
+            <QRCode value={`${offerSelected!.bolt12}`} size={300} level="H" />
           </Grid>
           <Grid
             container
@@ -100,7 +111,9 @@ export default function DonationView({ nodeInfo, show }: ParentProps, {listOffer
             alignItems="center"
           >
             <IconButton
-              onClick={() => navigator.clipboard.writeText(`${offer!.bolt12}`)}
+              onClick={() =>
+                navigator.clipboard.writeText(`${offerSelected!.bolt12}`)
+              }
               size="large"
             >
               <FileCopyTwoTone />
