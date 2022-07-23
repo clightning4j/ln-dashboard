@@ -1,9 +1,9 @@
 import { Component } from "react";
 import { GetServerSideProps } from "next";
 import { CssBaseline } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import HomeView from "../components/home/Home.component";
-import DonationView from "../components/donation/Donation.component";
+import DonationView from "./donation";
 import BasicAppBar from "../components/appbar/BasicAppBar.component";
 import { Helmet } from "react-helmet";
 import theme from "../theme/DarkTheme";
