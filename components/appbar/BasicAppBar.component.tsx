@@ -63,7 +63,10 @@ export default function BasicAppBar({ ready, child }: BasicAppBarProps) {
       </AppBar>
       <Box m={theme.spacing(1)} mb={theme.spacing(2)}>
         <>
-          <NextProgress color={theme.palette.primary.main} />
+          <NextProgress
+            color={theme.palette.primary.main}
+            options={{ showSpinner: false }}
+          />
           {ready === true ? child : <Loading />}
         </>
       </Box>
