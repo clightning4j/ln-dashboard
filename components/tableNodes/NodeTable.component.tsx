@@ -18,6 +18,8 @@ import {
   pingNode,
   intoSatoshi,
   getPrices,
+  check_amount_msat,
+  convert,
 } from "../../utils/AppUtils";
 import { Channel } from "../../model/CoreLN";
 
@@ -60,24 +62,6 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
   if (data.channels.length == 0) {
     show(true, "No channels open in this node");
     return <></>;
-  }
-
-  function convert(param: any): number {
-    if (param instanceof Number) {
-      return param as number;
-    }
-    return parseInt(param);
-  }
-  function check_amount_msat(param: any): string {
-    // if it is a number we return the value by appending msat
-    if (param instanceof Number) {
-      return `${param} msats`;
-    } else {
-      if (!param.includes("msat")) {
-        return `${param} msats`;
-      }
-      return param;
-    }
   }
   console.debug("BTC price " + btcPrice);
   return (

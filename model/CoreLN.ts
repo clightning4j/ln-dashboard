@@ -29,8 +29,7 @@ export type ListFunds = {
 
 export type Channel = {
   peer_id: string;
-  our_amount_msat: string | number;
-  amount_msat: string | number;
+  amount_msat: number | string;
   node_info: LNNode;
   connected: boolean;
   state: string;
