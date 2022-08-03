@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import QRCode from "qrcode.react";
 import theme from "../../theme/DarkTheme";
 import { GetInfoNode } from "../../model/GetInfoNode";
-import { CodeBlock, dracula } from "react-code-blocks";
 import { OfferTable } from "../tableNodes/OfferTable.component";
 import { ListOffers, OfferInfo } from "../../model/CoreLN";
 import { useState } from "react";
@@ -26,8 +25,6 @@ export default function DonationView({
 }: DonationViewProps) {
   let [offerSelected, setOfferSelected] = useState(offer);
   if (offer === null) return <>No Offers available at the moment</>;
-  const commandFetchInvoice = "lightning-cli fetchinvoice {bol12 offer}\n";
-  const commandPay = "lightning-cli pay {invoice}";
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -77,21 +74,6 @@ export default function DonationView({
           </Grid>
         </CardContent>
       </Card>
-      <Grid
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        margin="m"
-      >
-        <CodeBlock
-          text={`${commandFetchInvoice}${commandPay}`}
-          language={"bash"}
-          showLineNumbers={true}
-          startingLineNumber={false}
-          theme={dracula}
-        />
-      </Grid>
       <Grid
         container
         direction="row"

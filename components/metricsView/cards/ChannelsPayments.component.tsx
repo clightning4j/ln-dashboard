@@ -5,19 +5,12 @@ import { Card, Grid } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import TodayRounded from "@mui/icons-material/TodayRounded";
 import CardHeader from "@mui/material/CardHeader";
-import { RadarProps, ResponsiveRadar as Radar } from "@nivo/radar";
+import { RadarSvgProps, ResponsiveRadar } from "@nivo/radar";
 import CardContent from "@mui/material/CardContent";
 import makeTheme from "../../../theme/ChartTheme";
 import theme from "../../../theme/DarkTheme";
 import styles from "../../../styles/SummaryChannels.module.css";
 import { metricsOneToPaymentsContributionByChannels } from "../../../utils/AppUtils";
-
-interface ResponsiveRadarProps extends RadarProps {
-  motionConfig?: string;
-}
-function ResponsiveRadar(props: ResponsiveRadarProps) {
-  return <Radar {...props} />;
-}
 
 type ChannelsPaymentsProps = {
   nodeInfo: GetInfoNode;
