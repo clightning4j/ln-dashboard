@@ -6,10 +6,10 @@ import {
   ListOffers,
   OfferDecode,
 } from "../model/CoreLN";
-import { MetricsOne } from "../model/Metrics";
 import axios from "axios";
 import { OfferInfo } from "../model/Offer";
 import { inject, singleton } from "tsyringe";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 /**
  * Experimental feature.
@@ -23,17 +23,24 @@ export default class LNSocketAPI implements AppAPI {
   private nodeID: string;
   private rune: string;
   private lambda: string;
+  private ApolloClient: any;
+  private gqlClient: any;
 
   constructor(
     @inject("lambda") lambda: string,
     @inject("nodeID") nodeId: string,
     @inject("address") adderss: string,
-    @inject("rune") rune: string
+    @inject("rune") rune: string,
+    @inject("lnmetrics_url") url: string
   ) {
     this.nodeID = nodeId;
     this.address = adderss;
     this.rune = rune;
     this.lambda = lambda;
+    this.gqlClient = new ApolloClient({
+      uri: url,
+      cache: new InMemoryCache(),
+    });
   }
 
   async ping(node_id: string): Promise<boolean> {
@@ -84,7 +91,7 @@ export default class LNSocketAPI implements AppAPI {
         offer.info = await this.decode(offer.bolt12);
       }
     }
-    console.log(JSON.stringify(offers));
+    // console.log(JSON.stringify(offers));
     return offers;
   }
 
@@ -102,10 +109,93 @@ export default class LNSocketAPI implements AppAPI {
     return await this.call("listfunds", {});
   }
 
-  async getMetricOne(
+  async getMetricsOneOutput(
     network: string,
     nodeId: string
-  ): Promise<MetricsOne | undefined> {
-    throw new Error("Method not implemented.");
+  ): Promise<any | undefined> {
+    return this.gqlClient
+      .query({
+        query: gql`
+      query {
+        getMetricOneResult(network: "${network}", 
+        node_id: "${nodeId}") {
+            version
+            age
+            last_update
+            up_time {
+              one_day
+              ten_days
+              thirty_days
+              six_months
+            }
+          forwards_rating {
+              one_day {
+              success
+              failure
+              internal_failure
+            }
+              ten_days {
+              success
+              failure
+              internal_failure
+            }
+              thirty_days{
+              success
+              failure
+              internal_failure
+            }
+              six_months {
+              success
+              failure
+              internal_failure
+            }
+          }
+        channels_info {
+          age
+          channel_id
+          alias
+          direction
+          fee {
+            base
+            per_msat
+          }
+          capacity
+                  up_time {
+              one_day
+              ten_days
+              thirty_days
+              six_months
+            }
+          forwards_rating {
+              one_day {
+              success
+              failure
+              internal_failure
+            }
+              ten_days {
+              success
+              failure
+              internal_failure
+            }
+              thirty_days{
+              success
+              failure
+              internal_failure
+            }
+              six_months {
+              success
+              failure
+              internal_failure
+            }
+          }
+        }
+        }
+      } 
+      `,
+      })
+      .then((result) => {
+        console.log(result.data.getMetricOneResult);
+        return result.data.getMetricOneResult;
+      });
   }
 }

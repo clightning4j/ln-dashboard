@@ -4,7 +4,6 @@ import { GetServerSideProps } from "next";
 import { ListOffers, OfferInfo } from "../model/CoreLN";
 import DonationView from "../components/donation/DonationView.component";
 import ModelProvider from "../model/ModelProvider";
-import axios from "axios";
 
 type DonationViewProps = {
   listOffers: ListOffers | null;

@@ -12,7 +12,7 @@ import {
   ListOffers,
   OfferDecode,
 } from "../model/CoreLN";
-import { MetricsOne } from "../model/Metrics";
+import { MetricsOneOutput } from "../model/Metrics";
 import { OfferInfo } from "../model/Offer";
 
 export default interface AppAPI {
@@ -29,10 +29,10 @@ export default interface AppAPI {
   /**
    * Get all the information about the metrics of the node if exist otherwise undefined
    */
-  getMetricOne(
+  getMetricsOneOutput(
     network: string,
     nodeId: string
-  ): Promise<MetricsOne | undefined>;
+  ): Promise<MetricsOneOutput | undefined>;
 
   getOfferInfo(): Promise<OfferInfo>;
 
