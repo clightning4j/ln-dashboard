@@ -1,19 +1,19 @@
 export type GetInfoNode = {
-  id: String;
-  alias: String;
-  color: String;
+  id: string;
+  alias: string;
+  color: string;
   num_peers: Number;
   num_pending_channels: Number;
   num_active_channels: Number;
   num_inactive_channels: Number;
   address: Array<NodeAddress>;
   binding: Array<NodeAddress>;
-  version: String;
+  version: string;
   blockheight: Number;
-  network: String;
+  network: string;
   msatoshi_fees_collected: Number;
-  fees_collected_msat: String;
-  lightning_dir: String;
+  fees_collected_msat: string;
+  lightning_dir: string;
 };
 
 export type NodeAddress = {
