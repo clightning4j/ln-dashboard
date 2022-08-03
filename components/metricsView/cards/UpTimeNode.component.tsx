@@ -1,81 +1,171 @@
 import React from "react";
-import { MetricsOne } from "../../../model/Metrics";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
-import { ResponsiveCalendarCanvas } from "@nivo/calendar";
-import { metricsOneToContributionNode } from "../../../utils/AppUtils";
 import styles from "../../../styles/SummaryChannels.module.css";
 import { GetInfoNode } from "../../../model/GetInfoNode";
-import TodayRounded from "@mui/icons-material/TodayRounded";
-import theme from "../../../theme/DarkTheme";
-import makeTheme from "../../../theme/ChartTheme";
+import Timelapse from "@mui/icons-material/Timelapse";
+import { useQuery, gql } from "@apollo/client";
+import { LineSvgProps, ResponsiveLine as Line, Serie } from "@nivo/line";
+import { AxisProps } from "@nivo/axes";
+import Loading from "../../genericView/Loading.component";
+import { MetricsOneOutput } from "../../../model/Metrics";
 
 type UpTimeProps = {
   nodeInfo: GetInfoNode;
-  metricsOne: MetricsOne;
+  metrics: MetricsOneOutput;
   show: (show: boolean, message: string) => void;
 };
 
-export default function UpTimeNode({
-  nodeInfo,
-  metricsOne,
-  show,
-}: UpTimeProps): JSX.Element {
-  let { color } = metricsOne;
-  color = `#${color}`;
-  let data = metricsOneToContributionNode(metricsOne);
+interface AxisCustomizedProps extends AxisProps {
+  orient?: string;
+  color?: string;
+}
+interface ResponsiveLineProps extends LineSvgProps {
+  axisBottom: AxisCustomizedProps;
+  axisLeft: AxisCustomizedProps;
+}
+function ResponsiveLine(props: ResponsiveLineProps) {
+  return <Line {...props} />;
+}
+
+export default function UpTimeNode({ nodeInfo, metrics, show }: UpTimeProps) {
+  let lineChartData: Array<Serie> = [];
+
+  lineChartData.push({
+    id: "uptime_node",
+    color: "hsl(174.4, 100%, 29.41%)",
+    data: [
+      {
+        x: "Today",
+        y: metrics.up_time.one_day,
+      },
+      {
+        x: "Ten days",
+        y: metrics.up_time.ten_days,
+      },
+      {
+        x: "Thirty days",
+        y: metrics.up_time.thirty_days,
+      },
+      {
+        x: "Six months",
+        y: metrics.up_time.six_months,
+      },
+    ],
+  });
+
   return (
-    <Card>
+    <Card className={styles.cardContainer}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe">
-            <TodayRounded />
+            <Timelapse />
           </Avatar>
         }
-        title={`Node ${nodeInfo.alias} daily contribution`.toUpperCase()}
+        title={`Node ${nodeInfo.alias} uptime`.toUpperCase()}
       />
       <CardContent>
         <Grid
           container
           direction="row"
-          justifyContent="center"
-          alignItems="center"
+          justifyContent="left"
+          item
+          xs={12}
+          xl={12}
+          sm={12}
+          alignItems="left"
         >
-          <Grid item xs={12} xl={12} sm={12}>
-            <div className={styles.container}>
-              <ResponsiveCalendarCanvas
-                data={data}
-                from={data[0].day}
-                to={data[data.length - 1].day}
-                emptyColor={theme.palette.secondary.main}
-                colors={["#ff5370", "#f07178", "#c3e88d", color]}
-                margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-                yearSpacing={10}
-                maxValue={44}
-                minValue="auto"
-                daySpacing={4}
-                theme={makeTheme(color, theme.palette.text.primary)}
-                monthBorderColor={theme.palette.background.default}
-                dayBorderWidth={2}
-                dayBorderColor={theme.palette.background.default}
-                legends={[
-                  {
-                    anchor: "bottom-right",
-                    direction: "row",
-                    translateY: 36,
-                    itemCount: 4,
-                    itemWidth: 42,
-                    itemHeight: 36,
-                    itemsSpacing: 14,
-                    itemDirection: "right-to-left",
+          <div className={styles.container}>
+            <ResponsiveLine
+              theme={{
+                textColor: "#fff",
+                axis: {
+                  domain: {
+                    line: {
+                      stroke: "#fff",
+                      strokeWidth: 1.5,
+                    },
                   },
-                ]}
-              />
-            </div>
-          </Grid>
+                  ticks: {
+                    line: {
+                      stroke: "#fff",
+                      strokeWidth: 2,
+                    },
+                    text: {
+                      fontSize: 12,
+                      fill: "#fff",
+                    },
+                  },
+                  legend: {
+                    text: {
+                      fontSize: 12,
+                      fill: "#fff",
+                    },
+                  },
+                },
+                grid: {
+                  line: {
+                    stroke: "transparent",
+                  },
+                },
+                tooltip: {
+                  container: {
+                    background: "#fff",
+                    color: "#333",
+                    fontSize: 10,
+                  },
+                },
+                crosshair: {
+                  line: {
+                    stroke: "#fff",
+                  },
+                },
+              }}
+              data={lineChartData}
+              margin={{ top: 10, right: 120, bottom: 70, left: 120 }}
+              xScale={{ type: "point" }}
+              yScale={{
+                type: "linear",
+                min: "auto",
+                max: "auto",
+                stacked: true,
+                reverse: false,
+              }}
+              yFormat=" >-.2f"
+              axisTop={null}
+              axisRight={null}
+              axisBottom={{
+                orient: "bottom",
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "Number of Days",
+                legendOffset: 45,
+                legendPosition: "middle",
+                color: "#fff",
+              }}
+              axisLeft={{
+                orient: "left",
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "up_time",
+                legendOffset: -40,
+                legendPosition: "middle",
+                color: "#fff",
+              }}
+              colors={{ scheme: "nivo" }}
+              pointSize={10}
+              pointColor={{ theme: "background" }}
+              pointBorderWidth={2}
+              pointBorderColor={{ from: "serieColor" }}
+              pointLabelYOffset={-12}
+              useMesh={true}
+            />
+          </div>
         </Grid>
       </CardContent>
     </Card>

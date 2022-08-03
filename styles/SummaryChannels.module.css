@@ -1,4 +1,9 @@
 .container {
-  width: 90vw !important;
-  height: 40vh !important;
+  width: 50vw !important;
+  height: 50vh !important;
+}
+
+.cardContainer {
+  width: 50vw !important;
+  height: 65vh !important;
 }

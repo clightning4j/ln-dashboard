@@ -1,19 +1,6 @@
-import { Component } from "react";
 import { GetServerSideProps } from "next";
-import { CssBaseline } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
 import HomeView from "../components/home/Home.component";
-import DonationView from "./donation";
-import BasicAppBar from "../components/appbar/BasicAppBar.component";
-import { Helmet } from "react-helmet";
-import theme from "../theme/DarkTheme";
 import { GetInfoNode } from "../model/GetInfoNode";
-import Loading from "../components/genericView/Loading.component";
-import Snackbar from "@mui/material/Snackbar";
-import IconButton from "@mui/material/IconButton";
-import { Close } from "@mui/icons-material";
-import Offline from "../components/genericView/Offline.component";
-import { StyledEngineProvider } from "@mui/material/styles";
 import APIProvider from "../api/APIProvider";
 import ModelProvider from "../model/ModelProvider";
 

@@ -19,10 +19,13 @@ export default class APIProvider {
       let addr = process.env.NEXT_ADDR!;
       let rune = process.env.NEXT_RUNE!;
       let lambda = process.env.NEXT_LAMBDA;
+      let url = "https://api.lnmetrics.info/query";
+
       container.register("nodeID", { useValue: nodeID });
       container.register("address", { useValue: addr });
       container.register("rune", { useValue: rune });
       container.register("lambda", { useValue: lambda });
+      container.register("lnmetrics_url", { useValue: url });
       return container.resolve(LNSocketAPI);
     }
     return container.resolve(MockAPI);

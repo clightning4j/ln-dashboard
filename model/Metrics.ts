@@ -2,49 +2,56 @@ export type Metrics = {
   metrics: Map<String, Object>;
 };
 
-export type UpTime = {
-  channels: Array<Object>;
-  forwards: {
-    completed: number;
-    failed: number;
-  };
-  timestamp: number;
-};
-
-export type MetricsOne = {
-  metric_name: string;
-  color: string;
-  node_id: string;
-  os_info: {
-    architecture: string;
-    os: string;
-    version: string;
-  };
-  timezone: string;
-  up_time: Array<UpTime>;
+export type MetricsOneOutput = {
+  __typename: string;
+  version: number;
+  age: number;
+  last_update: number;
+  forwards_rating: ForwardsRating;
+  up_time: UpTime;
   channels_info: Array<ChannelInfo>;
 };
 
 export type ChannelInfo = {
-  node_alias: string;
-  node_id: string;
+  age: number;
   channel_id: string;
-  capacity: number;
-  online: boolean;
-  color: string;
+  alias: string;
   direction: string;
-  forwards: Array<Forward>;
-  last_update: number;
-  public: boolean;
-  up_times: Array<Uptime>;
+  node_id: string;
+  fee: Array<ChannelFee>;
+  limits: Array<ChannelLimit>;
+  up_time: UpTime;
+  forwards_rating: ForwardsRating;
 };
 
-export type Uptime = {
-  status: string;
-  timestamp: number;
+export type ChannelLimit = {
+  min: number;
+  max: number;
+};
+
+export type UpTime = {
+  one_day: number;
+  ten_days: number;
+  thirty_days: number;
+  six_months: number;
+  full: number;
+};
+
+export type ChannelFee = {
+  base: number;
+  per_msat: number;
+};
+
+export type ForwardsRating = {
+  one_day: Forward;
+  ten_days: Forward;
+  thirty_days: Forward;
+  six_months: Forward;
+  full: Forward;
 };
 
 export type Forward = {
-  direction: string;
-  status: string;
+  success: number;
+  failure: number;
+  internal_failure: number;
 };

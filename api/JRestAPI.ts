@@ -5,7 +5,7 @@ import {
   ListOffers,
   OfferDecode,
 } from "../model/CoreLN";
-import { MetricsOne } from "../model/Metrics";
+import { MetricsOneOutput } from "../model/Metrics";
 import AppAPI from "./AppAPI";
 import { OfferInfo } from "../model/Offer";
 import { singleton, inject } from "tsyringe";
@@ -50,10 +50,10 @@ export default class JRestAPI implements AppAPI {
   listFunds(): Promise<ListFunds> {
     throw new Error("Method not implemented.");
   }
-  getMetricOne(
+  getMetricsOneOutput(
     network: string,
     nodeId: string
-  ): Promise<MetricsOne | undefined> {
+  ): Promise<MetricsOneOutput | undefined> {
     throw new Error("Method not implemented.");
   }
   getOfferInfo(): Promise<OfferInfo> {

@@ -5,7 +5,7 @@ import {
   ListOffers,
   OfferDecode,
 } from "../model/CoreLN";
-import { MetricsOne } from "../model/Metrics";
+import { MetricsOneOutput } from "../model/Metrics";
 import { OfferInfo } from "../model/Offer";
 import AppAPI from "./AppAPI";
 import { singleton } from "tsyringe";
@@ -83,10 +83,10 @@ export default class MockAPI implements AppAPI {
     });
   }
 
-  getMetricOne(
+  getMetricsOneOutput(
     network: string,
     nodeId: string
-  ): Promise<MetricsOne | undefined> {
+  ): Promise<MetricsOneOutput | undefined> {
     throw new Error("Method not implemented.");
   }
 }

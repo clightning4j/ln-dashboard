@@ -19,6 +19,7 @@ import NextProgress from "next-progress";
 export class ViewName {
   static HOME = "home";
   static DONATION = "donation";
+  static METRICS = "metrics";
 }
 
 type BasicAppBarProps = {
@@ -30,6 +31,8 @@ function fromPathToValue(pathName: string): ViewName {
   switch (pathName) {
     case `/${ViewName.DONATION}`:
       return ViewName.DONATION;
+    case `/${ViewName.METRICS}`:
+      return ViewName.METRICS;
     default:
       return ViewName.HOME;
   }
@@ -97,6 +100,12 @@ export default function BasicAppBar({ ready, child }: BasicAppBarProps) {
             value={ViewName.HOME}
             disabled={false}
             icon={<Home />}
+          />
+          <BottomNavigationAction
+            label="Metrics"
+            value={ViewName.METRICS}
+            disabled={false}
+            icon={<PieChart />}
           />
         </BottomNavigation>
       </AppBar>
