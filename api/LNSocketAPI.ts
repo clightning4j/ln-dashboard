@@ -193,7 +193,7 @@ export default class LNSocketAPI implements AppAPI {
       } 
       `,
       })
-      .then((result) => {
+      .then((result: any) => {
         console.log(result.data.getMetricOneResult);
         return result.data.getMetricOneResult;
       });
