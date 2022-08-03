@@ -2,9 +2,7 @@ import { GetInfoNode } from "../../model/GetInfoNode";
 import Offline from "../genericView/Offline.component";
 import React from "react";
 import Grid from "@mui/material/Grid";
-import SummaryChannels from "./cards/SummaryChannels.components";
 import UpTimeNode from "./cards/UpTimeNode.component";
-import ChannelsPayments from "./cards/ChannelsPayments.component";
 import theme from "../../theme/DarkTheme";
 import { MetricsOneOutput } from "../../model/Metrics";
 import { Box } from "@mui/material";
@@ -35,24 +33,5 @@ export default function MetricsView({
         </Grid>
       </Grid>
     </Box>
-    //       <Grid item xs={12} xl={12} sm={12}>
-    //         <SummaryChannels
-    //           nodeInfo={nodeInfo}
-    //           metricsOne={metricsOne}
-    //           show={show}
-    //         />
-    //       </Grid>
-
-    //       <Grid item xs={12} xl={12} sm={12}>
-    //         <UpTimeNode nodeInfo={nodeInfo} metricsOne={metricsOne} show={show} />
-    //       </Grid>
-
-    //       <Grid item xs={12} xl={12} sm={12}>
-    //         <ChannelsPayments
-    //           nodeInfo={nodeInfo}
-    //           metricsOne={metricsOne}
-    //           show={show}
-    //         />
-    //       </Grid>
   );
 }

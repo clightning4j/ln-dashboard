@@ -7,7 +7,6 @@ import Avatar from "@mui/material/Avatar";
 import styles from "../../../styles/SummaryChannels.module.css";
 import { GetInfoNode } from "../../../model/GetInfoNode";
 import Timelapse from "@mui/icons-material/Timelapse";
-import { useQuery, gql } from "@apollo/client";
 import { LineSvgProps, ResponsiveLine as Line, Serie } from "@nivo/line";
 import { AxisProps } from "@nivo/axes";
 import Loading from "../../genericView/Loading.component";
