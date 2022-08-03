@@ -12,3 +12,4 @@ services:
       - NEXT_ADDR=<ip>:<port>
       - NEXT_RUNE=<>
       - NEXT_LAMBDA=http://ec2-52-55-124-1.compute-1.amazonaws.com:9002
+      - NEXT_LNMETRICS_URL=https://api.lnmetrics.info/query

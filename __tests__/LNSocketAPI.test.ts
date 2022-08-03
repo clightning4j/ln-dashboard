@@ -19,7 +19,8 @@ test("Configure lnsocket", async function () {
     "http://localhost:9002",
     /*node id*/ nodeID.toString(),
     /*address*/ "127.0.0.1:19735",
-    /*rune*/ runeRPC.rune
+    /*rune*/ runeRPC.rune,
+    /*url*/ "https://api.lnmetrics.info/query"
   );
   console.debug(`Node id ${nodeID} + Rune ${runeRPC.rune}`);
   await client.connect();
