@@ -8,15 +8,16 @@ type Rune = {
   rune: string;
 };
 
+beforeEach(() => {
+  fetchMock.doMock();
+});
+
 test("Configure lnsocket", async function () {
   let rpcClient = new RpcClient(process.env.CLN_UNIX!);
   let getInfoRpc = await rpcClient.call<GetInfoNode>("getinfo", {});
   let nodeID = getInfoRpc.id;
   let runeRPC: any = await rpcClient.call<Rune>("commando-rune", {
     restrictions: "readonly",
-  });
-  beforeEach(() => {
-    fetchMock.doMock();
   });
   console.log(`Node id ${nodeID} + Rune ${runeRPC.rune}`);
   let client = new LNSocketAPI(
