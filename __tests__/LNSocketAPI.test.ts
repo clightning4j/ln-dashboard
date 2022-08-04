@@ -2,6 +2,7 @@ import "reflect-metadata";
 import LNSocketAPI from "../api/LNSocketAPI";
 import RpcClient from "@core-ln/core";
 import { GetInfoNode } from "../model/GetInfoNode";
+import fetchMock from "jest-fetch-mock"
 
 type Rune = {
   rune: string;
@@ -14,6 +15,9 @@ test("Configure lnsocket", async function () {
   let runeRPC: any = await rpcClient.call<Rune>("commando-rune", {
     restrictions: "readonly",
   });
+  beforeEach(() => {
+    fetchMock.doMock()
+  })
   console.log(`Node id ${nodeID} + Rune ${runeRPC.rune}`);
   let client = new LNSocketAPI(
     "http://localhost:9002",
