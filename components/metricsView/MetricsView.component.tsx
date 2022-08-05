@@ -3,6 +3,7 @@ import Offline from "../genericView/Offline.component";
 import React from "react";
 import Grid from "@mui/material/Grid";
 import UpTimeNode from "./cards/UpTimeNode.component";
+import ForwardsRatingNode from "./cards/ForwardsRatingNode.component";
 import theme from "../../theme/DarkTheme";
 import { MetricsOneOutput } from "../../model/Metrics";
 import { Box } from "@mui/material";
@@ -23,13 +24,22 @@ export default function MetricsView({
     <Box mt={theme.spacing(1)} mb={theme.spacing(2)}>
       <Grid
         container
-        style={{ marginTop: "5em" }}
+        sx={{ flexGrow: 1 }}
+        style={{ marginTop: "2em" }}
         direction="row"
-        justifyContent="center"
-        alignItems="center"
+        justifyContent="left"
+        alignItems="left"
+        spacing={2}
       >
-        <Grid item xs={12} xl={12} sm={12}>
+        <Grid item xs={12} xl={6} sm={6}>
           <UpTimeNode nodeInfo={nodeInfo} show={show} metrics={metrics} />
+        </Grid>
+        <Grid item xs={12} xl={6} sm={6}>
+          <ForwardsRatingNode
+            nodeInfo={nodeInfo}
+            show={show}
+            metrics={metrics}
+          />
         </Grid>
       </Grid>
     </Box>

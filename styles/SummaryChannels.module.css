@@ -1,9 +1,21 @@
 .container {
-  width: 50vw !important;
-  height: 50vh !important;
+  width: 100% !important;
+  height: 62.5vh !important;
+}
+.containerPie {
+  /* width: 100% !important; */
+  height: 30vh !important;
+  min-width: 0 !important;
+  margin: 0 !important;
 }
 
-.cardContainer {
-  width: 50vw !important;
-  height: 65vh !important;
+.pieText {
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+.pieTextBottom {
+  margin-top: 20 !important;
+  margin-bottom: 0 !important;
+  text-align: center !important;
 }

@@ -57,7 +57,7 @@ export default function UpTimeNode({ nodeInfo, metrics, show }: UpTimeProps) {
   });
 
   return (
-    <Card className={styles.cardContainer}>
+    <Card>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe">
