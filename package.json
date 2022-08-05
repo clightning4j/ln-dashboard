@@ -22,6 +22,7 @@
     "@nivo/calendar": "^0.73.0",
     "@nivo/core": "^0.73.0",
     "@nivo/line": "^0.73.0",
+    "@nivo/pie": "^0.73.0",
     "@nivo/radar": "^0.73.0",
     "axios": "^0.21.2",
     "dayjs": "^1.10.6",
