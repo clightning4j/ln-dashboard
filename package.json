@@ -1,6 +1,6 @@
 {
   "name": "ln-dashboard",
-  "version": "0.1.0",
+  "version": "0.3.0-beta.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
+    "@emotion/cache": "^11.10.1",
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.10.0",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.3",
-    "@mui/material": "^5.8.3",
+    "@mui/material": "^5.9.3",
     "@nivo/calendar": "^0.73.0",
     "@nivo/core": "^0.73.0",
     "@nivo/line": "^0.73.0",
@@ -44,7 +47,7 @@
     "@types/react": "17.0.19",
     "@types/react-helmet": "^6.1.2",
     "@types/styled-components": "^5.1.14",
-    "eslint": "^8.20.0",
+    "eslint": "^8.21.0",
     "eslint-config-next": "^12.2.2",
     "jest-fetch-mock": "^3.0.3",
     "prettier": "2.7.0",
