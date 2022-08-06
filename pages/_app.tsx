@@ -1,15 +1,25 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import "reflect-metadata";
-import { StyledEngineProvider, ThemeProvider } from "@mui/system";
+import { ThemeProvider } from "@mui/system";
 import theme from "../theme/DarkTheme";
 import { CssBaseline } from "@mui/material";
+import { CacheProvider, EmotionCache } from "@emotion/react";
 import { Helmet } from "react-helmet";
 import BasicAppBar from "../components/appbar/BasicAppBar.component";
+import createEmotionCache from "../theme/createEmotionCache";
 
-function MyApp({ Component, pageProps }: AppProps) {
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
+
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+function MyApp(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
-    <StyledEngineProvider injectFirst>
+    <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Helmet>
@@ -40,7 +50,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Helmet>
         <BasicAppBar ready={true} child={<Component {...pageProps} />} />
       </ThemeProvider>
-    </StyledEngineProvider>
+    </CacheProvider>
   );
 }
 export default MyApp;

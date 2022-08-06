@@ -5,7 +5,7 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import FileCopyTwoTone from "@mui/icons-material/FileCopyTwoTone";
 import Box from "@mui/material/Box";
-import QRCode from "qrcode.react";
+import QRCodeSVG from "qrcode.react";
 import theme from "../../theme/DarkTheme";
 import { GetInfoNode } from "../../model/GetInfoNode";
 import { OfferTable } from "../tableNodes/OfferTable.component";
@@ -55,7 +55,11 @@ export default function DonationView({
             justifyContent="center"
             alignItems="center"
           >
-            <QRCode value={`${offerSelected!.bolt12}`} size={300} level="H" />
+            <QRCodeSVG
+              value={`${offerSelected!.bolt12}`}
+              size={300}
+              level="H"
+            />
           </Grid>
           <Grid
             container
