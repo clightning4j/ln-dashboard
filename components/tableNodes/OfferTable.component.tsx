@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
+import styled from "@emotion/styled";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";

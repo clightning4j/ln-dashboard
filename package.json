@@ -1,20 +1,24 @@
 {
   "name": "ln-dashboard",
-  "version": "0.1.0",
+  "version": "0.3.0-beta.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "typecheck": "tsc && eslint '**/*.{ts,tsx}'",
     "build": "next build",
     "start": "next start",
-    "test": "jest --detectOpenHandles --forceExit"
+    "test": "jest --detectOpenHandles --forceExit",
+    "preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
+    "@emotion/cache": "^11.10.1",
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.10.0",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.3",
-    "@mui/material": "^5.8.3",
+    "@mui/material": "^5.9.3",
     "@nivo/calendar": "^0.73.0",
     "@nivo/core": "^0.73.0",
     "@nivo/line": "^0.73.0",
@@ -24,32 +28,34 @@
     "graphql": "^16.5.0",
     "next": "^12.2.0",
     "next-progress": "^2.2.0",
-    "qrcode.react": "^3.1.0",
+    "next-transpile-modules": "^9.0.0",
+    "qrcode.react": "3.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-helmet": "^6.1.0",
     "react-loading": "^2.0.3",
     "reflect-metadata": "^0.1.13",
-    "styled-components": "^5.3.1",
     "swr": "^0.5.6",
     "tss-react": "^3.7.1",
     "tsyringe": "^4.7.0"
   },
   "devDependencies": {
     "@core-ln/core": "^0.2.1-beta.1",
-    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
     "@types/jest": "^28.1.5",
     "@types/node": "^17.0.44",
     "@types/qrcode.react": "^1.0.2",
-    "@types/react": "17.0.19",
+    "@types/react": "17.0.2",
     "@types/react-helmet": "^6.1.2",
-    "@types/styled-components": "^5.1.14",
-    "eslint": "^8.20.0",
+    "eslint": "^8.21.0",
     "eslint-config-next": "^12.2.2",
     "jest-fetch-mock": "^3.0.3",
     "prettier": "2.7.0",
     "ts-jest": "^28.0.6",
     "ts-node": "^10.9.1",
     "typescript": "4.3.5"
+  },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-domo": "17.0.2"
   }
 }
