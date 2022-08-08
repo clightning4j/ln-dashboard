@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import InputBase from "@mui/material/InputBase";
 import FileCopyTwoTone from "@mui/icons-material/FileCopyTwoTone";
 import Box from "@mui/material/Box";
-import QRCode from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react";
 import theme from "../../theme/DarkTheme";
 import { GetInfoNode, NodeAddress } from "../../model/GetInfoNode";
 import { useState } from "react";
@@ -88,7 +88,7 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
             </Box>
           </Grid>
           <Grid>
-            <QRCode
+            <QRCodeSVG
               value={`${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`}
               size={300}
               level="H"
