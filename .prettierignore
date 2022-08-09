@@ -5,3 +5,4 @@ coverage
 .github
 CONTRIBUTING.md
 README.md
+*.json
