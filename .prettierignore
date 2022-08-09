@@ -4,5 +4,6 @@ coverage
 .next
 .github
 CONTRIBUTING.md
+CHANGELOG.md
 README.md
 *.json
