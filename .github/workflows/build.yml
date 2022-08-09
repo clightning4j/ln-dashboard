@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
       - name: Install the dependencies
-        run: npm ci --silent
+        run: npm install
       - name: tsc and eslint check
         run: npm run typecheck
       - name: check code formatting
