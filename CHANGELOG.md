@@ -1,3 +1,12 @@
+# v0.0.3-beta.3
+
+## Added
+- add forwards_rating node ([commit](https://github.com/clightning4j/ln-dashboard/commit/3b6f08083972e5ff5df60fc6a61c649bb4229132)). @gautamjajoo 09-08-2022
+
+
+# v0.0.3-beta.3
+
+
 # v0.0.3-beta.2
 
 ## Fixed
