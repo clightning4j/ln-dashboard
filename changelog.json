@@ -1,0 +1,16 @@
+{
+  "package_name": "ln-dashboard",
+  "version": "v0.0.3-beta.2",
+  "api": {
+    "name": "github",
+    "repository": "clightning4j/ln-dashboard",
+    "branch": "main"
+  },
+  "generation_method": {
+    "name": "semver-v2",
+    "header_filter": false
+  },
+  "serialization_method": {
+    "name": "md"
+  }
+}
