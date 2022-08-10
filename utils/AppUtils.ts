@@ -68,7 +68,7 @@ export function check_amount_msat(param: any): string {
   if (param instanceof Number) {
     return `${param.valueOf() / 1000} sats`;
   } else {
-    if (!param.includes("msat")) {
+    if (!(typeof param == "string" && param.indexOf("msat") > -1)) {
       return `${param / 1000} sats`;
     }
     return `${parseInt(param) / 1000} sats`;
