@@ -7,9 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import styles from "../../../styles/SummaryChannels.module.css";
 import { GetInfoNode } from "../../../model/GetInfoNode";
 import Timelapse from "@mui/icons-material/Timelapse";
-import { LineSvgProps, ResponsiveLine as Line, Serie } from "@nivo/line";
-import { AxisProps } from "@nivo/axes";
-import Loading from "../../genericView/Loading.component";
+import { ResponsiveLine, Serie } from "@nivo/line";
 import { MetricsOneOutput } from "../../../model/Metrics";
 
 type UpTimeProps = {
@@ -17,18 +15,6 @@ type UpTimeProps = {
   metrics: MetricsOneOutput;
   show: (show: boolean, message: string) => void;
 };
-
-interface AxisCustomizedProps extends AxisProps {
-  orient?: string;
-  color?: string;
-}
-interface ResponsiveLineProps extends LineSvgProps {
-  axisBottom: AxisCustomizedProps;
-  axisLeft: AxisCustomizedProps;
-}
-function ResponsiveLine(props: ResponsiveLineProps) {
-  return <Line {...props} />;
-}
 
 export default function UpTimeNode({ nodeInfo, metrics, show }: UpTimeProps) {
   let lineChartData: Array<Serie> = [];
@@ -137,24 +123,20 @@ export default function UpTimeNode({ nodeInfo, metrics, show }: UpTimeProps) {
               axisTop={null}
               axisRight={null}
               axisBottom={{
-                orient: "bottom",
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
                 legend: "Number of Days",
                 legendOffset: 45,
                 legendPosition: "middle",
-                color: "#fff",
               }}
               axisLeft={{
-                orient: "left",
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
                 legend: "up_time",
                 legendOffset: -40,
                 legendPosition: "middle",
-                color: "#fff",
               }}
               colors={{ scheme: "nivo" }}
               pointSize={10}
