@@ -4,6 +4,7 @@ import { GetInfoNode } from "../model/GetInfoNode";
 import APIProvider from "../api/APIProvider";
 import ModelProvider from "../model/ModelProvider";
 import { MetricsOneOutput } from "../model/Metrics";
+import MetricsError from "../components/genericView/MetricsError.component";
 
 type MetricsViewProps = {
   nodeInfo: GetInfoNode | null;
@@ -25,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: {
         nodeInfo: nodeInfo,
         metrics: getMetricsOneOutput,
-        error: e,
+        error: JSON.parse(JSON.stringify(e)),
       },
     };
   }
@@ -44,8 +45,7 @@ export default function MetricsPage({
   error,
 }: MetricsViewProps) {
   if (error) {
-    //TODO adding an error view
-    return <></>;
+    return <MetricsError nodeInfo={nodeInfo} />;
   }
   return <MetricsView nodeInfo={nodeInfo} show={() => 1} metrics={metrics} />;
 }
