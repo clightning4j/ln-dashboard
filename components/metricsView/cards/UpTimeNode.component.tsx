@@ -9,6 +9,8 @@ import { GetInfoNode } from "../../../model/GetInfoNode";
 import Timelapse from "@mui/icons-material/Timelapse";
 import { ResponsiveLine, Serie } from "@nivo/line";
 import { MetricsOneOutput } from "../../../model/Metrics";
+import Chip from "@mui/material/Chip";
+import Box from "@mui/material/Box";
 
 type UpTimeProps = {
   nodeInfo: GetInfoNode;
@@ -42,6 +44,14 @@ export default function UpTimeNode({ nodeInfo, metrics, show }: UpTimeProps) {
     ],
   });
 
+  let date = new Date(metrics.last_update * 1000);
+  let time = new Date(metrics.last_update * 1000).toLocaleTimeString("en-US");
+  const longEnUSFormatter = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <Card>
       <CardHeader
@@ -51,6 +61,18 @@ export default function UpTimeNode({ nodeInfo, metrics, show }: UpTimeProps) {
           </Avatar>
         }
         title={`Node ${nodeInfo.alias} uptime`.toUpperCase()}
+        action={
+          <Box mt={1}>
+            <Chip
+              label={
+                "Last Update: " + longEnUSFormatter.format(date) + ", " + time
+              }
+              style={{
+                background: "#" + nodeInfo!.color,
+              }}
+            />
+          </Box>
+        }
       />
       <CardContent>
         <Grid
