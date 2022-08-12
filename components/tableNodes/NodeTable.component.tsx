@@ -46,7 +46,6 @@ type NodeTableProps = {
 
 export function NodeTable({ show }: NodeTableProps): JSX.Element {
   const { data, error } = useSWR("/api/channelsInfo", fetcher);
-  console.debug(data);
   const [btcPrice, setBtcPrice] = useState(-1);
   useEffect(() => {
     getPrices("BTC-USD", show).then((price) => {
