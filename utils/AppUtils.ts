@@ -65,7 +65,7 @@ export const pingNode = async (
  */
 export function check_amount_msat(param: any): string {
   // if it is a number we return the value by appending sats
-  if (param instanceof Number) {
+  if (typeof param == "number") {
     return `${param.valueOf() / 1000} sats`;
   } else {
     if (!(typeof param == "string" && param.indexOf("msat") > -1)) {
