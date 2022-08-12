@@ -14,8 +14,10 @@ type MetricsViewProps = {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let getMetricsOneOutput = null;
-  let nodeInfo = ModelProvider.getNodeInfo();
+  let nodeInfo = null;
   try {
+    nodeInfo = await APIProvider.api().getInfo();
+    ModelProvider.setNodeInfo(nodeInfo);
     getMetricsOneOutput = await APIProvider.api().getMetricsOneOutput(
       nodeInfo.network,
       nodeInfo.id

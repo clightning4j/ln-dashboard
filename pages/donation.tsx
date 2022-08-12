@@ -9,7 +9,7 @@ type DonationViewProps = {
   listOffers: ListOffers | null;
   offer: OfferInfo | null;
   error: any | null;
-  info: GetInfoNode | null;
+  nodeInfo: GetInfoNode | null;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
@@ -19,16 +19,18 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   );
 
   let offers = null;
-  let info = ModelProvider.getNodeInfo();
+  let nodeInfo = null;
   try {
     offers = await APIProvider.api().listOffers(true);
+    nodeInfo = await APIProvider.api().getInfo();
+    ModelProvider.setNodeInfo(nodeInfo);
   } catch (e) {
     console.error(e);
     return {
       props: {
         listOffers: null,
         offer: null,
-        info: info,
+        nodeInfo: nodeInfo,
         error: e,
       },
     };
@@ -39,14 +41,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       listOffers: offers,
       offer: offers!.offers[0],
       error: null,
-      info: info,
+      nodeInfo: nodeInfo,
     },
   };
 };
 
 export default function DonationPage({
   listOffers,
-  info,
+  nodeInfo,
   offer,
   error,
 }: DonationViewProps) {
@@ -54,5 +56,7 @@ export default function DonationPage({
     //TODO adding an error view
     return <></>;
   }
-  return <DonationView nodeInfo={info} listOffers={listOffers} offer={offer} />;
+  console.debug("List of offers from the command: lightning-listoffers: ");
+  console.debug(listOffers);
+  return <DonationView nodeInfo={nodeInfo} listOffers={listOffers} offer={offer} />;
 }
