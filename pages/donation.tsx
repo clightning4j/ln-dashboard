@@ -21,17 +21,15 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   let offers = null;
   let nodeInfo = null;
   try {
+    nodeInfo = await ModelProvider.getNodeInfo();
     offers = await APIProvider.api().listOffers(true);
-    nodeInfo = await APIProvider.api().getInfo();
-    ModelProvider.setNodeInfo(nodeInfo);
   } catch (e) {
-    console.error(e);
     return {
       props: {
         listOffers: null,
         offer: null,
         nodeInfo: nodeInfo,
-        error: e,
+        error: JSON.stringify(e),
       },
     };
   }
@@ -58,5 +56,7 @@ export default function DonationPage({
   }
   console.debug("List of offers from the command: lightning-listoffers: ");
   console.debug(listOffers);
-  return <DonationView nodeInfo={nodeInfo} listOffers={listOffers} offer={offer} />;
+  return (
+    <DonationView nodeInfo={nodeInfo} listOffers={listOffers} offer={offer} />
+  );
 }

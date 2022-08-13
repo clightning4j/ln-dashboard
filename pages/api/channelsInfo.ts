@@ -16,7 +16,9 @@ export default async function handler(
     funds.channels = funds.channels.filter(
       (channel) => channel.node_info != null
     );
-    console.debug("List of channels from command: lightning-listfunds and lighting-listnodes: ");
+    console.debug(
+      "List of channels from command: lightning-listfunds and lighting-listnodes: "
+    );
     console.debug(funds.channels);
     res.status(200).json({ channels: funds.channels });
   } catch (error) {
