@@ -1,3 +1,10 @@
+# v0.0.3-beta.5
+
+## Fixed
+- add no-cache policy ([commit](https://github.com/clightning4j/ln-dashboard/commit/bfc2172a7cb2a4f09b25bc92c641eadb5bf98d70)). @gautamjajoo 13-08-2022
+- access other pages directly ([commit](https://github.com/clightning4j/ln-dashboard/commit/4a849d11bbbc7d79b19b44d9da681bcd58da768f)). @gautamjajoo 13-08-2022
+
+
 # v0.0.3-beta.4
 
 ## Fixed
