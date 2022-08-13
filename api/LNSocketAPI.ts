@@ -9,7 +9,12 @@ import {
 import axios from "axios";
 import { OfferInfo } from "../model/Offer";
 import { inject, singleton } from "tsyringe";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  gql,
+  DefaultOptions,
+} from "@apollo/client";
 
 /**
  * Experimental feature.
@@ -17,6 +22,7 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
  * Implementing the API with the LNSocketAPI to use a native connection to call directly
  * the node API without use of any additional services.
  */
+
 @singleton()
 export default class LNSocketAPI implements AppAPI {
   private address: string;
@@ -33,6 +39,17 @@ export default class LNSocketAPI implements AppAPI {
     @inject("rune") rune: string,
     @inject("lnmetrics_url") url: string
   ) {
+    const defaultOptions: DefaultOptions = {
+      watchQuery: {
+        fetchPolicy: "no-cache",
+        errorPolicy: "ignore",
+      },
+      query: {
+        fetchPolicy: "no-cache",
+        errorPolicy: "all",
+      },
+    };
+
     this.nodeID = nodeId;
     this.address = adderss;
     this.rune = rune;
@@ -40,6 +57,7 @@ export default class LNSocketAPI implements AppAPI {
     this.gqlClient = new ApolloClient({
       uri: url,
       cache: new InMemoryCache(),
+      defaultOptions: defaultOptions,
     });
   }
 
