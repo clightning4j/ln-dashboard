@@ -12,25 +12,23 @@ type AppState = {
 };
 
 type AppProps = {
-  infoNode: GetInfoNode | null;
+  nodeInfo: GetInfoNode | null;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  let infoNode = null;
+  let nodeInfo = null;
   try {
-    // TODO: call also list nodes
-    infoNode = await APIProvider.api().getInfo();
-    ModelProvider.setNodeInfo(infoNode);
+    nodeInfo = await ModelProvider.getNodeInfo();
   } catch (e) {
     console.error(e);
   }
   return {
     props: {
-      infoNode: infoNode,
+      nodeInfo: nodeInfo,
     },
   };
 };
 
-export default function Home({ infoNode }: AppProps) {
-  return <HomeView nodeInfo={infoNode} show={() => 1} />;
+export default function Home({ nodeInfo }: AppProps) {
+  return <HomeView nodeInfo={nodeInfo} show={() => 1} />;
 }

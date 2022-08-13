@@ -16,8 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let getMetricsOneOutput = null;
   let nodeInfo = null;
   try {
-    nodeInfo = await APIProvider.api().getInfo();
-    ModelProvider.setNodeInfo(nodeInfo);
+    nodeInfo = await ModelProvider.getNodeInfo();
     getMetricsOneOutput = await APIProvider.api().getMetricsOneOutput(
       nodeInfo.network,
       nodeInfo.id
