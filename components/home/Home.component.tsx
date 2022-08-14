@@ -16,6 +16,9 @@ import theme from "../../theme/DarkTheme";
 import { GetInfoNode, NodeAddress } from "../../model/GetInfoNode";
 import { useState } from "react";
 import { NodeTable } from "../tableNodes/NodeTable.component";
+import React from "react";
+import Snackbar from "@mui/material/Snackbar";
+import SnackbarContentWrapper from "../notification/Notification.component";
 
 const PREFIX = "Home";
 
@@ -59,6 +62,26 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
     mapAddress.set(addr.type, addr);
   }
   if (nodeInfo === null) return <>NodeInfo null</>;
+
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    navigator.clipboard.writeText(
+      `${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`
+    );
+    setOpen(true);
+  };
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
   return (
     <StyledGrid
       container
@@ -137,16 +160,27 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
                 })}
               </Select>
             </FormControl>
-            <IconButton
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  `${nodeInfo!.id}@${selectAddr.address}:${selectAddr.port}`
-                )
-              }
-              size="large"
-            >
+            <IconButton onClick={handleClick} size="large">
               <FileCopyTwoTone />
             </IconButton>
+            <Snackbar
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={open}
+              autoHideDuration={6000}
+              onClick={handleClose}
+              onClose={() => setOpen(false)}
+            >
+              <Box>
+                <SnackbarContentWrapper
+                  onClose={handleClose}
+                  variant="success"
+                  message="Address successfully copied to clipboard"
+                />
+              </Box>
+            </Snackbar>
           </Grid>
         </CardContent>
       </Card>

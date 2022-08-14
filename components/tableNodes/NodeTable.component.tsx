@@ -22,6 +22,8 @@ import {
   convert,
 } from "../../utils/AppUtils";
 import { Channel } from "../../model/CoreLN";
+import Snackbar from "@mui/material/Snackbar";
+import SnackbarContentWrapper from "../notification/Notification.component";
 
 const PREFIX = "NodeTable";
 
@@ -52,6 +54,21 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
       setBtcPrice(price["price"]);
     });
   });
+  const [open, setOpen] = useState(false);
+
+  function handleClick() {
+    setOpen(true);
+  }
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   if (error) {
     show(true, "Error: " + error);
@@ -115,9 +132,28 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
                   {channel.state}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => pingNode(channel.peer_id, show)}>
-                    Ping
-                  </Button>
+                  <Button onClick={handleClick}>Ping</Button>
+                  <Snackbar
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={open}
+                    autoHideDuration={6000}
+                    onClick={() => {
+                      handleClick();
+                      // pingNode(channel.peer_id, show)
+                    }}
+                    onClose={() => setOpen(false)}
+                  >
+                    <Box>
+                      <SnackbarContentWrapper
+                        onClose={handleClose}
+                        variant="error"
+                        message="The method has not been implemented yet"
+                      />
+                    </Box>
+                  </Snackbar>
                 </TableCell>
               </TableRow>
             ))}
