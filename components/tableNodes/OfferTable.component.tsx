@@ -11,6 +11,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import theme from "../../theme/DarkTheme";
 import { OfferInfo } from "../../model/CoreLN";
+import React from "react";
+import Snackbar from "@mui/material/Snackbar";
+import SnackbarContentWrapper from "../notification/Notification.component";
+import { useState } from "react";
 
 type OfferTableProps = {
   listOffers: Array<OfferInfo>;
@@ -40,6 +44,21 @@ export function OfferTable({
   listOffers,
   onSelect,
 }: OfferTableProps): JSX.Element {
+  const [open, setOpen] = useState(false);
+
+  function handleClick() {
+    setOpen(true);
+  }
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   return (
     <StyledBox
       mt={theme.spacing(1)}
@@ -76,7 +95,32 @@ export function OfferTable({
                   {offer.single_use ? "Yes" : "No"}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={() => onSelect(offer)}>Select</Button>
+                  <Button
+                    onClick={() => {
+                      handleClick();
+                      onSelect(offer);
+                    }}
+                  >
+                    Select
+                  </Button>
+                  <Snackbar
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={open}
+                    autoHideDuration={6000}
+                    onClick={handleClose}
+                    onClose={() => setOpen(false)}
+                  >
+                    <Box>
+                      <SnackbarContentWrapper
+                        onClose={handleClose}
+                        variant="success"
+                        message="Updated the QR code with selected offer"
+                      />
+                    </Box>
+                  </Snackbar>
                 </TableCell>
               </TableRow>
             ))}

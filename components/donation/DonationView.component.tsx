@@ -11,6 +11,9 @@ import { GetInfoNode } from "../../model/GetInfoNode";
 import { OfferTable } from "../tableNodes/OfferTable.component";
 import { ListOffers, OfferInfo } from "../../model/CoreLN";
 import { useState } from "react";
+import React from "react";
+import Snackbar from "@mui/material/Snackbar";
+import SnackbarContentWrapper from "../notification/Notification.component";
 
 type DonationViewProps = {
   nodeInfo: GetInfoNode | null;
@@ -25,7 +28,22 @@ export default function DonationView({
 }: DonationViewProps) {
   let [offerSelected, setOfferSelected] = useState(offer);
   if (offer === null) return <>No Offers available at the moment</>;
+  const [open, setOpen] = useState(false);
 
+  const handleClick = () => {
+    navigator.clipboard.writeText(`${offerSelected!.bolt12}`);
+    setOpen(true);
+  };
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Card>
@@ -67,14 +85,27 @@ export default function DonationView({
             justifyContent="center"
             alignItems="center"
           >
-            <IconButton
-              onClick={() =>
-                navigator.clipboard.writeText(`${offerSelected!.bolt12}`)
-              }
-              size="large"
-            >
+            <IconButton onClick={handleClick} size="large">
               <FileCopyTwoTone />
             </IconButton>
+            <Snackbar
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={open}
+              autoHideDuration={6000}
+              onClick={handleClose}
+              onClose={() => setOpen(false)}
+            >
+              <Box>
+                <SnackbarContentWrapper
+                  onClose={handleClose}
+                  variant="success"
+                  message="Copied the bolt12 string to clipboard"
+                />
+              </Box>
+            </Snackbar>
           </Grid>
         </CardContent>
       </Card>
