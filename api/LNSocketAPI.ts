@@ -61,10 +61,6 @@ export default class LNSocketAPI implements AppAPI {
     });
   }
 
-  async ping(node_id: string): Promise<boolean> {
-    return await this.call("ping", { id: node_id });
-  }
-
   async decode(invoice: string): Promise<OfferDecode> {
     return await this.call("decode", { string: invoice });
   }
@@ -92,6 +88,9 @@ export default class LNSocketAPI implements AppAPI {
     ).data;
     if (result["errors"] != undefined) {
       throw new Error(result["errors"]);
+    }
+    if (method == "ping") {
+      return result;
     }
     return result["result"];
   }
@@ -125,6 +124,15 @@ export default class LNSocketAPI implements AppAPI {
 
   async listFunds(): Promise<ListFunds> {
     return await this.call("listfunds", {});
+  }
+
+  async ping(node_id: string): Promise<boolean> {
+    let response: any = await this.call("ping", { id: node_id });
+    if (response.error == null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   async getMetricsOneOutput(
