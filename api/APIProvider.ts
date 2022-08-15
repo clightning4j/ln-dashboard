@@ -20,7 +20,6 @@ export default class APIProvider {
       let rune = process.env.NEXT_RUNE!;
       let lambda = process.env.NEXT_LAMBDA;
       let url = process.env.NEXT_LNMETRICS_URL;
-
       container.register("nodeID", { useValue: nodeID });
       container.register("address", { useValue: addr });
       container.register("rune", { useValue: rune });

@@ -2,6 +2,7 @@ import axios from "axios";
 import { Datum } from "@nivo/line";
 import { CalendarDatum } from "@nivo/calendar/dist/types/types";
 import APIProvider from "../api/APIProvider";
+import ModelProvider from "../model/ModelProvider";
 
 export class LineChartItem implements Datum {
   [key: string]: any;
@@ -51,7 +52,14 @@ export const pingNode = async (
   nodeId: string,
   show: (visible: boolean, message: string) => void
 ) => {
-  const response = await APIProvider.api().ping(nodeId);
+  let response = null;
+  try {
+    response = await APIProvider.api().ping(nodeId);
+    console.log("HELLO");
+    console.log(response);
+  } catch (e) {
+    console.log(e);
+  }
   if (response) {
     show(true, "The node is up");
   } else {

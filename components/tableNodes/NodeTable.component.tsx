@@ -132,8 +132,11 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
                   {channel.state}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={handleClick}>Ping</Button>
-                  <Snackbar
+                  <Button onClick={() => {
+                    // handleClick();                      
+                    pingNode(channel.peer_id, show);
+                  }}>Ping</Button>
+                  {/* <Snackbar
                     anchorOrigin={{
                       vertical: "top",
                       horizontal: "right",
@@ -142,7 +145,6 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
                     autoHideDuration={6000}
                     onClick={() => {
                       handleClick();
-                      // pingNode(channel.peer_id, show)
                     }}
                     onClose={() => setOpen(false)}
                   >
@@ -153,7 +155,7 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
                         message="The method has not been implemented yet"
                       />
                     </Box>
-                  </Snackbar>
+                  </Snackbar> */}
                 </TableCell>
               </TableRow>
             ))}

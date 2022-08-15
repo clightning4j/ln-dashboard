@@ -24,15 +24,6 @@ export default class JRestAPI implements AppAPI {
   constructor(@inject("url") url: string) {
     this.url = url;
   }
-  async ping(node_id: string): Promise<boolean> {
-    try {
-      const _ = await axios(`/api/pingNode/${node_id}`);
-      return Promise.resolve(true);
-    } catch (e) {
-      console.error(e);
-      return Promise.resolve(false);
-    }
-  }
   decode(invoice: string): Promise<OfferDecode> {
     throw new Error("Method not implemented.");
   }
@@ -42,6 +33,10 @@ export default class JRestAPI implements AppAPI {
       await axios.get(`${process.env.NEXT_PUBLIC_REST_URL}/network/listnodes`)
     ).data;
     return nodes;
+  }
+
+  async ping(node_id: string): Promise<boolean> {
+    throw new Error("Method not implemented.");
   }
 
   getInfo(): Promise<GetInfoNode> {
