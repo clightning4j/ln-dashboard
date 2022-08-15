@@ -67,7 +67,6 @@ export interface NotificationProps {
 }
 
 export default function SnackbarContentWrapper(props: NotificationProps) {
-  console.log("HELLO");
   const { onClose, variant, message } = props;
   const Icon = typeOfIcon[variant];
 

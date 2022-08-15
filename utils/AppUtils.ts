@@ -1,7 +1,6 @@
 import axios from "axios";
 import { Datum } from "@nivo/line";
 import { CalendarDatum } from "@nivo/calendar/dist/types/types";
-import APIProvider from "../api/APIProvider";
 
 export class LineChartItem implements Datum {
   [key: string]: any;
@@ -47,15 +46,11 @@ export function intoSatoshi(priceBitcoin: number, satoshi: number): number {
  * @param nodeId
  * @param show
  */
-export const pingNode = async (
-  nodeId: string,
-  show: (visible: boolean, message: string) => void
-) => {
-  const response = await APIProvider.api().ping(nodeId);
-  if (response) {
-    show(true, "The node is up");
-  } else {
-    show(true, `The node is down`);
+export const pingNode = async (nodeId: string) => {
+  try {
+    return (await axios(`/api/pingNode/${nodeId}`)).data.result;
+  } catch (e) {
+    console.error(e);
   }
 };
 

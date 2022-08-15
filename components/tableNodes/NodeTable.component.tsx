@@ -55,8 +55,11 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
     });
   });
   const [open, setOpen] = useState(false);
+  const [ping, setPing] = useState(false);
 
-  function handleClick() {
+  async function handleClick(nodeId: string) {
+    let nodeUp = await pingNode(nodeId);
+    setPing(nodeUp);
     setOpen(true);
   }
 
@@ -132,7 +135,13 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
                   {channel.state}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Button onClick={handleClick}>Ping</Button>
+                  <Button
+                    onClick={() => {
+                      handleClick(channel.peer_id);
+                    }}
+                  >
+                    Ping
+                  </Button>
                   <Snackbar
                     anchorOrigin={{
                       vertical: "top",
@@ -140,17 +149,14 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
                     }}
                     open={open}
                     autoHideDuration={6000}
-                    onClick={() => {
-                      handleClick();
-                      // pingNode(channel.peer_id, show)
-                    }}
+                    onClick={handleClose}
                     onClose={() => setOpen(false)}
                   >
                     <Box>
                       <SnackbarContentWrapper
                         onClose={handleClose}
-                        variant="error"
-                        message="The method has not been implemented yet"
+                        variant={ping ? "success" : "error"}
+                        message={ping ? "The node is up" : "The node is down"}
                       />
                     </Box>
                   </Snackbar>

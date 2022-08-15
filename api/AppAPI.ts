@@ -34,6 +34,11 @@ export default interface AppAPI {
     nodeId: string
   ): Promise<MetricsOneOutput | undefined>;
 
+  /**
+   * Get info if the node is up or down
+   */
+  ping(node_id: string): Promise<boolean>;
+
   getOfferInfo(): Promise<OfferInfo>;
 
   /**
@@ -44,8 +49,6 @@ export default interface AppAPI {
   listNodes(node_id: string | null): Promise<ListNodes>;
 
   decode(invoice: string): Promise<OfferDecode>;
-
-  ping(node_id: string): Promise<boolean>;
 
   connect(): Promise<void>;
 
