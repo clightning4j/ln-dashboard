@@ -127,10 +127,11 @@ export default class LNSocketAPI implements AppAPI {
   }
 
   async ping(node_id: string): Promise<boolean> {
-    let response: any = await this.call("ping", { id: node_id });
-    if (response.error == null) {
+    try {
+      let response: any = await this.call("ping", { id: node_id });
       return true;
-    } else {
+    } catch (error) {
+      console.log(error);
       return false;
     }
   }
@@ -143,7 +144,7 @@ export default class LNSocketAPI implements AppAPI {
       .query({
         query: gql`
       query {
-        getMetricOneResult(network: "${network}", 
+        getMetricOneResult(network: "${network}",
         node_id: "${nodeId}") {
             version
             age
@@ -216,7 +217,7 @@ export default class LNSocketAPI implements AppAPI {
           }
         }
         }
-      } 
+      }
       `,
       })
       .then((result: any) => {
