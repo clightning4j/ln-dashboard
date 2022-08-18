@@ -1,3 +1,10 @@
+# v0.0.3-beta.6
+
+## Added
+- implement ping method ([commit](https://github.com/clightning4j/ln-dashboard/commit/ea30c348fa8d846d75a219aebb37281d3a40212a)). @gautamjajoo 18-08-2022
+- implement notification system ([commit](https://github.com/clightning4j/ln-dashboard/commit/e3913ddca09b0ecdf52aca3438f6dc937170ab55)). @gautamjajoo 14-08-2022
+
+
 # v0.0.3-beta.5
 
 ## Fixed

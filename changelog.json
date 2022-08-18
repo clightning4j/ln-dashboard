@@ -1,6 +1,6 @@
 {
   "package_name": "ln-dashboard",
-  "version": "v0.0.3-beta.5",
+  "version": "v0.0.3-beta.6",
   "api": {
     "name": "github",
     "repository": "clightning4j/ln-dashboard",
