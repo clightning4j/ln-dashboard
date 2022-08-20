@@ -48,5 +48,5 @@ export default function MetricsPage({
   if (error) {
     return <MetricsError nodeInfo={nodeInfo} />;
   }
-  return <MetricsView nodeInfo={nodeInfo} show={() => 1} metrics={metrics} />;
+  return <MetricsView nodeInfo={nodeInfo} metrics={metrics} />;
 }

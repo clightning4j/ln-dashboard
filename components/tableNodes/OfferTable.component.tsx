@@ -18,7 +18,6 @@ import { useState } from "react";
 
 type OfferTableProps = {
   listOffers: Array<OfferInfo>;
-  show: (visible: boolean, message: string) => void;
   onSelect: (offer: OfferInfo) => void;
 };
 
@@ -40,7 +39,6 @@ const StyledBox = styled(Box)({
 });
 
 export function OfferTable({
-  show,
   listOffers,
   onSelect,
 }: OfferTableProps): JSX.Element {

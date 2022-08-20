@@ -61,10 +61,6 @@ export default class LNSocketAPI implements AppAPI {
     });
   }
 
-  async decode(invoice: string): Promise<OfferDecode> {
-    return await this.call("decode", { string: invoice });
-  }
-
   private async call<ReturnType>(
     method: string,
     params: object
@@ -99,6 +95,10 @@ export default class LNSocketAPI implements AppAPI {
     return await this.call("listnodes", { id: node_id });
   }
 
+  async decode(invoice: string): Promise<OfferDecode> {
+    return await this.call("decode", { string: invoice });
+  }
+
   async close(): Promise<void> {}
 
   async listOffers(withInfo: boolean = false): Promise<ListOffers> {
@@ -108,7 +108,6 @@ export default class LNSocketAPI implements AppAPI {
         offer.info = await this.decode(offer.bolt12);
       }
     }
-    // console.log(JSON.stringify(offers));
     return offers;
   }
 

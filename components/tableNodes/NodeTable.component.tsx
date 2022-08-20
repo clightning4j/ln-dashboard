@@ -42,15 +42,11 @@ const StyledBox = styled(Box)({
   },
 });
 
-type NodeTableProps = {
-  show: (visible: boolean, message: string) => void;
-};
-
-export function NodeTable({ show }: NodeTableProps): JSX.Element {
+export function NodeTable(): JSX.Element {
   const { data, error } = useSWR("/api/channelsInfo", fetcher);
   const [btcPrice, setBtcPrice] = useState(-1);
   useEffect(() => {
-    getPrices("BTC-USD", show).then((price) => {
+    getPrices("BTC-USD").then((price) => {
       setBtcPrice(price["price"]);
     });
   });
@@ -74,12 +70,10 @@ export function NodeTable({ show }: NodeTableProps): JSX.Element {
   };
 
   if (error) {
-    show(true, "Error: " + error);
     return <></>;
   }
   if (!data || btcPrice === -1) return <Loading />;
   if (data.channels.length == 0) {
-    show(true, "No channels open in this node");
     return <></>;
   }
   console.debug("BTC price " + btcPrice);

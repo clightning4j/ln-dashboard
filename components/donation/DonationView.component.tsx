@@ -116,7 +116,6 @@ export default function DonationView({
         alignItems="center"
       >
         <OfferTable
-          show={() => console.log("todo")}
           listOffers={listOffers!.offers}
           onSelect={setOfferSelected}
         />

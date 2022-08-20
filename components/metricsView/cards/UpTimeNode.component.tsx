@@ -15,10 +15,9 @@ import Box from "@mui/material/Box";
 type UpTimeProps = {
   nodeInfo: GetInfoNode;
   metrics: MetricsOneOutput;
-  show: (show: boolean, message: string) => void;
 };
 
-export default function UpTimeNode({ nodeInfo, metrics, show }: UpTimeProps) {
+export default function UpTimeNode({ nodeInfo, metrics }: UpTimeProps) {
   let lineChartData: Array<Serie> = [];
 
   lineChartData.push({

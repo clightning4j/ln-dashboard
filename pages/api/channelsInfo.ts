@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import APIProvider from "../../api/APIProvider";
-import { LNNode, Channel } from "../../model/CoreLN";
 
 export default async function handler(
   req: NextApiRequest,

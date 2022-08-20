@@ -1,6 +1,5 @@
 import { container } from "tsyringe";
 import AppAPI from "./AppAPI";
-import JRestAPI from "./JRestAPI";
 import LNSocketAPI from "./LNSocketAPI";
 import MockAPI from "./MockAPI";
 
@@ -10,10 +9,6 @@ export default class APIProvider {
   private constructor() {}
 
   private static buildAPI(): AppAPI {
-    if (process.env.NEXT_PUBLIC_REST_URL != null) {
-      container.register("url", { useValue: process.env.NEXT_PUBLIC_REST_URL });
-      return container.resolve(JRestAPI);
-    }
     if (process.env.NEXT_NODE_ID != null) {
       let nodeID = process.env.NEXT_NODE_ID!;
       let addr = process.env.NEXT_ADDR!;
