@@ -1,28 +1,4 @@
 import axios from "axios";
-import { Datum } from "@nivo/line";
-import { CalendarDatum } from "@nivo/calendar/dist/types/types";
-
-export class LineChartItem implements Datum {
-  [key: string]: any;
-
-  public x: string;
-  public y: number;
-
-  constructor(key: string, val: number) {
-    this.x = key;
-    this.y = val;
-  }
-}
-
-export class CalendarChartItem implements CalendarDatum {
-  day: string;
-  value: number;
-
-  constructor(day: string, value: number) {
-    this.day = day;
-    this.value = value;
-  }
-}
 
 /**
  * TODO docs it
@@ -33,6 +9,8 @@ export const fetcher = (url: string) =>
 
 /**
  * TODO docs it
+ * @param bitcoin price
+ * @param sats
  */
 
 export function intoSatoshi(priceBitcoin: number, satoshi: number): number {
@@ -44,7 +22,6 @@ export function intoSatoshi(priceBitcoin: number, satoshi: number): number {
 /**
  * TODO: docs it
  * @param nodeId
- * @param show
  */
 export const pingNode = async (nodeId: string) => {
   try {
@@ -85,17 +62,11 @@ export function convert(param: any): number {
 /**
  * TODO: docs it
  * @param ticker
- * @param satoshi
- * @param show
  */
-export const getPrices = async (
-  ticker: string = "BTC-USD",
-  show: (visible: boolean, message: string) => void
-) => {
+export const getPrices = async (ticker: string = "BTC-USD") => {
   try {
     return (await axios(`/api/prices/${ticker}`)).data;
   } catch (e) {
-    show(true, `Error with message: ${e}`);
     console.error(e);
   }
 };

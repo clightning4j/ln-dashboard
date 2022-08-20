@@ -13,13 +13,11 @@ import { ResponsivePie } from "@nivo/pie";
 type ForwardsRatingProps = {
   nodeInfo: GetInfoNode;
   metrics: MetricsOneOutput;
-  show: (show: boolean, message: string) => void;
 };
 
 export default function ForwardsRatingNode({
   nodeInfo,
   metrics,
-  show,
 }: ForwardsRatingProps) {
   const dataOneDay = [
     {

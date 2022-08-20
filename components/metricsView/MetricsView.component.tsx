@@ -11,14 +11,9 @@ import { Box } from "@mui/material";
 type MetricsViewProps = {
   nodeInfo: GetInfoNode | null;
   metrics: MetricsOneOutput;
-  show: (visible: boolean, message: string) => void;
 };
 
-export default function MetricsView({
-  nodeInfo,
-  metrics,
-  show,
-}: MetricsViewProps) {
+export default function MetricsView({ nodeInfo, metrics }: MetricsViewProps) {
   if (!nodeInfo) return <Offline />;
   return (
     <Box mt={theme.spacing(1)} mb={theme.spacing(2)}>
@@ -32,14 +27,10 @@ export default function MetricsView({
         spacing={2}
       >
         <Grid item xs={12} xl={6} sm={6}>
-          <UpTimeNode nodeInfo={nodeInfo} show={show} metrics={metrics} />
+          <UpTimeNode nodeInfo={nodeInfo} metrics={metrics} />
         </Grid>
         <Grid item xs={12} xl={6} sm={6}>
-          <ForwardsRatingNode
-            nodeInfo={nodeInfo}
-            show={show}
-            metrics={metrics}
-          />
+          <ForwardsRatingNode nodeInfo={nodeInfo} metrics={metrics} />
         </Grid>
       </Grid>
     </Box>

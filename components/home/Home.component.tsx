@@ -49,10 +49,9 @@ const BootstrapInput = InputBase;
 
 type ParentProps = {
   nodeInfo: GetInfoNode | null;
-  show: (visible: boolean, message: string) => void;
 };
 
-export default function HomeView({ nodeInfo, show }: ParentProps) {
+export default function HomeView({ nodeInfo }: ParentProps) {
   let addr: NodeAddress =
     nodeInfo!.address.length > 0 ? nodeInfo!.address[0] : nodeInfo!.binding[0];
   const [selectAddr, setSelectAddr] = useState(addr);
@@ -190,7 +189,7 @@ export default function HomeView({ nodeInfo, show }: ParentProps) {
         justifyContent="center"
         alignItems="center"
       >
-        <NodeTable show={show} />
+        <NodeTable />
       </Grid>
     </StyledGrid>
   );

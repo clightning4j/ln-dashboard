@@ -16,7 +16,6 @@ import { singleton } from "tsyringe";
 @singleton()
 export default class MockAPI implements AppAPI {
   ping(node_id: string): Promise<boolean> {
-    // throw new Error("Method not implemented.");
     return Promise.resolve(false);
   }
   decode(invoice: string): Promise<OfferDecode> {
