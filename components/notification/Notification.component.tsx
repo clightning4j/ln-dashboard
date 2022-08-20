@@ -73,6 +73,7 @@ export default function SnackbarContentWrapper(props: NotificationProps) {
   return (
     <StyledGrid>
       <SnackbarContent
+        style={{ boxShadow: "none" }}
         className={classes[variant]}
         aria-describedby="client-snackbar"
         message={
