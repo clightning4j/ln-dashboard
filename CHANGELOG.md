@@ -1,3 +1,13 @@
+# v0.0.3-beta.7
+
+## Fixed
+- remove box shadow from the snackbar ([commit](https://github.com/clightning4j/ln-dashboard/commit/962c073274e0e5e3f724b455493b26eaff58d9bf)). @gautamjajoo 20-08-2022
+- catch the exception in the ping API ([commit](https://github.com/clightning4j/ln-dashboard/commit/2a244c5548d4e0f5dd0fddca9fb118ab171a1ffa)). @vincenzopalazzo 19-08-2022
+
+## Added
+- refactor code ([commit](https://github.com/clightning4j/ln-dashboard/commit/c5ad97468198a242b233ef5a2afa60b2a64224cb)). @gautamjajoo 20-08-2022
+
+
 # v0.0.3-beta.6
 
 ## Added
