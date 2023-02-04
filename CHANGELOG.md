@@ -1,3 +1,9 @@
+# v0.0.3
+
+## Fixed
+- fixes offers support ([commit](https://github.com/clightning4j/ln-dashboard/commit/909eac9f918e33938eab5f1d0a1bec46d320b2b8)). @vincenzopalazzo 04-02-2023
+
+
 # v0.0.3-beta.7
 
 ## Fixed
