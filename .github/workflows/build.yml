@@ -11,13 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
       - name: Install the dependencies
-        run: npm install
+        run: pnpm install
       - name: tsc and eslint check
-        run: npm run typecheck
+        run: pnpm run typecheck
       - name: check code formatting
         run: npx prettier --check .
       - name: Build
-        run: npm run build
+        run: pnpm run build
