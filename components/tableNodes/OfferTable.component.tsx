@@ -87,7 +87,7 @@ export function OfferTable({
                 </TableCell>
 
                 <TableCell component="th" scope="row">
-                  {offer.info.description}
+                  {offer.info!.offer_description}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {offer.single_use ? "Yes" : "No"}

@@ -3,7 +3,6 @@ export type OfferInfo = {
   active: boolean;
   single_use: boolean;
   bolt12: string;
-  bolt12_unsingned: string;
   used: boolean;
   created: boolean;
 };
