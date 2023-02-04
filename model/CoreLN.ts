@@ -52,11 +52,13 @@ export type ListOffers = {
 export type OfferInfo = {
   bolt12: string;
   active: boolean;
-  info: OfferDecode;
+  info: OfferDecode | undefined;
   single_use: boolean;
 };
 
 export type OfferDecode = {
+  type: string;
+  valid: boolean;
   label: string | undefined;
-  description: string;
+  offer_description: string;
 };
